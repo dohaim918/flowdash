@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./reset.css" />
+    <title>모달</title>
+    <style>
+      body {
+        background-image: url("https://i.ibb.co/3493r17/cat.jpg");
+      }
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .modal-content {
+        background-color: #ffffff;
+        width: 480px;
+        padding: 30px;
+        border-radius: 16px;
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .modal-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: #333;
+      }
+      .from-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #666;
+        margin-bottom: 8px;
+      }
+      input[type="text"]:focus::placeholder,
+      textarea:focus::placeholder {
+        color: transparent;
+      }
+      input[type="text"]:focus,
+      textarea:focus,
+      .status-select:focus {
+        outline: none; /* 테두리 제거 */
+        border: 1px solid #dd007b; /* 메인 컬러 */
+        box-shadow: 0 0 3px 1px rgba(221, 0, 122, 0.3);
+      }
+      input[type="text"],
+      textarea,
+      .status-select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+
+        box-sizing: border-box;
+      }
+
+      textarea {
+        height: 100px;
+        resize: none;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+      }
+
+      .priority-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      .priority-btn {
+        padding: 8px 16px;
+        border: 1px solid #e0e0e0;
+        border-radius: 20px;
+        background: none;
+        font-size: 14px;
+        color: #888;
+        cursor: pointer;
+      }
+
+      .priority-btn.active.red {
+        background-color: #d32f2f;
+        color: white;
+        border-color: #d32f2f;
+      }
+
+      .status-select {
+        appearance: none;
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .modal-btn {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .btn-cancel {
+        flex: 1;
+        background: none;
+        border: none;
+        color: #666;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .btn-save {
+        flex: 1;
+        background-color: #5c5cfc;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-save:hover {
+        background-color: #4a4ae0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="modal-overlay">
+      <div class="modal-content">
+        <h2 class="modal-title">새 할 일</h2>
+        <div class="from-wrap">
+          <div class="form-group">
+            <label>제목 *</label>
+            <input type="text" placeholder="무엇을 해야 하나요?" />
+          </div>
+
+          <div class="form-group">
+            <label>내용</label>
+            <textarea placeholder="상세 내용을 입력하세요..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>우선순위</label>
+              <div class="priority-group">
+                <button class="priority-btn active red">높음</button>
+                <button class="priority-btn">중간</button>
+                <button class="priority-btn">낮음</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>상태</label>
+            <select class="status-select">
+              <option>할 일</option>
+              <option>진행 중</option>
+              <option>완료</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-btn">
+          <button class="btn-cancel">취소</button>
+          <button class="btn-save">할 일</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
