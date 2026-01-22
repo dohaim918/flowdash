@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>to-do Team Project</title>
     <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/theme.css" />
     <link rel="stylesheet" href="./css/style.css" />
+    <script type="module" src="./js/main.js"></script>
   </head>
   <body>
     <div class="page-wrapper">
@@ -77,7 +79,7 @@
         </div>
 
         <!-- 기간 필터 -->
-        <select class="glass-select" aria-label="기간 필터">
+        <select class="dropdown-toggle" aria-label="기간 필터">
           <option value="" selected>전체 기간</option>
           <option value="">xx</option>
           <option value="">xx</option>
@@ -85,14 +87,14 @@
         </select>
 
         <!-- 우선순위 필터 -->
-        <select class="glass-select" aria-label="우선순위 필터">
+        <select class="dropdown-toggle" aria-label="우선순위 필터">
           <option value="" selected>전체 우선순위</option>
           <option value="">xx</option>
           <option value="">xx</option>
         </select>
 
         <!-- 정렬 -->
-        <button class="dropdown-toggle" aria-label="정렬 방식 변경">정렬: 오름차순</button>
+        <button class="toggle-btn" aria-label="정렬 방식 변경">정렬: 오름차순</button>
 
         <!-- 핑크 버튼 + 클래스명수정-->
         <button class="new-btn">+ 새 할 일</button>
@@ -113,10 +115,29 @@
               <span class="todo-number">0</span>
             </div>
 
-            <ul class="task-list"></ul>
+            <ul id="todoList" class="task-list">
+              <li class="task-card">
+                <div class="task-tag-wrap">
+                  <span class="task-tag medium">중간</span>
+                </div>
 
-            <div class="empty">할 일이 없습니다.</div>
+                <div class="task-text">
+                  <h4 class="task-title">할 일 예시</h4>
+                  <p class="task-desc">할 일 내용 입니다</p>
+                </div>
+
+                <div class="task-footer">
+                  <!-- 여기 SVG 넣으면 됨 -->
+                  <!-- <svg ...></svg> -->
+
+                  <span class="task-date"> 2026. 01. 22. 01:08 </span>
+                </div>
+              </li>
+            </ul>
+
+            <p class="empty">할 일이 없습니다.</p>
           </article>
+
           <article class="progress-item card-hover">
             <div class="card-header">
               <!-- 테그수정 -->
@@ -124,9 +145,9 @@
               <span class="progress-number">0</span>
             </div>
 
-            <ul class="task-list"></ul>
+            <ul id="progressList" class="task-list"></ul>
 
-            <div class="empty">진행 중인 일이 없습니다.</div>
+            <p class="empty">진행 중인 일이 없습니다.</p>
           </article>
 
           <article class="Done-item card-hover">
@@ -136,9 +157,9 @@
               <span class="Done-number">0</span>
             </div>
 
-            <ul class="task-list"></ul>
+            <ul id="doneList" class="task-list"></ul>
 
-            <div class="empty">완료한 일이 없습니다.</div>
+            <p class="empty">완료한 일이 없습니다.</p>
           </article>
         </div>
       </section>
