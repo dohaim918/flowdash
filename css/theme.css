@@ -1,0 +1,46 @@
+:root {
+  /* 메인 색상 */
+  --text-main: #33313a;
+  --text-medium: #666666;
+  --text-light: #888888;
+  --text-bright: #ffffff;
+  --point-pink: #dd007b;
+
+  /* 배경 및 글래스 효과 */
+  --bg-gradient: radial-gradient(
+    circle at top left,
+    #ffeaec,
+    #f3f3ff,
+    #f3f3ff,
+    rgba(221, 208, 217, 0.4),
+    rgba(178, 190, 255, 0.3)
+  );
+  --bg-image: url("../img/Light_Background_Image.png");
+  --glass-bg: rgba(255, 255, 255, 0.2);
+  --glass-bg-item: rgba(255, 255, 255, 0.15); /* 칸반 아이템용 */
+  --glass-hover: rgba(255, 255, 255, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --input-bg: rgba(255, 255, 255, 0.3);
+  --card-mask-bg: #f3f3ff;
+
+  /* 그림자 및 네온 */
+  --box-shadow: 0 0 6px 0 rgba(55, 48, 82, 0.2);
+  --neon-color: #dd007b;
+  --neon-glow: rgba(221, 0, 123, 0.4);
+  --neon-glow-light: rgba(221, 0, 123, 0.25);
+}
+
+/* 다크 모드 설정 */
+body.dark-mode {
+  --text-main: #f3f3ff;
+  --text-medium: #cccccc;
+  --text-light: #aaaaaa;
+  --bg-image: url("../img/Dark_Background_Image.png");
+  --bg-gradient: radial-gradient(circle at top, #1a1a2e, #05050a);
+  --glass-bg: rgba(0, 0, 0, 0.3);
+  --glass-bg-item: rgba(0, 0, 0, 0.25);
+  --glass-hover: rgba(22, 21, 24, 0.5);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --card-mask-bg: #1a1a1a;
+  --input-bg: rgba(0, 0, 0, 0.2);
+}
