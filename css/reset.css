@@ -46,7 +46,7 @@ footer {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font-family: "Pretendard" sans-serif;
+  font-family: "Pretendard", sans-serif;
 }
 
 html {
@@ -57,6 +57,23 @@ body {
   min-height: 100vh;
   min-height: 100dvh;
   background-color: #ffffff;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+/* 텍스트 아리아 전용 설정 */
+textarea {
+  resize: none;
 }
 
 ol,
@@ -73,6 +90,11 @@ a {
 button {
   background-color: transparent;
   cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 body {
