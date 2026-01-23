@@ -1,10 +1,44 @@
+@property --grad-1 {
+  syntax: "<color>";
+  initial-value: #ffeaec;
+  inherits: false;
+}
+@property --grad-2 {
+  syntax: "<color>";
+  initial-value: #f3f3ff;
+  inherits: false;
+}
+@property --grad-3 {
+  syntax: "<color>";
+  initial-value: #f3f3ff;
+  inherits: false;
+}
+@property --grad-4 {
+  syntax: "<color>";
+  initial-value: rgba(221, 208, 217, 0.4);
+  inherits: false;
+}
+@property --grad-5 {
+  syntax: "<color>";
+  initial-value: rgba(178, 190, 255, 0.3);
+  inherits: false;
+}
+
 :root {
+  --grad-1: #ffeaec;
+  --grad-2: #f3f3ff;
+  --grad-3: #f3f3ff;
+  --grad-4: rgba(221, 208, 217, 0.4);
+  --grad-5: rgba(178, 190, 255, 0.3);
+
   /* 메인 색상 */
   --text-main: #33313a;
   --text-medium: #666666;
   --text-light: #888888;
   --text-bright: #ffffff;
   --point-pink: #dd007b;
+
+  --drop-down: #f5f3f8;
 
   /* 배경 및 글래스 효과 */
   --bg-gradient: radial-gradient(
@@ -16,6 +50,7 @@
     rgba(178, 190, 255, 0.3)
   );
   --bg-image: url("../img/Light_Background_Image.png");
+
   --glass-bg: rgba(255, 255, 255, 0.2);
   --glass-bg-item: rgba(255, 255, 255, 0.15); /* 칸반 아이템용 */
   --glass-hover: rgba(255, 255, 255, 0.5);
@@ -24,7 +59,8 @@
   --card-mask-bg: #f3f3ff;
 
   /* 그림자 및 네온 */
-  --box-shadow: 0 0 6px 0 rgba(55, 48, 82, 0.2);
+  --box-shadow: 0 0 8px 0 rgba(113, 106, 139, 0.2);
+  --mini-shadow: 0 0 6px 0 rgba(60, 52, 95, 0.3);
   --neon-color: #dd007b;
   --neon-glow: rgba(221, 0, 123, 0.4);
   --neon-glow-light: rgba(221, 0, 123, 0.25);
@@ -32,6 +68,12 @@
 
 /* 다크 모드 설정 */
 body.dark-mode {
+  --grad-1: #ffeaec;
+  --grad-2: #f3f3ff;
+  --grad-3: #f3f3ff;
+  --grad-4: rgba(221, 208, 217, 0.4);
+  --grad-5: rgba(178, 190, 255, 0.3);
+
   --text-main: #f3f3ff;
   --text-medium: #cccccc;
   --text-light: #aaaaaa;

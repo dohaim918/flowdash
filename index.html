@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>to-do Team Project</title>
     <link rel="stylesheet" href="./css/reset.css" />
-    <link rel="stylesheet" href="./css/theme.css" />
     <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/theme.css" />
     <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/dropdown.js"></script>
   </head>
   <body>
     <div class="page-wrapper">
@@ -29,7 +30,6 @@
           <div class="date">2026년 1월 24일</div>
         </div>
         <div class="mode">
-          <!-- 글자 수정 -->
           <button class="dark-mode-toggle">Dark</button>
         </div>
       </header>
@@ -75,33 +75,104 @@
         <!-- 검색 -->
         <div class="search-wrap">
           <input type="text" placeholder="할 일을 검색해보세요" />
-          <button class="search-icon" aria-label="검색">검색</button>
+          <button type="submit" class="search-icon" aria-label="검색">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="0,2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="bi bi-chevron-down"
+            >
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+              />
+            </svg>
+          </button>
         </div>
 
-        <!-- 기간 필터 -->
-        <select class="dropdown-toggle" aria-label="기간 필터">
+        <!-- <select class="dropdown-toggle" aria-label="기간 필터">
           <option value="" selected>전체 기간</option>
           <option value="">xx</option>
           <option value="">xx</option>
           <option value="">xx</option>
         </select>
 
-        <!-- 우선순위 필터 -->
         <select class="dropdown-toggle" aria-label="우선순위 필터">
           <option value="" selected>전체 우선순위</option>
           <option value="">xx</option>
           <option value="">xx</option>
-        </select>
+        </select> -->
+        <!-- 기간 필터 -->
+        <div class="dropdown-toggle">
+          <button class="dropdown-trigger">
+            <span class="selected-value">전체 기간</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="arrow bi-chevron-down"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" data-value="">전체</li>
+            <li class="dropdown-item" data-value="today">오늘</li>
+            <li class="dropdown-item" data-value="week">7일</li>
+          </ul>
+        </div>
+        <!-- 우선순위 필터 -->
+        <div class="dropdown-toggle">
+          <button class="dropdown-trigger">
+            <span class="selected-value">전체 우선순</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="arrow bi-chevron-down"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" data-value="">높음</li>
+            <li class="dropdown-item" data-value="today">중간</li>
+            <li class="dropdown-item" data-value="week">낮음</li>
+          </ul>
+        </div>
 
         <!-- 정렬 -->
-        <button class="toggle-btn" aria-label="정렬 방식 변경">정렬: 오름차순</button>
+        <button class="toggle-btn" aria-label="정렬 방식 변경">정렬: <span class="change">오름차순</span></button>
 
         <!-- 핑크 버튼 + 클래스명수정-->
         <button class="new-btn">+ 새 할 일</button>
       </section>
 
       <div class="sequence">
-        <span class="sequence-content"> 정렬: <span class="add">오름차순</span> </span>
+        <span class="sequence-content"> 정렬: <span class="change">오름차순</span> </span>
         <!-- 버튼으로 수정 -->
         <button class="all-delete">전체 데이터 초기화</button>
       </div>
@@ -161,6 +232,46 @@
 
             <p class="empty">완료한 일이 없습니다.</p>
           </article>
+
+          <!--  -->
+          <template id="taskTemplate">
+            <li class="task-card" draggable="true">
+              <div class="task-tag-wrap">
+                <span class="task-tag medium">중간</span>
+              </div>
+
+              <div class="task-text">
+                <h4 class="task-title">할 일 예시</h4>
+                <p class="task-desc">할 일 내용 입니다</p>
+              </div>
+
+              <div class="task-footer">
+                <svg class="task-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M7 11h10M7 15h6M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+
+                <span class="task-date">2026. 01. 22. 01:08</span>
+
+                <!-- 오른쪽 버튼 영역 -->
+                <div class="task-actions">
+                  <select class="task-status-select glass-select" aria-label="상태 변경">
+                    <option value="todo">할 일</option>
+                    <option value="progress">진행중</option>
+                    <option value="done">완료</option>
+                  </select>
+
+                  <button type="button" class="task-delete-btn" aria-label="삭제">✕</button>
+                </div>
+              </div>
+            </li>
+          </template>
         </div>
       </section>
     </div>
