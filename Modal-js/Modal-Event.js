@@ -32,3 +32,4 @@ statusItems.forEach(item => {
     statusSelect.classList.remove('open');    // 리스트 닫기
   });
 });
+

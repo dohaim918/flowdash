@@ -228,7 +228,7 @@ body {
   box-shadow: var(--box-shadow);
 }
 
-/* 드롭다운버튼 */
+/* 드롭다운 버튼 */
 .dropdown-trigger {
   border: inherit;
   padding: 0 12px;
