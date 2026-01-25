@@ -266,18 +266,25 @@ body {
   padding: 8px;
   z-index: 1;
 
+  /* 주석처리 안 나와서~ */
   /* 애니메이션 초기 상태 */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-20px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  /* transform: translateY(-20px); */
+  /* transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); */
+  display: none;
 }
+
+
 
 /* 드롭다운 활성화 시 메뉴 표시 */
 .dropdown-toggle.active .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+.dropdown-toggle.open .dropdown-menu {
+  display: block; /* open 클래스 붙으면 보임 */
 }
 
 /* 메뉴 아이템 스타일  */

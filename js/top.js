@@ -22,7 +22,7 @@ function activeInput() {
 
   nicknameSpan.replaceWith(input);
 
-  // ⭐ span이 갖고 있던 너비 그대로 적용
+  // span이 갖고 있던 너비 그대로 적용
   input.style.width = spanWidth + 2 + "px";
 
   input.focus();
@@ -32,7 +32,7 @@ function activeInput() {
 
   // 입력 중에도 width 자연스럽게 업데이트(선택)
   input.addEventListener("input", () => {
-    // 여기고침!!!!!!!!!!!!!!!!!!ㅎㅎㅎㅎㅎ
+    // 여기고침!!!!!!!!!!!!!!!!!!ㅎㅎㅎㅎㅎ (고맙워!! ㅋㅋ)
     // scrollWidth = 요소 안에 있는 “내용이 실제로 차지하는 진짜 너비(px)”
     // input.style.width = input.value.length + 1 + "ch";
     input.style.width = "0px";
@@ -107,3 +107,51 @@ if (hour >= 5 && hour < 11) {
 }
 
 nicknameEl.textContent = message;
+
+// ================================================
+// 날짜 실시간 이 느낌으로
+
+// text,match(/\d+/g) : 숫자 뽑기
+
+// function isData() {
+//   const dateNow = new Date()        // 지금
+//   const dateToday = new Date();     // 오늘 
+//   dataToday.setHours(0,0,0,0);      // 오늘, 00:00 지정
+
+//   const live = new Data(dataToday);
+//   live.setDate(dataToday.getDate() + 1 or -1); // 내일 00.00 지정
+
+
+// 날짜 실시간 적용 js
+document.addEventListener("DOMContentLoaded",() => {
+const dateNow = document.querySelector(".date")
+
+// 날짜 문자열로 가져와..
+const text = dateNow.textContent.trim(); 
+
+// 숫자만 가져오기 (규식이형)
+const numberDate = text.match(/\d+/g); // ["0000","0","00"] 현재 날짜
+
+const year = Number(numberDate[0]);
+const month = Number(numberDate[1]) - 1; // - 1 안하면 2월 인식
+const day = Number(numberDate[2]);
+
+// Date 객체로 전환?..변환(conversion) 
+const conversion = new Date(year,month,day);
+conversion.setHours(0,0,0,0);
+
+// 오늘 날짜 추출 
+const dateToday = new Date();
+dateToday.setHours(0,0,0,0);
+
+});
+
+// // 비교 콘솔 확인용 (확인 필요 시 사용)
+// if (conversion.getTime() === dateToday.getTime()) {
+//   console.log('오늘 날짜 맞음');
+// } else {
+//   console.log('오늘 아님');
+// }
+
+
+
