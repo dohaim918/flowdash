@@ -2,7 +2,7 @@ const newBtn = document.querySelector(".new-btn");
 const modal = document.querySelector(".modal-overlay");
 
 // 클릭 시 수정
-const nicknameSpan = document.querySelector(".nickname-name");
+const nicknameSpan = document.querySelector(".user-name");
 
 // 저장된 닉네임 불러오기
 const savedName = localStorage.getItem("flowdash-nickname");
