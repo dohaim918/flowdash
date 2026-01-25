@@ -34,8 +34,33 @@ body {
   background-position: top center;
   background-size: auto;
   container-type: inline-size;
+  position: relative;
 }
+body::after {
+  content: "";
+  position: absolute;
 
+  /* 1. 하단 중앙 배치 공식 */
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  height: 100%;
+
+  /* 3. 이미지 설정 */
+  background-image: var(--floor);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+
+  /* 4. 기타 설정 */
+  z-index: -1; /* 콘텐츠 뒤로 보내기 */
+  pointer-events: none; /* 클릭 방해 금지 */
+
+  /* (선택 사항) 이미지가 너무 크면 화면 너비에 맞게 조절 */
+  max-width: 100%;
+  opacity: 0.3;
+}
 /* 상단 헤더 영역 */
 .introduction {
   width: 100%;
@@ -67,15 +92,45 @@ body {
   height: 24px;
 }
 
-.nickname {
+.user {
   margin-bottom: 12px;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 2.6rem;
 }
+.nickname-input,
+.user-name {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--point-pink);
+  margin-right: 2px;
+}
 
-.nickname-name {
+/*  아이콘 랜덤 js부분 */
+.nickname-icon {
+  display: none;
+}
+
+.nickname-icon {
+  width: 24px;
+  height: 24px;
+  transform: translateY(2px);
+  margin-left: 4px;
+}
+
+.nickname-icon.img {
+  display: inline-flex;
+}
+
+/*  별명 클릭 시 작대기만 나오게끔 */
+.nickname-input {
+  all: unset;
+  background: transparent;
+  outline: none;
+
+  /* 색 통일 */
+  box-sizing: content-box;
   font-size: 2rem;
   font-weight: 800;
   color: var(--point-pink);
@@ -200,10 +255,16 @@ body {
   border-color: var(--point-pink);
   box-shadow: 0 4px 15px var(--neon-glow);
 }
+.search-wrap input:focus::placeholder {
+  opacity: 0;
+}
+.search-wrap input::placeholder {
+  transition: opacity 0.2s ease;
+}
 
 .search-icon {
   height: 100%;
-  width: 42px;
+  color: var(--text-medium);
 }
 
 .dropdown-toggle {

@@ -30,6 +30,7 @@
   --grad-3: #f3f3ff;
   --grad-4: rgba(221, 208, 217, 0.4);
   --grad-5: rgba(178, 190, 255, 0.3);
+  --floor: url(../img/floor.png);
 
   /* 메인 색상 */
   --text-main: #33313a;
@@ -38,7 +39,8 @@
   --text-bright: #ffffff;
   --point-pink: #dd007b;
 
-  --drop-down: #f5f3f8;
+  --drop-down: rgba(255, 255, 255, 0.7);
+  --drop-background: #f3e5f5;
 
   /* 배경 및 글래스 효과 */
   --bg-gradient: radial-gradient(
@@ -73,6 +75,7 @@ body.dark-mode {
   --grad-3: #f3f3ff;
   --grad-4: rgba(221, 208, 217, 0.4);
   --grad-5: rgba(178, 190, 255, 0.3);
+  --floor: none;
 
   --text-main: #f3f3ff;
   --text-medium: #cccccc;
