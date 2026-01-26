@@ -1,0 +1,75 @@
+.delete-over {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deletebox {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+
+.delete-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.crystal-content {
+  background-color: #e7e7e7;
+  /* border: 1px solid; */
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+}
+
+
+.deletebox.allbtn {
+  width: 100%;
+  max-width: 400px;
+}
+
+
+/* 밑 버튼 */
+.btn-crystal, .btn-delete-save {
+    width: 100%;
+    max-width: 15%;
+    height: 38px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.btn-crystal {
+    color: #555;
+}
+.btn-delete-save {
+    color: white;
+    background-color: #dd007b;
+}
+
+.btn-save {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.crystal-btn {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  margin-bottom: 12px;
+  justify-content: flex-end;
+}
+
+
+.delete-text {
+    text-align: center;
+    margin-bottom: 50px;
+    font-weight: 600;
+}
