@@ -29,6 +29,12 @@
 }
 
 
+.deletebox.allbtn {
+  width: 100%;
+  max-width: 400px;
+}
+
+
 /* 밑 버튼 */
 .btn-crystal, .btn-delete-save {
     width: 100%;
