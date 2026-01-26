@@ -170,31 +170,24 @@ nicknameEl.textContent = message;
 //   live.setDate(dataToday.getDate() + 1 or -1); // 내일 00.00 지정
 
 // 날짜 실시간 적용 js
-document.addEventListener("DOMContentLoaded", () => {
+
   const dateNow = document.querySelector(".date");
 
-  // 날짜 문자열로 가져와..
-  const text = dateNow.textContent.trim();
+  // 오늘 날짜 추출 
+  const dateToday = new Date();  // 지금 (date객체 생성)
+  dateToday.setHours(0,0,0,0);  // 시간을 00~00초기화
 
-  // 숫자만 가져오기 (규식이형)
-  const numberDate = text.match(/\d+/g); // ["0000","0","00"] 현재 날짜
 
-  const year = Number(numberDate[0]);
-  const month = Number(numberDate[1]) - 1; // - 1 안하면 2월 인식
-  const day = Number(numberDate[2]);
+  const dateYear = dateToday.getFullYear();    // 연도
+  const dateMonth = dateToday.getMonth() + 1; // 월 (js 인덱스 0~11 기준 )
+  const dateDay = dateToday.getDate();       // 일
 
-  // Date 객체로 전환?..변환(conversion)
-  const conversion = new Date(year, month, day);
-  conversion.setHours(0, 0, 0, 0);
+  // 주석 풀고 아래 주석처리하면 확인가능 (분) 
+  // const dateMinutes = now.getMinutes();     
+  // dateNow.textContent = `${dateYear}년 ${dateMonth}월 ${dateDay}일 ${dateMinutes}분`;
+  
+  // HTML에 적용
+  dateNow.textContent = `${dateYear}년 ${dateMonth}월 ${dateDay}일`;
+  
 
-  // 오늘 날짜 추출
-  const dateToday = new Date();
-  dateToday.setHours(0, 0, 0, 0);
-});
 
-// // 비교 콘솔 확인용 (확인 필요 시 사용)
-// if (conversion.getTime() === dateToday.getTime()) {
-//   console.log('오늘 날짜 맞음');
-// } else {
-//   console.log('오늘 아님');
-// }
