@@ -93,6 +93,8 @@
         });
       });
     });
+    
+    
 
 // ====================================== 전체 기간 항목 ==============================================
 
@@ -155,6 +157,56 @@ allDelete.addEventListener("click", () => {
 
 // ====================================================================
 
+// 수정 전 
+// const sortBtn = document.querySelector(".toggle-btn");  // 버튼
+// const sortSub = document.querySelector(".list-control-bar-content"); 
+// const container = document.querySelector(".card-container"); // 카드 부모
+// const cardList = Array.from(container.querySelectorAll(".task-card")); // 카드 배열
+// const change = document.querySelectorAll(".change");
 
+// 텍스트 교체
+// const toggleSort = () => {
+//   const isAsc = change[0].textContent.trim() === "오름차순";
+//   const text = isAsc ? "내림차순" : "오름차순";
 
+//   change.forEach((el) => (el.textContent = text));
+// };
+
+// sortBtn.addEventListener("click", toggleSort);
+// sortSub.addEventListener("click", toggleSort);
     
+const toggleBtn = document.querySelector(".toggle-btn"); // 버튼
+const change = document.querySelectorAll(".change");     // NodeList: 여러 개
+
+let isAsc = true; // 오름차순 기본값
+
+toggleBtn.addEventListener("click", () => {
+
+  const toggleText = isAsc ? "내림차순" : "오름차순";
+   //  모든 카드 (배열) 전역에 이미 선언에서 안에.
+  const taskLists = Array.from(document.querySelectorAll(".task-list"));
+
+  taskLists.forEach(container => {
+    const cardList = Array.from(container.querySelectorAll(".task-card"));
+
+    // 오름차순 / 내림차순 결정 (일반 조건문 아님)
+    cardList.sort((a, b) => {
+      const textA = a.querySelector(".task-title").textContent.trim();
+      const textB = b.querySelector(".task-title").textContent.trim();
+
+      if (textA < textB) return isAsc ? -1 : 1;
+      if (textA > textB) return isAsc ? 1 : -1;
+      return 0;
+    });
+
+    // 정렬된 카드 다시 부모에 붙이는 ( 마지막 자신으로 이동시키기 )
+    cardList.forEach(card => container.appendChild(card));
+  });
+
+  // 모든 .change 텍스트 바꾸기
+  change.forEach(el => el.textContent = toggleText);
+
+  isAsc = !isAsc; // 다음 클릭 때 반대로
+});
+
+
