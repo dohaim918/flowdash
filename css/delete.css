@@ -73,3 +73,10 @@
     margin-bottom: 50px;
     font-weight: 600;
 }
+
+.delete-text.allbtn strong,
+.delete-text.allbtn span,
+.delete-text.allbtn em {
+  display: block;  
+  margin-bottom: 16px; 
+}

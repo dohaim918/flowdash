@@ -23,13 +23,13 @@
 
     // 2번재 드롭다운 닫기
     dropdownToggleRanking.classList.remove("open");
-    // 클릭한 드롭다운 열닫기!
+    // 클릭한 드롭다운 열닫기! 
     dropdownToggle.classList.toggle("open");
   });
 
   //  위에 순서 반대로 한번 더
-  dropdownTriggerRanking.addEventListener("click", (e) => {
-    e.stopPropagation(); // 위에 전달 막기위해 사용 ( 버튼 클릭 시 위에 문서 올라방지 )
+  dropdownTriggerRanking.addEventListener("click",(e) => {
+    e.stopPropagation();  // 위에 전달 막기위해 사용 ( 버튼 클릭 시 위에 문서 올라방지 )
     dropdownToggle.classList.remove("open");
     dropdownToggleRanking.classList.toggle("open");
   });
@@ -52,13 +52,13 @@
   // 두 번째 랭킹버튼
   dropdownItemRanking.forEach(item => {
     item.addEventListener("click", () => {
-      selectedValueRanking.textContent = item.textContent; // 텍스트 변경부분
+      selectedValueRanking.textContent = item.textContent;  // 텍스트 변경부분
       // 클래스에 open 있으면 remove (제거) 해라~
       dropdownToggleRanking.classList.remove("open");
     });
   });
 
-  document.addEventListener("click", (e) => {
+    document.addEventListener("click", (e) => {
     // 클릭한 대상이 드롭다운 안 아니면 닫아라
     // contains : 선택한 부모 요소 안에 내가 ~ 클릭한 요소 있냐를 확인시켜주는거임
        if (!dropdownToggle.contains(e.target)){ dropdownToggle.classList.remove("open")}
@@ -93,6 +93,8 @@
         });
       });
     });
+    
+    
 
 // ====================================== 전체 기간 항목 ==============================================
 
@@ -106,6 +108,7 @@
 const cardSearch = document.querySelector(".card-search") // 검색 기능박스
 const taskText = Array.from(document.querySelectorAll(".task-text")); // 제목 + 내용 (박스)
 // const taskDesc = Array.from(document.querySelectorAll(".task-desc"));
+
 
 cardSearch.addEventListener("input", () => {
   const cardList = Array.from(document.querySelectorAll(".task-card")); // 카드 리스트 
@@ -124,21 +127,6 @@ cardSearch.addEventListener("input", () => {
     } else {
       card.style.display = "none";
     }
-  });
-});
-
-// ================================
-
-// 텍스트 교체
-const toggleSort = () => {
-  const isAsc = change[0].textContent.trim() === "오름차순";
-  const text = isAsc ? "내림차순" : "오름차순";
-
-  change.forEach((el) => (el.textContent = text));
-};
-
-sortBtn.addEventListener("click", toggleSort);
-sortSub.addEventListener("click", toggleSort);
 
   })
 })
@@ -169,6 +157,54 @@ allDelete.addEventListener("click", () => {
 
 // ====================================================================
 
+// 수정 전 
+// const sortBtn = document.querySelector(".toggle-btn");  // 버튼
+// const sortSub = document.querySelector(".list-control-bar-content"); 
+// const container = document.querySelector(".card-container"); // 카드 부모
+// const cardList = Array.from(container.querySelectorAll(".task-card")); // 카드 배열
+// const change = document.querySelectorAll(".change");
 
+// 텍스트 교체
+// const toggleSort = () => {
+//   const isAsc = change[0].textContent.trim() === "오름차순";
+//   const text = isAsc ? "내림차순" : "오름차순";
 
+//   change.forEach((el) => (el.textContent = text));
+// };
+
+// sortBtn.addEventListener("click", toggleSort);
+// sortSub.addEventListener("click", toggleSort);
     
+const toggleBtn = document.querySelector(".toggle-btn"); // 버튼
+const change = document.querySelectorAll(".change");     // NodeList: 여러 개
+
+let isAsc = true; // 오름차순 기본값
+
+toggleBtn.addEventListener("click", () => {
+
+  const toggleText = isAsc ? "내림차순" : "오름차순";
+   //  모든 카드 (배열) 전역에 이미 선언에서 안에.
+  const taskLists = Array.from(document.querySelectorAll(".task-list"));
+
+  taskLists.forEach(container => {
+    const cardList = Array.from(container.querySelectorAll(".task-card"));
+
+    // 오름차순 / 내림차순 결정 (일반 조건문 아님)
+    cardList.sort((a, b) => {
+      const textA = a.querySelector(".task-title").textContent.trim();
+      const textB = b.querySelector(".task-title").textContent.trim();
+
+      if (textA < textB) return isAsc ? -1 : 1;
+      if (textA > textB) return isAsc ? 1 : -1;
+      return 0;
+    });
+
+    // 정렬된 카드 다시 부모에 붙이는 ( 마지막 자신으로 이동시키기 )
+    cardList.forEach(card => container.appendChild(card));
+  });
+
+  // 모든 .change 텍스트 바꾸기
+  change.forEach(el => el.textContent = toggleText);
+
+  isAsc = !isAsc; // 다음 클릭 때 반대로
+});
