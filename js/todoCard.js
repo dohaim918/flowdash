@@ -1,3 +1,20 @@
+// ! empty 상태 토글 함수
+//    - 각 리스트에 li 요소가 있는지 확인
+//    - empty 비어있을때 문구가 요소 생성되면 "none" 클래스 추가
+const toggleEmpty = () => {
+  // mainjs - todoListKey = Object.keys(lists); - 상태별 리스트 ul 객체의 키만 배열로 가져옴
+  todoListKey.forEach((key) => {
+    const ul = lists[key];
+    const count = ul.children.length;
+
+    // empty 문구 토글
+    const empty = emptyTexts[key];
+    count > 0 ? empty.classList.add("none") : empty.classList.remove("none");
+  });
+};
+
+// =============================
+
 //  카드 DOM 생성 전용 파일
 //    - todo 객체 → li 변환
 // & ======== 리스트 추가...도전중;;
@@ -20,6 +37,8 @@ const createTag = (el, className, content = "") => {
 
   return element;
 };
+
+// =============================
 
 // ! timestamp → 날짜 문자열 변환
 const nowDate = (timestamp) => {
@@ -95,13 +114,13 @@ const createList = (todo) => {
   const li = createTag("li", "task-card");
   li.dataset.id = todo.id;
 
-  // 위에 뱃지부분 영역
+  // 중요도 뱃지부분 영역
   const tagWrap = createTag("div", "task-tag-wrap");
-  const tag = createTag("span", `task-tag ${todo.priority}`, priorityText[todo.priority]);
+  const tag = createTag("span", `task-tag ${todo.priority}`, PRIORITY_TEXT[todo.priority]);
   const deleteBtn = createTag("span", "task-delete-btn");
   deleteBtn.innerHTML = deletBtnSvg;
 
-  // 위에 뱃지부분 영역
+  // 내용 컨텐츠 부분
   const text = createTag("div", "task-text");
   const title = createTag("h4", "task-title", todo.title);
   const Desc = createTag("p", "task-desc", todo.content);
@@ -134,8 +153,25 @@ const createList = (todo) => {
   return li;
 };
 
+// =============================
+
 // todo 상태별 리스트에 카드 렌더링
 const renderTodo = (todo) => {
   const li = createList(todo);
   lists[todo.status].append(li);
+};
+
+// ========================
+
+// 통계 계산 함수
+const countStatus = (todos) => {
+  const total = todos.length;
+  statusNums.textContent = total;
+
+  todoNums.forEach((el) => (el.textContent = todos.filter((t) => t.status === "todo").length));
+  doingNums.forEach((el) => (el.textContent = todos.filter((t) => t.status === "doing").length));
+  doneNums.forEach((el) => (el.textContent = todos.filter((t) => t.status === "done").length));
+
+  percentNums.textContent =
+    total == 0 ? 0 : Math.round((todos.filter((t) => t.status === "done").length / total) * 100) + `%`;
 };

@@ -26,7 +26,7 @@ const cancelBtn = modal.querySelector(".btn-cancel");
 // 추가 버튼
 const addBtn = modal.querySelector(".btn-save");
 
-// =============================
+// ====================
 
 // 우선순위 버튼
 
@@ -42,12 +42,30 @@ const statusBtn = statusSelect.querySelector(".status-btn");
 const statusValue = statusSelect.querySelector(".status");
 // ul요소
 const statusList = statusSelect.querySelector(".status-list");
-// const statusListAll = statusSelect.querySelectorAll(".status-list");
+
 // li요소
 const statusItems = statusList.querySelectorAll("li");
 
 // ! ~ 현재 선택된 li에 id값 !! ~ !
 let IsFix = null;
+
+// ==========================================
+
+// 오름차순 내림차순 요소 선택
+const sortBtn = document.querySelector(".toggle-btn");
+const sortSub = document.querySelector(".list-control-bar-content");
+const change = document.querySelectorAll(".change");
+
+// ================================
+
+// 통계 요소
+// const statusNums = document.querySelectorAll(".dashbord-stats .stats-number");
+// const cardStatusNums = document.querySelectorAll(".card-header span");
+const statusNums = document.querySelector("span[data-num]");
+const todoNums = document.querySelectorAll("span.todo");
+const doingNums = document.querySelectorAll("span.doing");
+const doneNums = document.querySelectorAll("span.done");
+const percentNums = document.querySelector("span[data-num='percent']");
 
 // ==========================================
 
@@ -60,13 +78,13 @@ let IsFix = null;
 // 상태값 텍스트
 
 // ! status(상태) 텍스트
-const statusText = {
+const STATUS_TEXT = {
   todo: "할 일",
   doing: "진행 중",
   done: "완료",
 };
 // ! priority(중요도) 텍스트
-const priorityText = {
+const PRIORITY_TEXT = {
   high: "높음",
   mid: "중간",
   low: "낮음",
@@ -74,14 +92,22 @@ const priorityText = {
 
 // ==========================================
 
-// ! 상태별 리스트 - ul
+// ! 상태별(할 일, 진행 중, 완료) ul 요소
 const lists = {
   todo: document.querySelector("#todoList"),
   doing: document.querySelector("#progressList"),
   done: document.querySelector("#doneList"),
 };
-
+// ul 객체의 키와 값 각각 배열로 반환
+const todoListKey = Object.keys(lists);
 const todoList = Object.values(lists);
+
+// ! 상태별 리스트가 비어있을 때 보여줄 문구
+const emptyTexts = {
+  todo: document.querySelector(".todo-item .empty"),
+  doing: document.querySelector(".progress-item .empty"),
+  done: document.querySelector(".done-item .empty"),
+};
 // ==========================================
 
 // & 저장된 todo 목록 가져오기
@@ -108,14 +134,18 @@ const openModal = (id) => {
   modalname.textContent = "할 일 수정";
   titleInput.value = todoObj.title;
   textareaContent.value = todoObj.content;
+
+  // 저장된 우선순위 값이랑 같은 버튼에 active 설정
   priorityBtns.forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.prio == todoObj.priority);
   });
+
+  // 저장된 상태(할일/진행중/완료) 값이랑 같은 버튼에 active 설정
   statusItems.forEach((li) => {
     const isActive = li.dataset.state === todoObj.status;
-    console.log("li:", li.dataset.state, "| todo:", todoObj.status);
+    // console.log("li:", li.dataset.state, "| todo:", todoObj.status);
+    li.classList.toggle("active", isActive);
     if (isActive) {
-      li.classList.toggle("active");
       statusValue.textContent = li.textContent;
     }
   });
@@ -135,11 +165,26 @@ todoList.forEach((ul) => {
 
 // # 화면 렌더링
 const render = () => {
+  // 로컬스토리지에서 저장된 todo 목록 가져오기
   const todos = getTodos();
-  todoList.forEach((li) => (li.innerHTML = ""));
+  // ul 초기화
+  todoList.forEach((ul) => (ul.innerHTML = ""));
+
+  // 각 todo 객체를 해당 상태별 리스트에 렌더링
   todos.forEach((todo) => {
-    renderTodo(todo); //  todoCard.js
+    renderTodo(todo); //  todoCard.js에서 li 요소 생성 후 ul에 추가
   });
+
+  // 상태별 리스트가 비어있으면 empty 문구 표시, 있으면 숨기기
+  toggleEmpty();
+
+  // 통계 계산 함수 호출
+  // const stats = gatCountStats(todos);
+  // renderStatus(stats);
+  countStatus(todos);
+
+  // 아이콘 생성 함수
+  changeIcon();
 };
 
 document.addEventListener("DOMContentLoaded", render);
