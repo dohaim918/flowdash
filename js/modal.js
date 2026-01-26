@@ -106,8 +106,11 @@ const saveData = () => {
   // 객체 변수들... 하 정신 나갈거같아
   // 우선순위 택1 오ㅐ...얘는 클래스 않줬ㅇ....
   const timeStamp = Date.now();
+  const istitle = removeValue();
+  // if (!title) return;
+  if (!istitle) return;
   const title = titleInput.value.trim();
-  if (!title) return;
+
   const content = textareaContent.value.trim();
   const status = isStatus ? isStatus.dataset.state : "todo";
   const priority = isPriority ? isPriority.dataset.prio : "mid";

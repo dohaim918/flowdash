@@ -208,5 +208,3 @@ toggleBtn.addEventListener("click", () => {
 
   isAsc = !isAsc; // 다음 클릭 때 반대로
 });
-
-
