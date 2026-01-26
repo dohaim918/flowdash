@@ -1,47 +1,145 @@
 // 요소 선택
+
+// 다크모드
 const themeBtn = document.querySelector(".dark-mode-toggle");
 const body = document.body;
 
-// 추가할 아이콘
-const lightIcon = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16">
-  <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
-</svg>`;
+// =============================
 
-const darkIcon = `
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16">
-  <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
-  <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
-</svg>`;
+// modal 영역
 
-// 1. 테마 적용
-const applyTheme = (theme) => {
-  theme === "dark" ? body.classList.add("dark-mode") : body.classList.remove("dark-mode");
+// 전체영역
+const modal = document.querySelector(".modal-overlay");
+// 모달 상단 메인 텍스트
+const modalname = modal.querySelector(".modal-title");
+// 제목을입력하는 인풋
+const titleInput = modal.querySelector(".text");
+// 에러 클래스를 넣을 부모
+const formGroup = modal.querySelector(".form-group");
+// 내용 입력하는 텍스트영역
+const textareaContent = modal.querySelector("textarea");
+
+// 클릭할 버튼
+const modalBtn = document.querySelector(".new-btn");
+// 삭제 버튼
+const cancelBtn = modal.querySelector(".btn-cancel");
+// 추가 버튼
+const addBtn = modal.querySelector(".btn-save");
+
+// =============================
+
+// 우선순위 버튼
+
+// active 추가 + 제거
+const priorityBtns = document.querySelectorAll(".priority-btn");
+
+// 요소 선택 (버튼드롭 리스트)
+// 전체영역
+const statusSelect = document.querySelector(".status-select");
+// 드롭다운 메인 버튼
+const statusBtn = statusSelect.querySelector(".status-btn");
+// 메인 버튼 문구
+const statusValue = statusSelect.querySelector(".status");
+// ul요소
+const statusList = statusSelect.querySelector(".status-list");
+// const statusListAll = statusSelect.querySelectorAll(".status-list");
+// li요소
+const statusItems = statusList.querySelectorAll("li");
+
+// ! ~ 현재 선택된 li에 id값 !! ~ !
+let IsFix = null;
+
+// ==========================================
+
+// todoObj.content = content;
+// todoObj.priority = priority;
+// todoObj.status = status;
+// todoObj.updateAt = nowDate(timeStamp);
+// todoObj.completeAt = status === "done" ? nowDate(timeStamp) : null;
+
+// 상태값 텍스트
+
+// ! status(상태) 텍스트
+const statusText = {
+  todo: "할 일",
+  doing: "진행 중",
+  done: "완료",
+};
+// ! priority(중요도) 텍스트
+const priorityText = {
+  high: "높음",
+  mid: "중간",
+  low: "낮음",
 };
 
-// 2. 아이콘 교체
-const updateIcon = () => {
-  const isDark = body.classList.contains("dark-mode");
-  themeBtn.innerHTML = isDark ? lightIcon : darkIcon;
+// ==========================================
+
+// ! 상태별 리스트 - ul
+const lists = {
+  todo: document.querySelector("#todoList"),
+  doing: document.querySelector("#progressList"),
+  done: document.querySelector("#doneList"),
 };
 
-// 3. 클릭했을때 테마 교체
-const toggleHandler = () => {
-  const isDark = body.classList.contains("dark-mode");
-  const newTheme = isDark ? "light" : "dark";
-  applyTheme(newTheme);
-  updateIcon();
-  localStorage.setItem("flowdash-theme", newTheme);
+const todoList = Object.values(lists);
+// ==========================================
+
+// & 저장된 todo 목록 가져오기
+const getTodos = () => {
+  const todos = localStorage.getItem("flowdash-todos");
+  return todos ? JSON.parse(todos) : [];
+};
+// & 저장된 todo 목록 로컬에 보내기
+const setTodos = (key) => {
+  return localStorage.setItem("flowdash-todos", JSON.stringify(key));
 };
 
-// 초기 불러오기
-const loadTheme = () => {
-  const savedTheme = localStorage.getItem("flowdash-theme") || "light";
+// ==========================================
 
-  applyTheme(savedTheme);
-  updateIcon();
+// ! 카드 클릭 → 수정 모달 열기
+
+// 모달을 다시열자 수정하쟣ㅎ....
+const openModal = (id) => {
+  //   console.log("openModal 실행됨, id:", id);
+  const todos = getTodos();
+  const todoObj = todos.find((todo) => todo.id == id);
+
+  toggleModal();
+  modalname.textContent = "할 일 수정";
+  titleInput.value = todoObj.title;
+  textareaContent.value = todoObj.content;
+  priorityBtns.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.prio == todoObj.priority);
+  });
+  statusItems.forEach((li) => {
+    const isActive = li.dataset.state === todoObj.status;
+    console.log("li:", li.dataset.state, "| todo:", todoObj.status);
+    if (isActive) {
+      li.classList.toggle("active");
+      statusValue.textContent = li.textContent;
+    }
+  });
+
+  IsFix = id;
 };
 
-themeBtn.addEventListener("click", toggleHandler);
+// ul 객체 값만 배열로 변환
+todoList.forEach((ul) => {
+  ul.addEventListener("click", (e) => {
+    const li = e.target.closest("li");
+    openModal(li.dataset.id);
+  });
+});
 
-document.addEventListener("DOMContentLoaded", loadTheme);
+// ==========================================
+
+// # 화면 렌더링
+const render = () => {
+  const todos = getTodos();
+  todoList.forEach((li) => (li.innerHTML = ""));
+  todos.forEach((todo) => {
+    renderTodo(todo); //  todoCard.js
+  });
+};
+
+document.addEventListener("DOMContentLoaded", render);

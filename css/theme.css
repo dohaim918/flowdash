@@ -31,6 +31,8 @@
   --grad-4: rgba(221, 208, 217, 0.4);
   --grad-5: rgba(178, 190, 255, 0.3);
   --floor: url(../img/floor.png);
+  --date: #9aa0aa;
+  --dateh: #c74d7b;
 
   /* 메인 색상 */
   --text-main: #33313a;

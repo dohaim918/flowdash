@@ -9,10 +9,6 @@
     <link rel="stylesheet" href="./css/modal_style.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/theme.css" />
-    <script type="module" src="./js/main.js"></script>
-    <script type="module" src="./js/dropdown.js"></script>
-    <script type="module" src="./js/top.js"></script>
-    <script type="module" src="./js/modal.js"></script>
   </head>
   <body>
     <div class="page-wrapper">
@@ -82,7 +78,7 @@
         <!-- 검색 & 필터 영역 -->
         <!-- 검색 -->
         <div class="search-wrap">
-          <input type="text" placeholder="할 일을 검색해보세요" />
+          <input type="text" class="card-search" placeholder="할 일을 검색해보세요" />
           <button type="submit" class="search-icon" aria-label="검색">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -101,19 +97,6 @@
           </button>
         </div>
 
-        <!-- <select class="dropdown-toggle" aria-label="기간 필터">
-          <option value="" selected>전체 기간</option>
-          <option value="">xx</option>
-          <option value="">xx</option>
-          <option value="">xx</option>
-        </select>
-
-        <select class="dropdown-toggle" aria-label="우선순위 필터">
-          <option value="" selected>전체 우선순위</option>
-          <option value="">xx</option>
-          <option value="">xx</option>
-        </select> -->
-        <!-- 기간 필터 -->
         <div class="dropdown-toggle">
           <button class="dropdown-trigger">
             <span class="selected-value">전체 기간</span>
@@ -136,15 +119,16 @@
             </svg>
           </button>
           <ul class="dropdown-menu">
-            <li class="dropdown-item" data-value="">전체</li>
+            <li class="dropdown-item" data-value="all">전체</li>
             <li class="dropdown-item" data-value="today">오늘</li>
             <li class="dropdown-item" data-value="week">7일</li>
           </ul>
         </div>
+
         <!-- 우선순위 필터 -->
-        <div class="dropdown-toggle">
-          <button class="dropdown-trigger">
-            <span class="selected-value">전체 우선순</span>
+        <div class="dropdown-toggle ranking">
+          <button class="dropdown-trigger ranking">
+            <span class="selected-value ranking">전체 우선순</span>
             <svg
               class="arrow bi-chevron-down"
               xmlns="http://www.w3.org/2000/svg"
@@ -163,10 +147,11 @@
               />
             </svg>
           </button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item" data-value="">높음</li>
-            <li class="dropdown-item" data-value="today">중간</li>
-            <li class="dropdown-item" data-value="week">낮음</li>
+          <ul class="dropdown-menu ranking">
+            <li class="dropdown-item" data-value="3">전체 우선순</li>
+            <li class="dropdown-item" data-value="3">높음</li>
+            <li class="dropdown-item" data-value="2">중간</li>
+            <li class="dropdown-item" data-value="1">낮음</li>
           </ul>
         </div>
 
@@ -182,6 +167,7 @@
         <!-- 버튼으로 수정 -->
         <button class="all-delete">전체 데이터 초기화</button>
       </div>
+
       <section class="progress-wrap">
         <div class="progress-box">
           <!-- 시멘틱테그 수정 -->
@@ -196,6 +182,24 @@
               <li class="task-card">
                 <div class="task-tag-wrap">
                   <span class="task-tag medium">중간</span>
+                  <button type="button" class="task-delete-btn" aria-label="삭제">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="bi bi-x-lg"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                      />
+                    </svg>
+                  </button>
                 </div>
 
                 <div class="task-text">
@@ -204,62 +208,24 @@
                 </div>
 
                 <div class="task-footer">
-                  <!-- 여기 SVG 넣으면 됨 -->
-                  <svg class="task-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="0.5"
+                    stroke="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="bi bi-calendar-heart"
+                    viewBox="0 0 16 16"
+                  >
                     <path
-                      d="M7 11h10M7 15h6M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      fill-rule="evenodd"
+                      d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM1 14V4h14v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1m7-6.507c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"
                     />
                   </svg>
-
-                  <div class="task-section">
-                    <label>상태</label>
-                    <div class="task-select">
-                      <button type="button" class="status-btn">
-                        <span class="status">할 일</span>
-                        <svg
-                          class="arrow bi-chevron-down"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="12"
-                          height="12"
-                          viewBox="0 0 16 16"
-                          fill="currentColor"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
-                          />
-                        </svg>
-                      </button>
-                      <ul class="status-list">
-                        <li class="select add" data-state="todo">할 일</li>
-                        <li class="select ing" data-state="doing">진행 중</li>
-                        <li class="select completion" data-state="done">완료</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <button type="button" class="task-delete-btn" aria-label="삭제">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-x-square-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"
-                      />
-                    </svg>
-                  </button>
                   <span class="task-date"> 2026. 01. 22. 01:08 </span>
                 </div>
               </li>
@@ -357,9 +323,9 @@
                 <div class="priority-section">
                   <label>우선순위</label>
                   <div class="priority-group">
-                    <button class="priority-btn active red" data-Prio="3">높음</button>
-                    <button class="priority-btn yellow" data-Prio="2">중간</button>
-                    <button class="priority-btn green" data-Prio="1">낮음</button>
+                    <button type="button" class="priority-btn active red" data-Prio="high">높음</button>
+                    <button type="button" class="priority-btn yellow" data-Prio="mid">중간</button>
+                    <button type="button" class="priority-btn green" data-Prio="low">낮음</button>
                   </div>
                 </div>
 
@@ -395,8 +361,8 @@
                   </div>
                 </div>
                 <div class="modal-btn">
-                  <button class="btn-cancel">취소</button>
-                  <button class="btn-save">저장</button>
+                  <button type="button" class="btn-cancel">취소</button>
+                  <button type="button" class="btn-save">저장</button>
                 </div>
               </div>
             </div>
@@ -404,5 +370,11 @@
         </div>
       </div>
     </div>
+    <script src="./js/main.js"></script>
+    <script src="./js/dropdown.js"></script>
+    <script src="./js/top.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/fliter.js"></script>
+    <script src="./js/todoCard.js"></script>
   </body>
 </html>
