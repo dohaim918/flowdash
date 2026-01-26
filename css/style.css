@@ -108,18 +108,11 @@ body::after {
 }
 
 /*  아이콘 랜덤 js부분 */
-.nickname-icon {
-  display: none;
-}
-
-.nickname-icon {
+.nickname-icon > svg {
   width: 24px;
   height: 24px;
   transform: translateY(2px);
   margin-left: 4px;
-}
-
-.nickname-icon.img {
   display: inline-flex;
 }
 
@@ -167,7 +160,7 @@ body::after {
 }
 
 /*  통계 카드 */
-.total-sorting {
+.dashbord-stats {
   width: 100%;
   max-width: 1200px;
   display: flex;
@@ -176,7 +169,7 @@ body::after {
   margin-bottom: 20px;
 }
 
-.total-item {
+.stats-item {
   flex: 1 1 185px;
   padding: 20px;
   border-radius: 12px;
@@ -191,18 +184,18 @@ body::after {
   box-shadow: var(--box-shadow);
 }
 
-.total-item:hover {
+.stats-item:hover {
   transform: translateY(-5px);
   background: var(--glass-hover);
 }
 
-.total-title {
+.stats-title {
   display: block;
   font-size: 0.85rem;
   color: var(--text-medium);
   margin-bottom: 10px;
 }
-.total-number {
+.stats-number {
   display: block;
   font-size: 1.8rem;
   font-weight: 700;
@@ -405,7 +398,7 @@ body::after {
 }
 
 /*  정렬 및 칸반 보드 */
-.sequence {
+.list-control-bar {
   width: 100%;
   max-width: 1200px;
   display: flex;
@@ -417,10 +410,10 @@ body::after {
   /*  ! ! ! */
   cursor: pointer;
 }
-.sequence-content {
+.list-control-bar-content {
   padding: 6px 12px;
   border-radius: 20px;
-  box-shadow: 0 0px 2px 2px var(--neon-glow-light);
+  box-shadow: var(--mini-shadow);
 }
 .all-delete {
   background: none;
@@ -450,7 +443,7 @@ body::after {
 
 .todo-item,
 .progress-item,
-.Done-item {
+.done-item {
   background: var(--glass-bg-item);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
@@ -466,11 +459,14 @@ body::after {
   align-items: center;
   border-bottom: 2px solid var(--text-main);
   padding-bottom: 15px;
-  margin-bottom: 50px;
+  margin-bottom: 24px;
   color: var(--text-main);
   transition:
     border-color 0.3s ease,
     color 0.3s ease;
+}
+.card-hover:hover .card-header > span {
+  box-shadow: 0 0 6px var(--point-pink);
 }
 
 .card-hover:hover .card-header {
@@ -497,7 +493,7 @@ body::after {
 }
 .card-hover:hover::before {
   opacity: 1;
-  animation: rotate-border 3s linear infinite;
+  animation: rotate-border 2.4s linear infinite;
 }
 @keyframes rotate-border {
   from {
@@ -529,7 +525,7 @@ body::after {
   justify-content: center;
   align-items: center;
 
-  box-shadow: 0 0 3px rgba(51, 49, 58, 0.3);
+  box-shadow: var(--mini-shadow);
   border-radius: 40px;
 }
 
@@ -538,6 +534,10 @@ body::after {
   text-align: center;
   font-weight: bold;
   color: #888;
+  margin-top: 50px;
+}
+.empty.none {
+  display: none;
 }
 
 /* 할일 리스트 목록 */
@@ -589,12 +589,12 @@ body::after {
   color: #dd007b;
 }
 /* medium(중간) 태그 컬러 */
-.task-tag.mid {
+.task-tag.low {
   background: rgba(19, 199, 127, 0.16);
   color: #13c77f;
 }
 /* medium(낮음) 태그 컬러 */
-.task-tag.low {
+.task-tag.mid {
   background: rgba(255, 167, 38, 0.16);
   color: #ff9800;
 }
