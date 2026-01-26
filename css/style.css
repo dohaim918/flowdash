@@ -336,8 +336,6 @@ body::after {
   display: none;
 }
 
-
-
 /* 드롭다운 활성화 시 메뉴 표시 */
 .dropdown-toggle.active .dropdown-menu {
   opacity: 1;
@@ -585,8 +583,18 @@ body::after {
   color: var(--point-pink);
 }
 
+/* medium(높음) 태그 컬러 */
+.task-tag.high {
+  background: rgba(221, 0, 122, 0.16);
+  color: #dd007b;
+}
 /* medium(중간) 태그 컬러 */
-.task-tag.medium {
+.task-tag.mid {
+  background: rgba(19, 199, 127, 0.16);
+  color: #13c77f;
+}
+/* medium(낮음) 태그 컬러 */
+.task-tag.low {
   background: rgba(255, 167, 38, 0.16);
   color: #ff9800;
 }
@@ -618,7 +626,11 @@ body::after {
 .task-footer {
   display: flex;
   align-items: center;
+  color: var(--date);
   gap: 8px;
+}
+.task-footer:hover {
+  color: var(--dateh);
 }
 
 /* 날짜 텍스트 */
@@ -629,7 +641,6 @@ body::after {
 
   font-size: 0.9rem;
   font-weight: 700;
-  color: #9aa0aa;
 }
 
 /* svg 아이콘 공통 */

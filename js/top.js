@@ -1,5 +1,53 @@
+// ===== 다크모드 기능 =====
+
+// 추가할 아이콘
+const lightIcon = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high" viewBox="0 0 16 16">
+  <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+</svg>`;
+
+const darkIcon = `
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars" viewBox="0 0 16 16">
+  <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/>
+  <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+</svg>`;
+
+// 1. 테마 적용
+const applyTheme = (theme) => {
+  theme === "dark" ? body.classList.add("dark-mode") : body.classList.remove("dark-mode");
+};
+
+// 2. 아이콘 교체
+const updateIcon = () => {
+  const isDark = body.classList.contains("dark-mode");
+  themeBtn.innerHTML = isDark ? lightIcon : darkIcon;
+};
+
+// 3. 클릭했을때 테마 교체
+const toggleHandler = () => {
+  const isDark = body.classList.contains("dark-mode");
+  const newTheme = isDark ? "light" : "dark";
+  applyTheme(newTheme);
+  updateIcon();
+  localStorage.setItem("flowdash-theme", newTheme);
+};
+
+// 초기 불러오기
+const loadTheme = () => {
+  const savedTheme = localStorage.getItem("flowdash-theme") || "light";
+
+  applyTheme(savedTheme);
+  updateIcon();
+};
+
+// 이벤트 핸들러
+themeBtn.addEventListener("click", toggleHandler);
+document.addEventListener("DOMContentLoaded", loadTheme);
+
+// ========================
+
 const newBtn = document.querySelector(".new-btn");
-const modal = document.querySelector(".modal-overlay");
+const modalBg = document.querySelector(".modal-overlay");
 
 // 클릭 시 수정
 const nicknameSpan = document.querySelector(".user-name");
@@ -115,35 +163,33 @@ nicknameEl.textContent = message;
 
 // function isData() {
 //   const dateNow = new Date()        // 지금
-//   const dateToday = new Date();     // 오늘 
+//   const dateToday = new Date();     // 오늘
 //   dataToday.setHours(0,0,0,0);      // 오늘, 00:00 지정
 
 //   const live = new Data(dataToday);
 //   live.setDate(dataToday.getDate() + 1 or -1); // 내일 00.00 지정
 
-
 // 날짜 실시간 적용 js
-document.addEventListener("DOMContentLoaded",() => {
-const dateNow = document.querySelector(".date")
+document.addEventListener("DOMContentLoaded", () => {
+  const dateNow = document.querySelector(".date");
 
-// 날짜 문자열로 가져와..
-const text = dateNow.textContent.trim(); 
+  // 날짜 문자열로 가져와..
+  const text = dateNow.textContent.trim();
 
-// 숫자만 가져오기 (규식이형)
-const numberDate = text.match(/\d+/g); // ["0000","0","00"] 현재 날짜
+  // 숫자만 가져오기 (규식이형)
+  const numberDate = text.match(/\d+/g); // ["0000","0","00"] 현재 날짜
 
-const year = Number(numberDate[0]);
-const month = Number(numberDate[1]) - 1; // - 1 안하면 2월 인식
-const day = Number(numberDate[2]);
+  const year = Number(numberDate[0]);
+  const month = Number(numberDate[1]) - 1; // - 1 안하면 2월 인식
+  const day = Number(numberDate[2]);
 
-// Date 객체로 전환?..변환(conversion) 
-const conversion = new Date(year,month,day);
-conversion.setHours(0,0,0,0);
+  // Date 객체로 전환?..변환(conversion)
+  const conversion = new Date(year, month, day);
+  conversion.setHours(0, 0, 0, 0);
 
-// 오늘 날짜 추출 
-const dateToday = new Date();
-dateToday.setHours(0,0,0,0);
-
+  // 오늘 날짜 추출
+  const dateToday = new Date();
+  dateToday.setHours(0, 0, 0, 0);
 });
 
 // // 비교 콘솔 확인용 (확인 필요 시 사용)
@@ -152,6 +198,3 @@ dateToday.setHours(0,0,0,0);
 // } else {
 //   console.log('오늘 아님');
 // }
-
-
-

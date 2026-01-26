@@ -1,5 +1,4 @@
-// active 추가 + 제거
-const priorityBtns = document.querySelectorAll(".priority-btn");
+//  우선순위 버튼
 
 priorityBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -11,24 +10,10 @@ priorityBtns.forEach((btn) => {
   });
 });
 
-// ==========================================
+// =============================
 
-// 요소 선택 (버튼드롭 리스트)
-// 전체영역
-const statusSelect = document.querySelector(".status-select");
-// 드롭다운 메인 버튼
-const statusBtn = statusSelect.querySelector(".status-btn");
-// 메인 버튼 문구
-const statusValue = statusSelect.querySelector(".status");
-// ul요소
-const statusList = statusSelect.querySelector(".status-list");
-// li요소
-const statusItems = statusList.querySelectorAll("li");
+//  상태 드롭다운
 
-// ! 리스트 닫기
-const closeStatus = () => {
-  statusSelect.classList.remove("open");
-};
 // ! open 클래스 토글
 const toggleStatus = () => {
   // open 클래스 토글
@@ -44,34 +29,24 @@ statusItems.forEach((item) => {
     statusItems.forEach((i) => i.classList.remove("active"));
     item.classList.add("active");
     statusValue.textContent = item.textContent; // 버튼 텍스트 변경
-    closeStatus();
+    // 닫기
+    statusSelect.classList.remove("open");
   });
 });
 
+// =============================
+
 // ======== 모달 닫기 / 열기
-
-// 전체영역
-const modal = document.querySelector(".modal-overlay");
-// 제목을입력하는 인풋
-const titleInput = modal.querySelector(".text");
-// 에러 클래스를 넣을 부모
-const formGroup = modal.querySelector(".form-group");
-// 내용 입력하는 텍스트영역
-const textareaContent = modal.querySelector("textarea");
-// 클릭할 버튼
-const modalBtn = document.querySelector(".new-btn");
-
-// 삭제 버튼
-const cancelBtn = modal.querySelector(".btn-cancel");
-// 추가 버튼
-const addBtn = modal.querySelector(".btn-save");
 
 // 모달 열기/닫기
 const toggleModal = () => {
   modal.classList.toggle("open");
+
   titleInput.focus();
 };
+// =============================
 
+//  모달 초기화 (새 할 일 기준)
 // 모달 닫기 (입력값 초기화)
 const modalClear = () => {
   titleInput.value = "";
@@ -79,15 +54,22 @@ const modalClear = () => {
   formGroup.classList.remove("error");
 
   priorityBtns.forEach((btn, i) => {
-    i !== 0 ? btn.classList.remove("active") : btn.classList.add("active");
+    // i !== 0 ? btn.classList.remove("active") : btn.classList.add("active");
+    btn.classList.toggle("active", i === 0);
   });
-
-  statusValue.textContent = "할 일";
-  closeStatus();
+  statusItems.forEach((li, i) => {
+    // i !== 0 ? li.classList.remove("active") : li.classList.add("active");
+    li.classList.toggle("active", i === 0);
+  });
+  // statusValue.textContent = statusItems[0].textContent;
   // console.log("modalClear 실행됨");
+  IsFix = null;
+  modalname.textContent = "새 할 일";
 };
 
-// 타이핑 에러
+// =============================
+
+// 타이핑 에러 (제목 입력값 검증)
 const removeValue = () => {
   const isValue = !titleInput.value.trim();
 
@@ -96,36 +78,26 @@ const removeValue = () => {
   return !isValue;
 };
 
+// =============================
+
+// 모달 버튼 이벤트
+
 // 모달 열기/닫기
-modalBtn.addEventListener("click", toggleModal);
+modalBtn.addEventListener("click", () => {
+  toggleModal();
+  modalClear();
+});
 cancelBtn.addEventListener("click", () => {
   toggleModal();
-  // 닫히고 0.3초뒤 초기화
-  setTimeout(() => {
-    modalClear();
-  }, 300);
+  setTimeout(modalClear, 300);
 });
 
 // 타이핑 에러
 titleInput.addEventListener("input", removeValue);
 
-// & ======== 리스트 추가...도전중;;
-// *** curId = 현재 아이디 값 내가 클릭한 카드의 아이디 !!!!
-// *** 널로 해두고 카드를 클릭시 이걸 저장되게!!!
+// =========================
 
-// & 가져오기이~~~~~~~~~~~~~~~ todo
-const getTodos = () => {
-  const todos = localStorage.getItem("flowdash-todos");
-  return todos ? JSON.parse(todos) : [];
-};
-
-// 상태 각각 배열
-
-// & 보내기이~~~~~~~~~~~~~~~ todo
-const setTodos = (key) => {
-  return localStorage.setItem("flowdash-todos", JSON.stringify(key));
-};
-
+// Todo 데이터 생성 & 저장
 const saveData = () => {
   const todos = getTodos();
 
@@ -133,53 +105,49 @@ const saveData = () => {
   const isPriority = document.querySelector(".priority-btn.active");
   // 객체 변수들... 하 정신 나갈거같아
   // 우선순위 택1 오ㅐ...얘는 클래스 않줬ㅇ....
-  const timestamp = Date.now();
+  const timeStamp = Date.now();
   const title = titleInput.value.trim();
+  if (!title) return;
   const content = textareaContent.value.trim();
-  const status = isStatus ? isStatus.textContent : "할일";
-  const priority = isPriority ? isPriority.textContent : "보통";
-  const now = new Date();
+  const status = isStatus ? isStatus.dataset.state : "todo";
+  const priority = isPriority ? isPriority.dataset.prio : "mid";
 
-  // 이거 함수로 바꾸기
-  const nowDate = `${now.getFullYear()}. ${String(now.getMonth() + 1).padStart(2, "0")}. ${String(now.getDate()).padStart(2, "0")}. ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  // 있으면 값을꺼내서 수정
+  if (IsFix) {
+    const todoObj = todos.find((todo) => todo.id == IsFix);
+    todoObj.title = title;
+    todoObj.content = content;
+    todoObj.priority = priority;
+    todoObj.status = status;
+    todoObj.updateAt = nowDate(timeStamp);
+    todoObj.completeAt = status === "done" ? nowDate(timeStamp) : null;
 
-  const todoObject = {
-    id: timestamp, // data- 속성과 연결하기!
-    title, // 인풋 제목 값
-    content, // 콘텐츠 제목 값
-    status,
-    priority,
-    createdAt: timestamp,
-    //  updatedAt: null 카드 수정할때 지금 선택된 스테이 터스 랑 로컬에 저장된 스테이터스와 다를 경우 업데이트
-    updatedAt: null,
-    completedAt: status === "완료" ? nowDate : null,
-  };
+    IsFix = null;
+  } else {
+    // todo 객체 생성
+    const todoObject = {
+      id: timeStamp, // data- 속성과 연결하기!
+      title, // 인풋 제목 값
+      content, // 콘텐츠 제목 값
+      status,
+      priority,
+      createAt: nowDate(timeStamp),
+      //  updateAt: null 카드 수정할때 지금 선택된 스테이 터스 랑 로컬에 저장된 스테이터스와 다를 경우 업데이트
+      updateAt: null,
+      completeAt: status === "done" ? nowDate(timeStamp) : null,
+    };
 
-  todos.push(todoObject);
+    // 저장 하기
+    todos.push(todoObject);
+  }
+
+  // 모달 닫기 + 초기화
   setTodos(todos);
   toggleModal();
+
+  // 화면에 추가
+  render();
 };
 
-// ! 요소 만드는 함수
-const createTag = (el, className) => {
-  const element = document.createElement(el);
-  element.className = className;
-};
-// 요소만들고(ㄱㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ)  +모달 리셋함수&렌더(로컬데이터 안에)
-// +숫자세는거 리스트!!!!!! 그거에 맞춰서바꿔주기
+// 각 카드에 클릭이벤트를 만들고 클릭된 함수는 각각클릭했을때??
 addBtn.addEventListener("click", saveData);
-
-const createList = (todo) => {
-  // 전체 list li
-  const li = document.createElement("li");
-  li.className = "task-card";
-
-  li.dataset.id = todo.id;
-
-  // div 테그
-  const tagWrap = document.createElement("div");
-  tagWrap.className = "task-tag-wrap";
-  // span 테그
-  const tag = document.createElement("span");
-  tag.className = "task-tag-wrap";
-};
