@@ -452,7 +452,7 @@ textarea {
   z-index: 999;
   padding: 20px;
 
-  background-color: var(--overlay-shadow);
+  background-color: var(--d-overlay-shadow);
   backdrop-filter: blur(4px);
   opacity: 0;
   pointer-events: none;
@@ -519,7 +519,7 @@ textarea {
 .delete-text {
   line-height: 1.4;
   font-size: 15px;
-  color: var(--text-light);
+  color: var(--text-medium);
   margin: 6px 0 18px 0;
 }
 

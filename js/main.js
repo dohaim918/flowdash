@@ -79,11 +79,9 @@ const statusList = statusSelect.querySelector(".status-list");
 const statusItems = statusList.querySelectorAll("li");
 
 // ! ~ 현재 선택된 li에 id값 !! ~ !
-let IsFix = null;
+let IsFixId = null;
 
 // ==========================================
-
-// ================================
 
 // 통계 요소
 // const statusNums = document.querySelectorAll(".dashbord-stats .stats-number");
@@ -99,6 +97,13 @@ const percentNums = document.querySelector("span[data-num='percent']");
 // 전체 초기화 버튼!
 const allDelete = document.querySelector(".all-delete");
 const todosList = document.querySelectorAll(".task-list");
+
+// ====
+
+// 삭제 모달 요소
+const deletModal = document.querySelector(".delete-over");
+const deletCancelBtn = deletModal.querySelector(".btn-crystal");
+const deletBtn = deletModal.querySelector(".btn-delete");
 
 // ==========================================
 

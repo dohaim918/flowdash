@@ -102,6 +102,7 @@
 
   --d-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   --overlay-shadow: 0 8px 32px rgba(80, 80, 80, 0.4);
+  --d-overlay-shadow: rgba(80, 80, 80, 0.4);
 }
 
 /* 다크 모드 설정 */
@@ -153,4 +154,5 @@ body.dark-mode {
   --green-btn: rgba(23, 41, 38, 0.5);
   --yllow-btn: rgba(53, 41, 25, 0.5);
   --overlay-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --d-overlay-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }

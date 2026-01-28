@@ -25,7 +25,6 @@ statusBtn.addEventListener("click", toggleStatus);
 // 리스트 항목 클릭 >> 버튼 텍스트 변경 + 리스트 닫기
 statusItems.forEach((item) => {
   item.addEventListener("click", () => {
-    // !!!!!!!!!!!!!!!!!!!!!추가함 ㅡㅡ 개 너무해
     statusItems.forEach((i) => i.classList.remove("active"));
     item.classList.add("active");
     statusValue.textContent = item.textContent; // 버튼 텍스트 변경
@@ -63,7 +62,7 @@ const modalClear = () => {
   });
   // statusValue.textContent = statusItems[0].textContent;
   // console.log("modalClear 실행됨");
-  IsFix = null;
+  IsFixId = null;
   modalname.textContent = "새 할 일";
 };
 
@@ -117,8 +116,8 @@ const saveData = () => {
   const priority = isPriority ? isPriority.dataset.prio : "mid";
 
   // 있으면 값을꺼내서 수정
-  if (IsFix) {
-    const todoObj = todos.find((todo) => todo.id == IsFix);
+  if (IsFixId) {
+    const todoObj = todos.find((todo) => todo.id == IsFixId);
     todoObj.title = title;
     todoObj.content = content;
     todoObj.priority = priority;
@@ -126,7 +125,7 @@ const saveData = () => {
     todoObj.updateAt = nowDate(timeStamp);
     todoObj.completeAt = status === "done" ? nowDate(timeStamp) : null;
 
-    IsFix = null;
+    IsFixId = null;
   } else {
     // todo 객체 생성
     const todoObject = {
