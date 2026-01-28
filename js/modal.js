@@ -109,6 +109,7 @@ const saveData = () => {
   const istitle = removeValue();
   // if (!title) return;
   if (!istitle) return;
+
   const title = titleInput.value.trim();
 
   const content = textareaContent.value.trim();
