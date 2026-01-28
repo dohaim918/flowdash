@@ -31,25 +31,24 @@ const addBtn = modal.querySelector(".btn-save");
 // 요소 리스트 ( 안되면 점 ,"",절차 표시 다시확인 )
 // 첫번째 드롭다운 (전체기간 버튼)
 // 드롭다운 전체 영역
-const dropdownToggle = document.querySelector (".dropdown-toggle");
+const dropdownToggle = document.querySelector(".dropdown-toggle");
 // 드롭다운 전체기간 버튼
-const dropdownTrigger = dropdownToggle.querySelector (".dropdown-trigger");
+const dropdownTrigger = dropdownToggle.querySelector(".dropdown-trigger");
 // 전체 우선순 텍스트
-const selectedValue = dropdownTrigger.querySelector (".selected-value");
+const selectedValue = dropdownTrigger.querySelector(".selected-value");
 // 전체 메뉴 (ul)
-const dropdownMenu = dropdownToggle.querySelector (".dropdown-menu")
+const dropdownMenu = dropdownToggle.querySelector(".dropdown-menu");
 // 메뉴 안 리스트 (li 전체)
-const dropdownItem = dropdownMenu.querySelectorAll("li")
+const dropdownItem = dropdownMenu.querySelectorAll("li");
 
 // 두번째 드롭다운 (우선순위 버튼)
 // 드롭다운 버튼
 // 위에랑 같음 내부말고 박스영역 (.ranking만 붙음)
-const dropdownToggleRanking = document.querySelector (".dropdown-toggle.ranking");
-const dropdownTriggerRanking = dropdownToggleRanking.querySelector (".dropdown-trigger.ranking");
-const selectedValueRanking = dropdownTriggerRanking.querySelector (".selected-value.ranking");
-const dropdownMenuRanking = document.querySelector (".dropdown-menu.ranking") // toggle 밖에 있음 (분리)
-const dropdownItemRanking = dropdownMenuRanking.querySelectorAll("li")
-
+const dropdownToggleRanking = document.querySelector(".dropdown-toggle.ranking");
+const dropdownTriggerRanking = dropdownToggleRanking.querySelector(".dropdown-trigger.ranking");
+const selectedValueRanking = dropdownTriggerRanking.querySelector(".selected-value.ranking");
+const dropdownMenuRanking = document.querySelector(".dropdown-menu.ranking"); // toggle 밖에 있음 (분리)
+const dropdownItemRanking = dropdownMenuRanking.querySelectorAll("li");
 
 // 오름차순 내림차순 (내부) 요소 선택
 const sortBtn = document.querySelector(".toggle-btn");
@@ -58,11 +57,10 @@ const change = document.querySelectorAll(".change");
 
 //===========================================================
 
-// 검색 
-// 검색창 버튼 
-const cardSearch = document.querySelector(".card-search") 
+// 검색
+// 검색창 버튼
+const cardSearch = document.querySelector(".card-search");
 //===========================================================
-
 
 // active 추가 + 제거
 const priorityBtns = document.querySelectorAll(".priority-btn");
@@ -95,6 +93,12 @@ const todoNums = document.querySelectorAll("span.todo");
 const doingNums = document.querySelectorAll("span.doing");
 const doneNums = document.querySelectorAll("span.done");
 const percentNums = document.querySelector("span[data-num='percent']");
+
+// ==========================================
+
+// 전체 초기화 버튼!
+const allDelete = document.querySelector(".all-delete");
+const todosList = document.querySelectorAll(".task-list");
 
 // ==========================================
 
@@ -151,44 +155,22 @@ const setTodos = (key) => {
 
 // ==========================================
 
-// ! 카드 클릭 → 수정 모달 열기
+// ! 요소 만드는 함수
+const createTag = (el, className, content = "") => {
+  const element = document.createElement(el);
+  if (className) element.className = className;
+  if (content) element.textContent = content;
 
-// 모달 다시열자 수정....
-const openModal = (id) => {
-  //   console.log("openModal 실행됨, id:", id);
-  const todos = getTodos();
-  const todoObj = todos.find((todo) => todo.id == id);
-
-  toggleModal();
-  modalname.textContent = "할 일 수정";
-  titleInput.value = todoObj.title;
-  textareaContent.value = todoObj.content;
-
-  // 저장된 우선순위 값이랑 같은 버튼에 active 설정
-  priorityBtns.forEach((btn) => {
-    btn.classList.toggle("active", btn.dataset.prio == todoObj.priority);
-  });
-
-  // 저장된 상태(할일/진행중/완료) 값이랑 같은 버튼에 active 설정
-  statusItems.forEach((li) => {
-    const isActive = li.dataset.state === todoObj.status;
-    // console.log("li:", li.dataset.state, "| todo:", todoObj.status);
-    li.classList.toggle("active", isActive);
-    if (isActive) {
-      statusValue.textContent = li.textContent;
-    }
-  });
-
-  IsFix = id;
+  return element;
 };
 
-// ul 객체 값만 배열로 변환
-todoList.forEach((ul) => {
-  ul.addEventListener("click", (e) => {
-    const li = e.target.closest("li");
-    openModal(li.dataset.id);
-  });
-});
+// =============================
+
+// ! timestamp → 날짜 문자열 변환
+const nowDate = (timestamp) => {
+  const now = new Date(timestamp);
+  return `${now.getFullYear()}. ${String(now.getMonth() + 1).padStart(2, "0")}. ${String(now.getDate()).padStart(2, "0")}. ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+};
 
 // ==========================================
 
@@ -212,8 +194,8 @@ const render = () => {
   // renderStatus(stats);
   countStatus(todos);
 
-  // 아이콘 생성 함수
-  changeIcon();
+  // // 아이콘 생성 함수
+  // changeIcon();
 };
 
 document.addEventListener("DOMContentLoaded", render);
