@@ -77,7 +77,7 @@ const createList = (todo) => {
   if (todo.status === "done") {
     li.append(createDate(doneSvg, todo.completeAt, "done-time"));
   } else if (todo.updateAt) {
-    li.append(createDate(doingSvg, todo.updateAt, "doing-time"));
+    li.append(createDate(doingSvg, todo.updateAt, "update-time"));
   }
 
   return li;
@@ -113,14 +113,25 @@ const openModal = (id) => {
     }
   });
 
-  IsFix = id;
+  IsFixId = id;
 };
 
 // ul 객체 값만 배열로 변환
 todoList.forEach((ul) => {
   ul.addEventListener("click", (e) => {
     const li = e.target.closest("li");
-    openModal(li.dataset.id);
+
+    // li가 없으면 실행x
+    if (!li) return;
+
+    // 삭제 모달 & 할일 추가 모달 검사
+    const isCloseBtn = e.target.closest(".task-delete-btn");
+    if (isCloseBtn) {
+      e.stopPropagation();
+      openDelModal(li.dataset.id);
+    } else {
+      openModal(li.dataset.id);
+    }
   });
 });
 
