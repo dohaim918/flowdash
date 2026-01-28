@@ -77,16 +77,34 @@ document.addEventListener("DOMContentLoaded", () => {
           } else {
             card.style.display = "none";
           }
-          updateControlBar(clickText)
-          render();
         });
+
+        //  카드 반복 끝나고 한 번만 컨트롤바 업뎃 
+        updateControlBar(clickText);
       });
     });
+
+    // ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
+    // 공용 함수: controlWrap에 span 추가/제거
+    function updateControlBar(text) {
+      const controlWrap = document.querySelector(".contral-bar-wrap");
+      if (!controlWrap) return;
+
+      // 기존 추가된 span 제거
+      const oldSpan = controlWrap.querySelector(".list-control-bar-content.added");
+      if (oldSpan) oldSpan.remove();
+
+      // 전체 우선순이면 추가하지 않ㄱㅔ
+      if (text !== "전체 우선순") {
+        const newTextSpan = document.createElement("span");
+        newTextSpan.className = "list-control-bar-content added";
+        newTextSpan.textContent = text;
+        controlWrap.appendChild(newTextSpan);
+      }
+    }
      
 
 // ====================================== 전체 기간 항목 ==============================================
-
-
 
 //===============================================================================
 
@@ -173,24 +191,6 @@ sortBtn.addEventListener("click", () => {
   });
 })
 
-// ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
- // 공용 함수: controlWrap에 span 추가/제거
-function updateControlBar(text) {
-  const controlWrap = document.querySelector(".contral-bar-wrap");
-  if (!controlWrap) return;
-
-  // 기존 추가된 span 제거
-  const oldSpan = controlWrap.querySelector(".list-control-bar-content.added");
-  if (oldSpan) oldSpan.remove();
-
-  // 전체 우선순이면 추가하지 않ㄱㅔ
-  if (text !== "전체 우선순") {
-    const newTextSpan = document.createElement("span");
-    newTextSpan.className = "list-control-bar-content added";
-    newTextSpan.textContent = text;
-    controlWrap.appendChild(newTextSpan);
-  }
-}
 
 //============================
 //  힌트
