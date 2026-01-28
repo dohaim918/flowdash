@@ -1,3 +1,13 @@
+:root {
+  --save-color: #5c5cfc;
+  --save-hover: #4a4ae0;
+  --bg-glass: rgba(255, 255, 255, 0.73);
+  --border-glass: rgba(255, 255, 255, 0.062);
+  --input-bg: #f9f9f9;
+  --text-main: #333;
+  --m-boder: #eee;
+}
+
 /* 오버레이 딤드 */
 .modal-overlay {
   position: fixed;
@@ -43,11 +53,11 @@
   content: "";
   position: absolute;
   inset: 2.8px;
-  background: var(--m-glass-bg);
+  background: var(--glass-bg);
   border-radius: 18px;
   box-shadow:
-    0 0 3px var(--m-box-shadow),
-    inset 0 0 10px var(--m-shadow);
+    0 0 3px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px var(--text-bright);
   z-index: -1;
 }
 
@@ -70,7 +80,7 @@
   display: block;
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-medium);
+  color: #555;
   margin-bottom: 10px;
 }
 .select-form-group label {
@@ -78,13 +88,14 @@
   display: block;
   font-weight: 600;
   font-size: 14px;
+  color: #555;
   margin-bottom: 10px;
 }
 .select-form-group {
   display: block;
   font-weight: 600;
   font-size: 14px;
-  color: var(--text-medium);
+  color: #555;
   margin-bottom: 10px;
 }
 
@@ -101,7 +112,6 @@ textarea,
   transition: all 0.2s;
   box-sizing: border-box;
   position: relative;
-  box-shadow: var(--modal-shadow);
 }
 .status-select {
   padding: 0;
@@ -177,6 +187,7 @@ textarea {
 .status-section {
   display: flex;
   flex-direction: column;
+  transition: margin 0.3;
 }
 
 /* 우선순위 버튼 */
@@ -198,8 +209,6 @@ textarea {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
-  background-color: var(--input-bg);
-  color: var(--text-medium);
 }
 
 .priority-btn.active.red {
@@ -223,13 +232,11 @@ textarea {
 /* 상태 셀렉트 */
 
 .status-select {
+  position: relative;
   height: 42px;
   display: flex;
   align-items: center;
   cursor: pointer;
-
-  position: relative;
-  z-index: 10;
 }
 
 .status-btn {
@@ -245,10 +252,6 @@ textarea {
   justify-content: space-between;
   align-items: center;
   padding: 0 14px;
-
-  color: var(--text-medium);
-  box-shadow: var(--box-shadow);
-  border-radius: 10px;
 }
 
 .status-list {
@@ -256,38 +259,18 @@ textarea {
   top: 115%;
   left: 0;
   width: 100%;
-  background: var(--drop-down);
+  background: #fff;
   border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-
+  z-index: 10;
   opacity: 0;
   visibility: hidden;
-  color: var(--text-medium);
-  padding: 8px;
-  box-shadow: var(--box-shadow);
-  transform: translateY(-20px);
-  transition: all 0.3s;
+  transform: translateY(-5px);
+  transition: 0.2s;
 }
 
-.status-list::after {
-  content: "";
-  position: absolute;
-  top: 0%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  backdrop-filter: blur(12px);
-  background: var(--drop-down);
-
-  z-index: -1;
-}
-
-.select {
-  border-radius: 10px;
-}
-
-.status-select.open .status-list {
+.status-select:focus-within .status-list {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -295,23 +278,15 @@ textarea {
 
 .status-list li {
   padding: 12px;
+  list-style: none;
   font-size: 14px;
 }
 
 .status-list li:hover {
-  background-color: var(--m-drop-background);
+  background-color: var(--drop-background);
   color: var(--point-pink);
-  backdrop-filter: blur(8px);
 }
 
-/* 화살표 */
-.status-select .arrow {
-  transform: rotate(0deg);
-  transition: transform 0.2s ease-out;
-}
-.status-select.open .arrow {
-  transform: rotate(-180deg);
-}
 /* 하단 버튼 */
 
 /*  액티브 */
@@ -330,19 +305,16 @@ textarea {
 
 /* 호버 */
 .priority-btn.yellow:hover {
-  background-color: var(--yllow-btn);
+  background-color: rgb(255, 237, 211);
   color: #ff8800;
-  border-color: #ff8800;
 }
 .priority-btn.green:hover {
-  background-color: var(--green-btn);
+  background-color: #d3ffed;
   color: #13c77f;
-  border-color: #13c77f;
 }
 .priority-btn.red:hover {
-  background-color: var(--pink-btn);
+  background-color: #ffdef0;
   color: #dd007b;
-  border-color: #dd007b;
 }
 
 .priority-btn {
@@ -350,7 +322,6 @@ textarea {
     background-color 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  box-shadow: var(--modal-shadow);
 }
 
 .priority-btn:hover {
@@ -384,9 +355,8 @@ textarea {
 }
 
 .btn-cancel {
-  background: var(--m-clear-btn);
-  color: var(--m-clear-color);
-  border: 1px solid rgba(224, 224, 224, 0.5);
+  background: var(--m-boder);
+  color: #555;
 }
 .btn-save {
   background: var(--save-color);
@@ -420,9 +390,7 @@ textarea {
   box-shadow:
     0 0 8px var(--neon-glow-light),
     0 0 16px var(--neon-glow-light);
-  background-color: var(--input-bg);
   transform: translateY(-3px);
-  border: 1px solid var(--point-pink);
 }
 
 /* 컨테이너가 좁아지면 1열 */
@@ -436,150 +404,4 @@ textarea {
   .status-section {
     margin-top: 32px;
   }
-}
-
-/* ================================ */
-
-/* delete 모달 */
-.delete-over {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  padding: 20px;
-
-  background-color: var(--overlay-shadow);
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 1, 1);
-}
-.delete-over.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-.delete-over.open .deletebox {
-  transform: scale(1) translatey(0);
-}
-
-.deletebox {
-  width: 350px;
-  padding: 30px;
-  /* background: rgba(255, 255, 255, 0.7); */
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--m-boder);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  animation: modal-appear 0.3s ease-out;
-
-  background: var(--m-glass-bg);
-  border-radius: 18px;
-  box-shadow:
-    var(--d-box-shadow),
-    inset 0 0 10px var(--m-shadow);
-  z-index: -1;
-
-  /* transform: scale(0.2); */
-}
-.deletebox::before {
-  content: "";
-  position: absolute;
-  inset: 0px;
-  background: var(--m-glass-bg);
-  backdrop-filter: blur(4px);
-  border-radius: 18px;
-  box-shadow:
-    0 0 3px var(--m-box-shadow),
-    inset 0 0 10px var(--m-shadow);
-  z-index: -1;
-}
-
-.crystal-icon {
-  font-size: 32px;
-  margin-bottom: 16px;
-}
-
-.delete-title {
-  font-size: 18px;
-  font-weight: 700;
-
-  color: var(--text-main);
-}
-.delete-comment {
-  line-height: 2.4;
-  font-size: 12px;
-  color: rgba(255, 57, 57, 0.8);
-  font-weight: 600;
-}
-.delete-text {
-  line-height: 1.4;
-  font-size: 15px;
-  color: var(--text-light);
-  margin: 6px 0 18px 0;
-}
-
-.crystal-btn {
-  display: flex;
-  gap: 12px;
-  line-height: 2;
-  justify-content: center;
-  font-weight: 700;
-}
-
-.btn-crystal,
-.btn-delete {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background-color 0.3s ease;
-}
-.btn-crystal {
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: none;
-  background: var(--m-clear-btn);
-  color: var(--m-clear-color);
-  font-size: 14px;
-
-  border: 1px solid rgba(224, 224, 224, 0.5);
-
-  /* border: 2px solid black; */
-}
-
-.btn-delete {
-  padding: 12px 24px;
-  border-radius: 12px;
-  border: none;
-  background: var(--neon-color);
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.btn-crystal:hover {
-  color: var(--point-pink);
-  box-shadow:
-    0 0 8px var(--neon-glow-light),
-    0 0 16px var(--neon-glow-light);
-  background-color: var(--input-bg);
-  border: 1px solid var(--point-pink);
-  transform: translateY(-2px);
-}
-
-.btn-delete:hover {
-  color: #fff;
-  /* background: #ff008c; */
-  background: #ff008c;
-  text-shadow:
-    0 0 4px var(--neon-color),
-    0 0 8px var(--neon-glow);
-  box-shadow:
-    0 0 8px var(--neon-glow-light),
-    0 0 16px var(--neon-glow-light);
-  transform: translateY(-2px);
 }

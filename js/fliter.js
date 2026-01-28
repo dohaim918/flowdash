@@ -70,6 +70,40 @@ document.addEventListener("DOMContentLoaded", () => {
         const tagEl = card.querySelector(".task-tag");
         const tagText = tagEl ? tagEl.textContent.trim() : "";
 
+<<<<<<< HEAD
+          // 버튼 안 || li안 텍스트 같아야지 나오게 아님 숨기기 
+          if (clickText === "전체 우선순" || tagText === clickText) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        //  카드 반복 끝나고 한 번만 컨트롤바 업뎃 
+        updateControlBar(clickText);
+      });
+    });
+
+    // ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
+    // 공용 함수: controlWrap에 span 추가/제거
+    function updateControlBar(text) {
+      const controlWrap = document.querySelector(".contral-bar-wrap");
+      if (!controlWrap) return;
+
+      // 기존 추가된 span 제거
+      const oldSpan = controlWrap.querySelector(".list-control-bar-content.added");
+      if (oldSpan) oldSpan.remove();
+
+      // 전체 우선순이면 추가하지 않ㄱㅔ
+      if (text !== "전체 우선순") {
+        const newTextSpan = document.createElement("span");
+        newTextSpan.className = "list-control-bar-content added";
+        newTextSpan.textContent = text;
+        controlWrap.appendChild(newTextSpan);
+      }
+    }
+     
+=======
         // 버튼 안 || li안 텍스트 같아야지 나오게 아님 숨기기
         if (clickText === "전체 우선순" || tagText === clickText) {
           card.style.display = "block";
@@ -79,9 +113,13 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+>>>>>>> f8872cc9c120f05dbeb97a2b35ba6c3c3e95bd96
 
   // ====================================== 전체 기간 항목 ==============================================
 
+<<<<<<< HEAD
+//===============================================================================
+=======
   //===============================================================================
 
   // 검색창 기능
@@ -91,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 변형 되는 부분 / todos 배열 가져오기 (로컬스토리지)
     let todos = JSON.parse(localStorage.getItem("flowdash-todos")) || [];
     const keyText = cardSearch.value.toLowerCase();
+>>>>>>> f8872cc9c120f05dbeb97a2b35ba6c3c3e95bd96
 
     // 카드 리스트 검사 (화면 렌더링부분임)
     filterList.forEach((card) => {
@@ -161,6 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+<<<<<<< HEAD
+=======
 // ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
 // 공용 함수: controlWrap에 span 추가/제거
 function updateControlBar(text) {
@@ -179,6 +220,7 @@ function updateControlBar(text) {
     controlWrap.appendChild(newTextSpan);
   }
 }
+>>>>>>> f8872cc9c120f05dbeb97a2b35ba6c3c3e95bd96
 
 //============================
 //  힌트
