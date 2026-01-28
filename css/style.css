@@ -410,6 +410,13 @@ body::after {
   /*  ! ! ! */
   cursor: pointer;
 }
+
+/* 정렬 (오름차순) 배치 */
+.contral-bar-wrap {
+  display: flex;
+  gap: 18px;
+}
+
 .list-control-bar-content {
   padding: 6px 12px;
   border-radius: 20px;
