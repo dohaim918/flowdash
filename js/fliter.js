@@ -1,23 +1,9 @@
 // 여기에 드롭다운 JS 전체
+document.addEventListener("DOMContentLoaded", () => {
 
 
-    // 요소 리스트 ( 안되면 점 ,"",절차 표시 다시확인 )
-    // 첫번째 드롭다운 
-  const dropdownToggle = document.querySelector (".dropdown-toggle");
-  const dropdownTrigger = dropdownToggle.querySelector (".dropdown-trigger");
-  const selectedValue = dropdownTrigger.querySelector (".selected-value");
-  const dropdownMenu = dropdownToggle.querySelector (".dropdown-menu")
-  const dropdownItem = dropdownMenu.querySelectorAll("li")
-
-    // 두번째 드롭다운
-  const dropdownToggleRanking = document.querySelector (".dropdown-toggle.ranking");
-  const dropdownTriggerRanking = dropdownToggleRanking.querySelector (".dropdown-trigger.ranking");
-  const selectedValueRanking = dropdownTriggerRanking.querySelector (".selected-value.ranking");
-  const dropdownMenuRanking = document.querySelector (".dropdown-menu.ranking") // toggle 밖에 있음 (분리)
-  const dropdownItemRanking = dropdownMenuRanking.querySelectorAll("li")
- 
-  // 주의 : 만약 ul li  버튼이 밖이면 document 헷갈리지말기..
-
+  //  첫번 째 = 전체기간 드롭다운 / 두 번째 = 우선순위 버튼 
+  // 주의 : 만약 ul li  버튼이 밖이면 document 
   dropdownTrigger.addEventListener("click", (e) => {
     e.stopPropagation();
 
@@ -67,6 +53,7 @@
     
     // ====================================== 전체 우선순 항목 ==============================================
 
+   
       dropdownItemRanking.forEach(item => {
         item.addEventListener("click", () => {
 
@@ -90,11 +77,12 @@
           } else {
             card.style.display = "none";
           }
+          updateControlBar(clickText)
+          render();
         });
       });
     });
-    
-    
+     
 
 // ====================================== 전체 기간 항목 ==============================================
 
@@ -104,20 +92,16 @@
 
 //======================================================================================
 
-// 각 영역이 떨어져 있음 (검색 필터기능 부분)
-const cardSearch = document.querySelector(".card-search") // 검색 기능박스
-const taskText = Array.from(document.querySelectorAll(".task-text")); // 제목 + 내용 (박스)
-// const taskDesc = Array.from(document.querySelectorAll(".task-desc"));
-
+// 검색창 기능
 
 cardSearch.addEventListener("input", () => {
-  const cardList = Array.from(document.querySelectorAll(".task-card")); // 카드 리스트 
+  const filterList = Array.from(document.querySelectorAll(".task-card")); // 카드 리스트 
   // 변형 되는 부분 / todos 배열 가져오기 (로컬스토리지)
   let todos = JSON.parse(localStorage.getItem("flowdash-todos")) || [];
   const keyText = cardSearch.value.toLowerCase();
   
   // 카드 리스트 검사 (화면 렌더링부분임)
-  cardList.forEach(card => {
+  filterList.forEach(card => {
   // 중간 배찌도 검색해서 특정요소 뽑아서 
   const cardTextEl = card.querySelector(".task-text"); // 제목 + 내용만
   const cardText = cardTextEl ? cardTextEl.innerText.toLowerCase().trim() : ""; // 소문자+공백 포함
@@ -127,7 +111,6 @@ cardSearch.addEventListener("input", () => {
     } else {
       card.style.display = "none";
     }
-
   })
 })
 
@@ -157,30 +140,9 @@ allDelete.addEventListener("click", () => {
 
 // ====================================================================
 
-// 수정 전 
-// const sortBtn = document.querySelector(".toggle-btn");  // 버튼
-// const sortSub = document.querySelector(".list-control-bar-content"); 
-// const container = document.querySelector(".card-container"); // 카드 부모
-// const cardList = Array.from(container.querySelectorAll(".task-card")); // 카드 배열
-// const change = document.querySelectorAll(".change");
-
-// 텍스트 교체
-// const toggleSort = () => {
-//   const isAsc = change[0].textContent.trim() === "오름차순";
-//   const text = isAsc ? "내림차순" : "오름차순";
-
-//   change.forEach((el) => (el.textContent = text));
-// };
-
-// sortBtn.addEventListener("click", toggleSort);
-// sortSub.addEventListener("click", toggleSort);
-    
-const toggleBtn = document.querySelector(".toggle-btn"); // 버튼
-const change = document.querySelectorAll(".change");     // NodeList: 여러 개
-
 let isAsc = true; // 오름차순 기본값
 
-toggleBtn.addEventListener("click", () => {
+sortBtn.addEventListener("click", () => {
 
   const toggleText = isAsc ? "내림차순" : "오름차순";
    //  모든 카드 (배열) 전역에 이미 선언에서 안에.
@@ -198,13 +160,68 @@ toggleBtn.addEventListener("click", () => {
       if (textA > textB) return isAsc ? 1 : -1;
       return 0;
     });
-
-    // 정렬된 카드 다시 부모에 붙이는 ( 마지막 자신으로 이동시키기 )
+    
+    // 정렬된 카드 다시 부모에 붙이는 ( 마지막 자식으로 이동시키기 )
     cardList.forEach(card => container.appendChild(card));
   });
 
-  // 모든 .change 텍스트 바꾸기
-  change.forEach(el => el.textContent = toggleText);
+    // 모든 .change 텍스트 바꾸기
+    change.forEach(el => el.textContent = toggleText);
 
-  isAsc = !isAsc; // 다음 클릭 때 반대로
-});
+    isAsc = !isAsc; // 다음 클릭 때 반대로
+
+  });
+})
+
+// ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
+ // 공용 함수: controlWrap에 span 추가/제거
+function updateControlBar(text) {
+  const controlWrap = document.querySelector(".contral-bar-wrap");
+  if (!controlWrap) return;
+
+  // 기존 추가된 span 제거
+  const oldSpan = controlWrap.querySelector(".list-control-bar-content.added");
+  if (oldSpan) oldSpan.remove();
+
+  // 전체 우선순이면 추가하지 않ㄱㅔ
+  if (text !== "전체 우선순") {
+    const newTextSpan = document.createElement("span");
+    newTextSpan.className = "list-control-bar-content added";
+    newTextSpan.textContent = text;
+    controlWrap.appendChild(newTextSpan);
+  }
+}
+
+//============================
+//  힌트
+// funxtion 우선순위필터(todos, filter) {
+//   if (!filter) return todos;
+//   return todos.filter(todo => todo.priority === filter값);
+// }
+
+
+//   // 전역 상태 활용??
+//   const filterState = {
+//     keyword: "",
+//     priority: null,
+//     sort: null,
+//     date: null
+//   }; 
+
+
+//   // 기간 필터 버튼/드롭다운 등도 동일하게
+//   // 예: datePicker.addEventListener("change", ...)
+
+//   // 렌더링
+
+//   // 필터 함수
+//   function applyFilter(todos, filter) {
+//     let result = todos;
+//     result = 우선순위필터(result, filter.priority);
+//     result = 검색어필터(result, filter.keyword);
+//     result = 기간필터(result, filter.date);
+//     result = 정렬(result, filter.sort);
+//     return result;
+//   }
+
+// });
