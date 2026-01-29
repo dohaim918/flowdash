@@ -77,24 +77,21 @@ flowdash/
 ```
 
 ### 3-2. 모듈 책임 분리
-- main.js : 이벤트 리스너
+- main.js : 이벤트 리스너 관리
 - modal.js : Ui 생성과 모달 + 통계 관리
 - deleteTodo.js : 앱의 상태인 Todo 리스트를 로컬 스토리지와 동기화하면서 관리
 - icons.js : svg 관리
 - filter.js : 검색 파이프라인 전담 관리 
-- storage.js: LocalStorage IO 전담
-- todoCard.js : 
-- ui/board.js: 보드 단위 렌더링
-- ui/card.js: 카드 렌더링 및 이벤트
-- utils/date.js: 날짜 계산 유틸
+- todoCard.js : Todo 앱에서 카드 생성, 모달, UI 상태, 통계 계산까지 관리
+- top.js : 전역 UI 상태 관리 
 
 ### 3-3. 데이터 흐름
 User Action  
 
-→ updateState()  
-→ saveToStorage()  
-→ renderBoards()  
-→ renderStats()
+→ Todo 데이터(todos) 상태 변경
+→ LocalStorage에 상태 저장
+→ 상태별 보드 다시 렌더링
+→ 통계 UI 업데이트 
 
 ---
 
