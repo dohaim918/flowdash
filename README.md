@@ -59,20 +59,20 @@ flowdash/
 ├─ css/
 │  ├─ reset.css             (resrt.css)
 │  ├─ base.css              (style.css : 메인) 
-│  ├─ components.css       (delete.css / modal_style.css : 재사용 )
+│  ├─ components.css        (delete.css / modal_style.css : 재사용 )
 │  ├─ theme.css             (색상변수:다크모드)
-│  └─ responsive.css          (쿼리)
+│  └─ responsive.css        (쿼리)
 └─ js/
    ├─ main.js                (main.js : 이벤트리스너 ,,,)
-   ├─ state.js                (deleteTodo.js : 삭제모달 / filter.js : 검색 파이프라인 ) 
-   ├─ storage.js               (저장)
+   ├─ state.js               (deleteTodo.js : 삭제모달 / filter.js : 검색 파이프라인 ) 
+   ├─ storage.js             (저장)
    ├─ utils/
    │  └─ date.js               
    └─ ui/                      (icons.js : svg /modal.js : 모달기능 / todoCard.js :)
-      ├─ board.js               (dom)
-      ├─ card.js                (top.js : 제목,내용,날짜)
+      ├─ board.js              (dom)
+      ├─ card.js               (top.js : 제목,내용,날짜)
       ├─ header.js             (로고버튼프로필)
-      └─ stats.js             카드생성 Ui + Dom + 모달
+      └─ stats.js              
 
        ※ todoCard.js : 카드생성 Ui + Dom + 모달역할 + 통계 
 ```
