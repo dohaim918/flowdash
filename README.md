@@ -67,7 +67,7 @@ flowdash/
    ├─ storage.js             (저장)
    ├─ utils/
    │  └─ date.js               
-   └─ ui/                      (icons.js : svg /modal.js : 모달기능 / todoCard.js :)
+   └─ ui/                      (icons.js : svg / modal.js : 모달기능 / todoCard.js :)
       ├─ board.js              (dom)
       ├─ card.js               (top.js : 제목,내용,날짜)
       ├─ header.js             (로고버튼프로필)
@@ -79,9 +79,11 @@ flowdash/
 ### 3-2. 모듈 책임 분리
 - main.js : 이벤트 리스너
 - modal.js : Ui 생성과 모달 + 통계 관리
-- deleteTodo.js : 
-- state.js: 앱의 단일 상태 관리
+- deleteTodo.js : 앱의 상태인 Todo 리스트를 로컬 스토리지와 동기화하면서 관리
+- icons.js : svg 관리
+- filter.js : 검색 파이프라인 전담 관리 
 - storage.js: LocalStorage IO 전담
+- todoCard.js : 
 - ui/board.js: 보드 단위 렌더링
 - ui/card.js: 카드 렌더링 및 이벤트
 - utils/date.js: 날짜 계산 유틸
