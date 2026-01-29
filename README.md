@@ -57,7 +57,7 @@ flowdash/
 ├─ README.md
 ├─ index.html
 ├─ css/
-│  ├─ reset.css ()
+│  ├─ reset.css (resrt.css)
 │  ├─ base.css (style.css) 
 │  ├─ components.css (delete.css / modal_style.css : 재사용 )
 │  ├─ theme.css (색상변수:다크모드)
@@ -68,7 +68,7 @@ flowdash/
    ├─ storage.js (저장)
    ├─ utils/
    │  └─ date.js 
-   └─ ui/
+   └─ ui/ (icons.js : svg)
       ├─ board.js (dom)
       ├─ card.js (제목내용날짜)
       ├─ header.js (로고버튼프로필)
