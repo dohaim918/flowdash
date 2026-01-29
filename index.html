@@ -4,144 +4,295 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>to-do Team Project</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/theme.css" />
+    <link rel="stylesheet" href="./css/modal_style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <main class="background">
+    <div class="page-wrapper">
       <header class="introduction">
         <div class="nickname-header">
-          <!-- 글자수정 -->
-          <div class="nickname">
-            좋은 저녁이에요,
-            <span class="nickname-name">Client</span>님
-            <svg class="nickname-icon" width="20" height="20" viewBox="0 0 24 24">
-              <path
-                d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              />
-            </svg>
+          <div class="user">
+            <span class="time"> 좋은 저녁이에요</span>, <span class="user-name">FlowDash</span>님
           </div>
           <div class="date">2026년 1월 24일</div>
         </div>
         <div class="mode">
-          <!-- 글자 수정 -->
-          <button id="dark-mode-toggle">다크모드</button>
+          <button class="dark-mode-toggle">Dark</button>
         </div>
       </header>
 
       <section class="phrase">
         <h2 class="phrase-header">Welcome to Your Clear Vision</h2>
-        <!-- 오타수정 -->
         <p class="phrase-text">2026년의 새로운 인터페이스로 당신의 목표를 투명하게 관리해보세요.</p>
       </section>
 
-      <section class="total-sorting">
-        <!-- 시멘틱 터그 수정 -->
-        <article class="total-item">
-          <span class="total-title">Total Tasks</span>
-          <span class="total-number">0</span>
+      <section class="dashbord-stats">
+        <article class="stats-item">
+          <h3 class="stats-title">Total Tasks</h3>
+          <span class="stats-number" data-num="total">0</span>
         </article>
 
-        <article class="total-item">
-          <span class="total-title">To Do</span>
-          <span class="total-number">0</span>
+        <article class="stats-item">
+          <h3 class="stats-title">To Do</h3>
+          <span class="stats-number todo">0</span>
         </article>
 
-        <article class="total-item">
-          <span class="total-title">In Progress</span>
-          <span class="total-number">0</span>
+        <article class="stats-item">
+          <h3 class="stats-title">In Progress</h3>
+          <span class="stats-number doing">0</span>
         </article>
 
-        <article class="total-item">
-          <span class="total-title">Done</span>
-          <span class="total-number">0</span>
+        <article class="stats-item">
+          <h3 class="stats-title">done</h3>
+          <span class="stats-number done">0</span>
         </article>
 
-        <article class="total-item">
-          <span class="total-title">Achievement</span>
-          <!-- 글자수정 -->
-          <span class="total-number">-</span>
+        <article class="stats-item">
+          <h3 class="stats-title">Achievement</h3>
+          <span class="stats-number" data-num="percent">-</span>
         </article>
       </section>
 
-      <section class="add-btn-wrap">
-        <!-- 3개 묶음 -->
-        <!-- 검색 & 필터 영역 -->
-        <!-- 검색 -->
+      <section class="control-bar">
+        <h3 class="sr-only">검색 및 필터</h3>
         <div class="search-wrap">
-          <input type="text" placeholder="할 일을 검색해보세요" />
-          <button class="search-icon" aria-label="검색">검색</button>
+          <input
+            type="text"
+            maxlength="14"
+            class="card-search"
+            placeholder="할 일을 검색해보세요"
+          />
+          <button type="submit" class="search-icon" aria-label="검색">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="19"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <line x1="16.65" y1="16.65" x2="21" y2="21" />
+            </svg>
+          </button>
         </div>
 
-        <!-- 드롭다운...? -->
-        <!-- 기간 필터 -->
-        <select class="glass-select" aria-label="기간 필터">
-          <option value="" selected>전체 기간</option>
-          <option value="">xx</option>
-          <option value="">xx</option>
-          <option value="">xx</option>
-        </select>
+        <div class="dropdown-toggle">
+          <button class="dropdown-trigger">
+            <span class="selected-value">전체 기간</span>
+            <svg
+              class="arrow bi-chevron-down"
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </button>
+          <ul class="dropdown-menu period">
+            <li class="dropdown-item" data-value="all">전체 기간</li>
+            <li class="dropdown-item" data-value="today">오늘</li>
+            <li class="dropdown-item" data-value="week">최근 7일</li>
+          </ul>
+        </div>
 
-        <!-- 우선순위 필터 -->
-        <select class="glass-select" aria-label="우선순위 필터">
-          <option value="" selected>전체 우선순위</option>
-          <option value="">xx</option>
-          <option value="">xx</option>
-        </select>
+        <div class="dropdown-toggle ranking">
+          <button class="dropdown-trigger ranking">
+            <span class="selected-value ranking">전체 우선순위</span>
+            <svg
+              class="arrow bi-chevron-down"
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </button>
+          <ul class="dropdown-menu ranking">
+            <li class="dropdown-item">전체 우선순위</li>
+            <li class="dropdown-item" data-state="high">높음</li>
+            <li class="dropdown-item" data-state="mid">중간</li>
+            <li class="dropdown-item" data-state="low">낮음</li>
+          </ul>
+        </div>
 
-        <!-- 정렬 -->
-        <button class="dropdown-toggle" aria-label="정렬 방식 변경">정렬: 오름차순</button>
+        <button class="toggle-btn" aria-label="정렬 방식 변경">
+          정렬:<span class="change">오름차순</span>
+        </button>
 
-        <!-- 핑크 버튼 + 클래스명수정-->
-        <button class="new-btn">+ 새 할일</button>
+        <button class="new-btn">+ 새 할 일</button>
       </section>
 
-      <div class="sequence">
-        <span class="sequence-content"> 정렬: <span class="add">오름차순</span> </span>
-        <!-- 버튼으로 수정 -->
+      <div class="list-control-bar">
+        <div class="contral-bar-wrap">
+          <span class="list-control-bar-content sort"
+            >정렬:<span class="change">오름차순</span></span
+          >
+          <span class="list-control-bar-content priority hidden"
+            >우선순위: <span class="change">전체 우선순위</span></span
+          >
+          <span class="list-control-bar-content period hidden"
+            >기간:<span class="change">전체 기간</span></span
+          >
+          <span class="list-control-bar-content search hidden"
+            >검색:<span class="change"></span
+          ></span>
+        </div>
         <button class="all-delete">전체 데이터 초기화</button>
       </div>
+
       <section class="progress-wrap">
+        <h3 class="sr-only">todo 보드</h3>
         <div class="progress-box">
-          <!-- 시멘틱테그 수정 -->
-          <article class="todo-item">
-            <div class="todo-header">
-              <!-- 테그수정 -->
+          <article class="todo-item card-hover">
+            <div class="card-header">
               <h3 class="todo-title">할 일</h3>
-              <span class="todo-number">0</span>
+              <span class="todo-number todo">0</span>
             </div>
 
-            <ul class="task-list"></ul>
+            <ul id="todoList" class="task-list"></ul>
 
-            <div class="empty">할 일이 없습니다.</div>
+            <p class="empty">할 일이 없습니다.</p>
           </article>
-          <article class="progress-item">
-            <div class="progress-header">
-              <!-- 테그수정 -->
+
+          <article class="progress-item card-hover">
+            <div class="card-header">
               <h3 class="progress-title">진행 중</h3>
-              <span class="progress-number">0</span>
+              <span class="progress-number doing">0</span>
             </div>
 
-            <ul class="task-list"></ul>
+            <ul id="progressList" class="task-list"></ul>
 
-            <div class="empty">진행 중인 일이 없습니다.</div>
+            <p class="empty">진행 중인 일이 없습니다.</p>
           </article>
 
-          <article class="Done-item">
-            <div class="Done-header">
-              <!-- 테그수정 -->
-              <h3 class="Done-title">진행 중</h3>
-              <span class="Done-number">0</span>
+          <article class="done-item card-hover">
+            <div class="card-header">
+              <h3 class="done-title">완료</h3>
+              <span class="done-number done">0</span>
             </div>
 
-            <ul class="task-list"></ul>
+            <ul id="doneList" class="task-list"></ul>
 
-            <div class="empty">완료한 일이 없습니다.</div>
+            <p class="empty">완료한 일이 없습니다.</p>
           </article>
         </div>
       </section>
-    </main>
+    </div>
+
+    <div class="modal-overlay">
+      <div class="modal-wrap">
+        <div class="modal-content">
+          <h2 class="modal-title">새 할 일</h2>
+          <div class="form-wrap">
+            <div class="form-group">
+              <label>제목 *</label>
+              <input class="text" type="text" placeholder="무엇을 해야 하나요?" />
+              <p class="error-message">할 일을 입력해주세요.</p>
+            </div>
+
+            <div class="form-group">
+              <label>내용</label>
+              <textarea placeholder="상세 내용을 입력하세요..."></textarea>
+            </div>
+
+            <div class="select-form-group">
+              <div class="form-row">
+                <div class="priority-section">
+                  <label>우선순위</label>
+                  <div class="priority-group">
+                    <button type="button" class="priority-btn active red" data-prio="high">
+                      높음
+                    </button>
+                    <button type="button" class="priority-btn yellow" data-prio="mid">중간</button>
+                    <button type="button" class="priority-btn green" data-prio="low">낮음</button>
+                  </div>
+                </div>
+
+                <div class="status-section">
+                  <label>상태</label>
+                  <div class="status-select">
+                    <button type="button" class="status-btn">
+                      <span class="status">할 일</span>
+                      <svg
+                        class="arrow bi-chevron-down"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 16 16"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"
+                        />
+                      </svg>
+                    </button>
+                    <ul class="status-list">
+                      <li class="select add" data-state="todo">할 일</li>
+                      <li class="select ing" data-state="doing">진행 중</li>
+                      <li class="select completion" data-state="done">완료</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="modal-btn">
+                  <button type="button" class="btn-cancel">취소</button>
+                  <button type="button" class="btn-save">저장</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="delete-over allbtn">
+      <div class="deletebox">
+        <div class="crystal-content">
+          <div class="crystal-icon">⚠️</div>
+          <h3 class="delete-title">정말 삭제하시겠습니까?</h3>
+          <span class="delete-comment"> 삭제된 데이터는 복구할 수 없습니다.</span>
+          <p class="delete-text">계속하시려면 확인 버튼을 눌러주세요.</p>
+        </div>
+        <div class="crystal-btn">
+          <button class="btn-crystal">취소</button>
+          <button class="btn-delete">확인</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+    <script src="./js/icons.js"></script>
+    <script src="./js/top.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/fliter.js"></script>
+    <script src="./js/todoCard.js"></script>
+    <script src="./js/deleteTodo.js"></script>
   </body>
 </html>
