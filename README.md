@@ -134,7 +134,7 @@ filter.js (파이프라인으로 데이터 가공)
 
 ---
 
-## 4. 핵심 설계 결정 사항 (Design Decisions) > 의논 <
+## 4. 핵심 설계 결정 사항 (Design Decisions) 
 
 - status 기반 보드 분리 → 상태 필터 제거
 - 모든 날짜 데이터는 timestamp(number)로 통일
