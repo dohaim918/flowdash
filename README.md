@@ -57,22 +57,22 @@ flowdash/
 ├─ README.md
 ├─ index.html
 ├─ css/
-│  ├─ reset.css (resrt.css)
-│  ├─ base.css (style.css : 메인) 
-│  ├─ components.css (delete.css / modal_style.css : 재사용 )
-│  ├─ theme.css (색상변수:다크모드)
-│  └─ responsive.css (쿼리)
+│  ├─ reset.css             (resrt.css)
+│  ├─ base.css              (style.css : 메인) 
+│  ├─ components.css       (delete.css / modal_style.css : 재사용 )
+│  ├─ theme.css             (색상변수:다크모드)
+│  └─ responsive.css          (쿼리)
 └─ js/
-   ├─ main.js (main.js : 이벤트리스너 ,,,)
-   ├─ state.js (deleteTodo.js : 삭제모달 / filter.js : 검색 파이프라인 ) 
-   ├─ storage.js (저장)
+   ├─ main.js                (main.js : 이벤트리스너 ,,,)
+   ├─ state.js                (deleteTodo.js : 삭제모달 / filter.js : 검색 파이프라인 ) 
+   ├─ storage.js               (저장)
    ├─ utils/
    │  └─ date.js 
-   └─ ui/ (icons.js : svg / modal.js )
-      ├─ board.js (dom)
-      ├─ card.js (top.js : 제목,내용,날짜)
-      ├─ header.js (로고버튼프로필)
-      └─ stats.js (todoCard.js : 통계부분)
+   └─ ui/                      (icons.js : svg / modal.js )
+      ├─ board.js               (dom)
+      ├─ card.js                (top.js : 제목,내용,날짜)
+      ├─ header.js             (로고버튼프로필)
+      └─ stats.js             (todoCard.js : 통계부분)
 ```
 
 ### 3-2. 모듈 책임 분리
