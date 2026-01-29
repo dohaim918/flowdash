@@ -67,12 +67,14 @@ flowdash/
    ├─ state.js                (deleteTodo.js : 삭제모달 / filter.js : 검색 파이프라인 ) 
    ├─ storage.js               (저장)
    ├─ utils/
-   │  └─ date.js 
-   └─ ui/                      (icons.js : svg / modal.js )
+   │  └─ date.js               
+   └─ ui/                      (icons.js : svg /modal.js : 모달기능 / todoCard.js :)
       ├─ board.js               (dom)
       ├─ card.js                (top.js : 제목,내용,날짜)
       ├─ header.js             (로고버튼프로필)
-      └─ stats.js             (todoCard.js : 통계부분)
+      └─ stats.js             카드생성 Ui + Dom + 모달
+
+       ※ todoCard.js : 카드생성 Ui + Dom + 모달역할 + 통계 
 ```
 
 ### 3-2. 모듈 책임 분리
