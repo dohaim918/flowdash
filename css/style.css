@@ -779,6 +779,10 @@ body::after {
   color: #179c67;
 }
 
+.hidden {
+  display: none;
+}
+
 /* 오름차순 내림차순 컬러 추가 */
 .change {
   color: #638dff;
