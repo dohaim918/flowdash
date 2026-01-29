@@ -5,12 +5,6 @@ const applyTheme = (theme) => {
   theme === "dark" ? body.classList.add("dark-mode") : body.classList.remove("dark-mode");
 };
 
-// 아이콘 교체
-// const updateIcon = () => {
-//   const isDark = body.classList.contains("dark-mode");
-//   themeBtn.innerHTML = isDark ? lightIcon : darkIcon;
-// };
-
 // 클릭했을때 테마 교체
 const toggleHandler = () => {
   const isDark = body.classList.contains("dark-mode");
@@ -78,9 +72,6 @@ function activeInput() {
 
   // 입력 중에도 width 자연스럽게 업데이트(선택)
   input.addEventListener("input", () => {
-    // 여기고침!!!!!!!!!!!!!!!!!!ㅎㅎㅎㅎㅎ (고맙워!! ㅋㅋ)
-    // scrollWidth = 요소 안에 있는 “내용이 실제로 차지하는 진짜 너비(px)”
-    // input.style.width = input.value.length + 1 + "ch";
     input.style.width = "0px";
     input.style.width = input.scrollWidth + 2 + "px";
   });
@@ -168,7 +159,7 @@ iconEl.addEventListener("click", () => {
 
 const nicknameEl = document.querySelector(".time");
 
-// //  현재 시간 가져오기
+// 현재 시간 가져오기
 const now = new Date();
 const hour = now.getHours(); // 0-23
 
@@ -187,17 +178,6 @@ if (hour >= 5 && hour < 11) {
 nicknameEl.textContent = message;
 
 // ================================================
-// 날짜 실시간 이 느낌으로
-
-// text,match(/\d+/g) : 숫자 뽑기
-
-// function isData() {
-//   const dateNow = new Date()        // 지금
-//   const dateToday = new Date();     // 오늘
-//   dataToday.setHours(0,0,0,0);      // 오늘, 00:00 지정
-
-//   const live = new Data(dataToday);
-//   live.setDate(dataToday.getDate() + 1 or -1); // 내일 00.00 지정
 
 // 날짜 실시간 적용 js
 

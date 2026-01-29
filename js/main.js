@@ -128,6 +128,13 @@ const PRIORITY_TEXT = {
   low: "낮음",
 };
 
+const filter = {
+  date: "전체 기간",
+  priority: "전체 우선순위",
+  sort: "오름차순",
+  keyword: "",
+};
+
 // ==========================================
 
 // ! 상태별(할 일, 진행 중, 완료) ul 요소
@@ -186,21 +193,15 @@ const render = () => {
   // ul 초기화
   todoList.forEach((ul) => (ul.innerHTML = ""));
 
+  const filteredList = applyFilter(todos, filter);
   // 각 todo 객체를 해당 상태별 리스트에 렌더링
-  todos.forEach((todo) => {
+  filteredList.forEach((todo) => {
     renderTodo(todo); //  todoCard.js에서 li 요소 생성 후 ul에 추가
   });
 
-  // 상태별 리스트가 비어있으면 empty 문구 표시, 있으면 숨기기
   toggleEmpty();
 
-  // 통계 계산 함수 호출
-  // const stats = gatCountStats(todos);
-  // renderStatus(stats);
   countStatus(todos);
-
-  // // 아이콘 생성 함수
-  // changeIcon();
 };
 
 document.addEventListener("DOMContentLoaded", render);

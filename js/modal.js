@@ -146,7 +146,7 @@ const saveData = () => {
       content, // 콘텐츠 제목 값
       status,
       priority,
-      createAt: nowDate(timeStamp),
+      createAt: timeStamp,
       //  updateAt: null 카드 수정할때 지금 선택된 스테이 터스 랑 로컬에 저장된 스테이터스와 다를 경우 업데이트
       updateAt: null,
       completeAt: status === "done" ? nowDate(timeStamp) : null,
@@ -156,12 +156,12 @@ const saveData = () => {
 
     // !!!!!!!!테스트용
     const immediataly = {
-      id: timeStamp,
+      id: timeStamp - 1000 * 60 * 60 * 24 * 8,
       title,
       content,
       status,
       priority,
-      createAt: nowDate(timeStamp - 1000 * 60 * 60 * 24),
+      createAt: timeStamp - 1000 * 60 * 60 * 24 * 8,
       updateAt: null,
       completeAt: status === "done" ? nowDate(timeStamp) : null,
     };
