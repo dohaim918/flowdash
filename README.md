@@ -146,7 +146,7 @@ filter.js (파이프라인으로 데이터 가공)
 ## 5. 수행 결과 (Implementation Result)
 
 ### 5-1. 주요 기능
-- CRUD 전 기능
+- *CRUD : 생성 / 조회 / 수정 / 삭제 전 기능 정상 동작
 - 칸반 보드 : TODO / DOING / DONE
 - 기간 필터 / 정렬 / 검색 순 유지
 - 통계 대시보드 및 달성률
