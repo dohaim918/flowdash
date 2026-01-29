@@ -116,7 +116,7 @@
         <!-- 우선순위 필터 -->
         <div class="dropdown-toggle ranking">
           <button class="dropdown-trigger ranking">
-            <span class="selected-value ranking">전체 우선순</span>
+            <span class="selected-value ranking">전체 우선순위</span>
             <svg
               class="arrow bi-chevron-down"
               xmlns="http://www.w3.org/2000/svg"
@@ -136,8 +136,8 @@
             </svg>
           </button>
           <ul class="dropdown-menu ranking">
-            <li class="dropdown-item">전체 우선순</li>
-            <li class="dropdown-item" data-state="high">높음</li>
+            <li class="dropdown-item">전체 우선순위</li>
+            <li class="dropdown-item" data-state="high" >높음</li>
             <li class="dropdown-item" data-state="mid">중간</li>
             <li class="dropdown-item" data-state="low">낮음</li>
           </ul>
@@ -156,7 +156,10 @@
       <div class="list-control-bar">
         <!-- span 박스 추가 -->
         <div class="contral-bar-wrap">
-          <span class="list-control-bar-content"> 정렬: <span class="change">오름차순</span> </span>
+          <span class="list-control-bar-content period" >정렬:<span class="change">오름차순</span></span>
+          <span class="list-control-bar-content priority hidden" data-priority="높음"><span class="change">높음</span></span>
+          <span class="list-control-bar-content priority hidden" data-priority="중간"><span class="change">중간</span></span>
+          <span class="list-control-bar-content priority hidden" data-priority="낮음"><span class="change">낮음</span></span>
         </div>
         <!-- 버튼으로 수정 -->
         <button class="all-delete">전체 데이터 초기화</button>
