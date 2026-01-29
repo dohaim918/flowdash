@@ -57,14 +57,14 @@ flowdash/
 ├─ README.md
 ├─ index.html
 ├─ css/
-│  ├─ reset.css
-│  ├─ style.css (base.css) 
-│  ├─ components.css (재사용)
+│  ├─ reset.css ()
+│  ├─ base.css (style.css) 
+│  ├─ components.css (delete.css / modal_style.css : 재사용 )
 │  ├─ theme.css (색상변수:다크모드)
 │  └─ responsive.css (쿼리)
 └─ js/
-   ├─ main.js(초기화함수호출,전역리스너이벤트)
-   ├─ state.js (저장수정삭제로직)
+   ├─ main.js (main.js : 이벤트리스너 ,,,)
+   ├─ state.js (deleteTodo.js / modal.js / filter.js :저장,로직) 
    ├─ storage.js (저장)
    ├─ utils/
    │  └─ date.js 
