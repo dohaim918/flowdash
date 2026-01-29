@@ -1,9 +1,9 @@
 # 6조 (TODO_404)
 
 > 공통 과제: 칸반 기반 태스크 관리 대시보드  
-> 팀원: 김나나, 오나라, 아주나  
-> 저장소: [GitHub](https://github.com/링크주소/)
-> 배포: [GitHub Pages](https://링크주소)
+> 팀원: 김신중,김도하  
+> 저장소: [GitHub](https://github.com/링크주소/)](https://github.com/dohaim918/flowdash)
+> 배포: [GitHub Pages](http://127.0.0.1:5500/index.html)
 
 ---
 
