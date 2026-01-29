@@ -450,11 +450,6 @@ body::after {
   gap: 18px;
 }
 
-.list-control-bar-content {
-  padding: 6px 12px;
-  border-radius: 20px;
-  box-shadow: var(--mini-shadow);
-}
 .all-delete {
   background: none;
   border: none;
@@ -797,13 +792,20 @@ body::after {
 /* 오름차순 내림차순 컬러 추가 */
 .change {
   padding-left: 6px;
-  color: #638dff;
+  /* color: #638dff; */
+  color: rgb(99, 115, 255);
+}
+.contral-bar-wrap {
+  flex-wrap: wrap;
 }
 .list-control-bar-content {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  box-shadow: var(--mini-shadow);
 }
 .hidden {
   display: none;
@@ -890,6 +892,22 @@ body.dark-mode .moon {
 body.dark-mode .sun {
   transform: rotate(360deg) scale(1);
   opacity: 1;
+}
+
+.list-control-bar-content.priority:hover,
+.list-control-bar-content.period:hover,
+.list-control-bar-content.search:hover {
+  background-color: rgba(99, 115, 255, 0.5);
+  color: white;
+}
+.priority:hover .change,
+.period:hover .change,
+.search:hover .change {
+  color: rgb(255, 255, 255);
+}
+
+.sr-only {
+  display: none;
 }
 
 @container (max-width: 750px) {

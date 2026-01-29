@@ -48,7 +48,7 @@ const createList = (todo) => {
   const createDate = (svg, day, name = "todo-time") => {
     const footer = createTag("div", `task-footer ${name}`);
     footer.innerHTML = svg;
-    const date = createTag("span", `task-date`, day);
+    const date = createTag("span", `task-date`, nowDate(day));
     footer.append(date);
 
     // console.log(date);
@@ -77,7 +77,6 @@ const createList = (todo) => {
 
 // ! 카드 클릭 → 수정 모달 열기
 
-// 모달을 다시열자 수정하쟣ㅎ....
 const openModal = (id) => {
   //   console.log("openModal 실행됨, id:", id);
   const todos = getTodos();

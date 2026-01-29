@@ -128,6 +128,7 @@ const PRIORITY_TEXT = {
   low: "낮음",
 };
 
+// 현재 선택된 필터들의 상태를 저장
 const filter = {
   date: "전체 기간",
   priority: "전체 우선순위",
@@ -202,6 +203,8 @@ const render = () => {
   toggleEmpty();
 
   countStatus(todos);
+  // 필터링된 ul 다시 그리기
+  listNumbers(filteredList);
 };
 
 document.addEventListener("DOMContentLoaded", render);
