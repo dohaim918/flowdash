@@ -36,11 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       dropdownToggle.classList.remove("open");
 
-        // 필터 (조건)부분 
-       const periodText = item.textContent.trim();
-       filterCardsPeriod(periodText)
+      // 필터 (조건)부분
+      const periodText = item.textContent.trim();
+      filterCardsPeriod(periodText);
     });
-  })
+  });
 
   // 두 번째 랭킹버튼
   dropdownItemRanking.forEach((item) => {
@@ -60,10 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!dropdownToggleRanking.contains(e.target)) {
       dropdownToggleRanking.classList.remove("open");
     }
- 
   });
-
-
 
   function filterCardsPeriod(periodText) {
     const cards = document.querySelectorAll(".task-card");
@@ -72,58 +69,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const sevenDays = new Date();
     sevenDays.setDate(today.getDate() - 7);
 
-    cards.forEach(card => {
+    cards.forEach((card) => {
       const dateEl = card.querySelector(".task-date");
       if (!dateEl) return;
 
       const cardDate = new Date(dateEl.innerText.trim());
-      
 
       if (periodText === "전체") {
         card.style.display = "block";
       } else if (periodText === "오늘") {
         card.style.display = cardDate >= startOfToday ? "block" : "none";
       } else if (periodText === "7일") {
-        card.style.display = cardDate >= sevenDays? "block" : "none";
+        card.style.display = cardDate >= sevenDays ? "block" : "none";
       }
-    });                                                           
+    });
   }
-
-
 
   // ====================================== 전체 우선순 항목 ==============================================
 
   // 다시 정리해야함
- dropdownItemRanking.forEach((item) => {
+  dropdownItemRanking.forEach((item) => {
     item.addEventListener("click", () => {
       const clickText = item.textContent.trim();
       selectedValueRanking.textContent = clickText;
- 
+
       const cardList = document.querySelectorAll(".task-card");
       const searchKey = cardSearch.value.toLowerCase().trim();
-      
+
       cardList.forEach((card) => {
-      // 제목만 검색
-      const titleEl = card.querySelector(".task-text");
-      const titleText = titleEl ? titleEl.innerText.toLowerCase().trim() : "";
+        // 제목만 검색
+        const titleEl = card.querySelector(".task-text");
+        const titleText = titleEl ? titleEl.innerText.toLowerCase().trim() : "";
 
-      const tagText =
-        card.querySelector(".task-tag")?.textContent.trim() || "";
+        const tagText = card.querySelector(".task-tag")?.textContent.trim() || "";
 
-      //  검색 조건은 항상 유지
-      const matchesSearch = searchKey === "" || titleText.includes(searchKey);
+        //  검색 조건은 항상 유지
+        const matchesSearch = searchKey === "" || titleText.includes(searchKey);
 
-      //  우선순 조건 (전체면 무조건 true)
-      const matchesPriority = clickText === "전체 우선순위" || tagText === clickText;
+        //  우선순 조건 (전체면 무조건 true)
+        const matchesPriority = clickText === "전체 우선순위" || tagText === clickText;
 
-      // 둘 다 만족해야 보이기
-      if (matchesSearch && matchesPriority) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
-    });
-     rankingSpan(clickText);
+        // 둘 다 만족해야 보이기
+        if (matchesSearch && matchesPriority) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+      rankingSpan(clickText);
     });
   });
 
@@ -135,11 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const spans = controlWrap.querySelectorAll(".list-control-bar-content.priority");
 
     spans.forEach((span) => {
-      const priority = span.dataset.priority                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ; // data-priority 값
+      const priority = span.dataset.priority; // data-priority 값
       if (priority === clickText) {
         span.classList.remove("hidden"); // 보여주기
       } else {
-        span.classList.add("hidden");    // 숨기기
+        span.classList.add("hidden"); // 숨기기
       }
     });
 
@@ -148,9 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (periodSpan) periodSpan.classList.remove("hidden");
   }
 
-
   // ====================================== 전체 기간 항목 ==============================================
-
 
   //===============================================================================
   // 전체 수정 >> 검색 조건과 우선순위 조건 동시작용
@@ -165,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedPriority = selectedValueRanking.textContent.trim();
 
     cardList.forEach((card) => {
-      // 제목 + 내용 
+      // 제목 + 내용
       const cardTextEl = card.querySelector(".task-text");
       const cardText = cardTextEl ? cardTextEl.innerText.toLowerCase().trim() : "";
 
@@ -178,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 우선순위 조건
       const matchesPriority = selectedPriority === "전체 우선순위" || tagText === selectedPriority;
 
-      // 둘 다 만족하면 보이게 
+      // 둘 다 만족하면 보이게
       if (matchesSearch && matchesPriority) {
         card.style.display = "block";
       } else {
@@ -191,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateSearchSpan(cardSearch.value.trim());
     });
   });
-  
+
   // ==========================================================================
   // 검색 시 같이 입력과 누르면 삭제 (조건 추가/제거)
   function updateSearchSpan(searchText) {
@@ -210,8 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // 클릭하면 검색 초기화
         searchSpan.addEventListener("click", () => {
           const cardSearch = document.querySelector(".card-search");
-          cardSearch.value = "";              // 검색창 비우기
-          searchSpan.remove();                // span 제거
+          cardSearch.value = ""; // 검색창 비우기
+          searchSpan.remove(); // span 제거
           cardSearch.dispatchEvent(new Event("input")); //  검색 이벤트 다시 실행해서 카드 복구
         });
       }
@@ -219,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       searchSpan?.remove();
     }
-      
   }
   //=====================================================================
 
@@ -239,6 +229,36 @@ document.addEventListener("DOMContentLoaded", () => {
       list.innerHTML = "";
     });
   });
+
+  // ==========================================================================
+  // 검색 시 같이 입력과 누르면 삭제 (조건 추가/제거)
+  function updateSearchSpan(searchText) {
+    const controlWrap = document.querySelector(".contral-bar-wrap");
+    if (!controlWrap) return;
+
+    let searchSpan = controlWrap.querySelector(".search-span");
+
+    // span 추가 (검색 시 마지막 추가/제거)
+    if (searchText !== "") {
+      if (!searchSpan) {
+        searchSpan = document.createElement("span");
+        searchSpan.className = "list-control-bar-content added search-span";
+        controlWrap.appendChild(searchSpan);
+
+        // 클릭하면 검색 초기화 (클릭 시 제거까지)
+        searchSpan.addEventListener("click", () => {
+          const cardSearch = document.querySelector(".card-search");
+          cardSearch.value = ""; // 검색창 비우기
+          searchSpan.remove(); // span 제거
+          cardSearch.dispatchEvent(new Event("input")); //  검색 이벤트 다시 실행해서 카드 복구
+        });
+      }
+      //
+      searchSpan.textContent = searchText;
+    } else {
+      searchSpan?.remove();
+    }
+  }
 
   // ====================================================================
 
@@ -272,4 +292,3 @@ document.addEventListener("DOMContentLoaded", () => {
     isAsc = !isAsc; // 다음 클릭 때 반대로
   });
 });
-

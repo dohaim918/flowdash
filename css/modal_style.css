@@ -1,13 +1,3 @@
-:root {
-  --save-color: #5c5cfc;
-  --save-hover: #4a4ae0;
-  --bg-glass: rgba(255, 255, 255, 0.73);
-  --border-glass: rgba(255, 255, 255, 0.062);
-  --input-bg: #f9f9f9;
-  --text-main: #333;
-  --m-boder: #eee;
-}
-
 /* 오버레이 딤드 */
 .modal-overlay {
   position: fixed;
@@ -53,11 +43,11 @@
   content: "";
   position: absolute;
   inset: 2.8px;
-  background: var(--glass-bg);
+  background: var(--m-glass-bg);
   border-radius: 18px;
   box-shadow:
-    0 0 3px rgba(0, 0, 0, 0.5),
-    inset 0 0 10px var(--text-bright);
+    0 0 3px var(--m-box-shadow),
+    inset 0 0 10px var(--m-shadow);
   z-index: -1;
 }
 
@@ -80,7 +70,7 @@
   display: block;
   font-weight: 600;
   font-size: 14px;
-  color: #555;
+  color: var(--text-medium);
   margin-bottom: 10px;
 }
 .select-form-group label {
@@ -88,14 +78,13 @@
   display: block;
   font-weight: 600;
   font-size: 14px;
-  color: #555;
   margin-bottom: 10px;
 }
 .select-form-group {
   display: block;
   font-weight: 600;
   font-size: 14px;
-  color: #555;
+  color: var(--text-medium);
   margin-bottom: 10px;
 }
 
@@ -112,6 +101,7 @@ textarea,
   transition: all 0.2s;
   box-sizing: border-box;
   position: relative;
+  box-shadow: var(--modal-shadow);
 }
 .status-select {
   padding: 0;
@@ -135,7 +125,6 @@ textarea,
   margin-top: 6px;
   margin-left: 4px;
 
-  /* 애니메이션 효과 (나타날 때 스르륵) */
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -150,7 +139,6 @@ textarea,
   display: block;
 }
 
-/* 부드러운 등장 애니메이션 */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -187,7 +175,6 @@ textarea {
 .status-section {
   display: flex;
   flex-direction: column;
-  transition: margin 0.3;
 }
 
 /* 우선순위 버튼 */
@@ -209,6 +196,8 @@ textarea {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+  background-color: var(--input-bg);
+  color: var(--text-medium);
 }
 
 .priority-btn.active.red {
@@ -232,11 +221,13 @@ textarea {
 /* 상태 셀렉트 */
 
 .status-select {
-  position: relative;
   height: 42px;
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  position: relative;
+  z-index: 10;
 }
 
 .status-btn {
@@ -252,6 +243,10 @@ textarea {
   justify-content: space-between;
   align-items: center;
   padding: 0 14px;
+
+  color: var(--text-medium);
+  box-shadow: var(--box-shadow);
+  border-radius: 10px;
 }
 
 .status-list {
@@ -259,18 +254,38 @@ textarea {
   top: 115%;
   left: 0;
   width: 100%;
-  background: #fff;
+  background: var(--drop-down);
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  z-index: 10;
+
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-5px);
-  transition: 0.2s;
+  color: var(--text-medium);
+  padding: 8px;
+  box-shadow: var(--box-shadow);
+  transform: translateY(-20px);
+  transition: all 0.3s;
 }
 
-.status-select:focus-within .status-list {
+.status-list::after {
+  content: "";
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backdrop-filter: blur(12px);
+  background: var(--drop-down);
+
+  z-index: -1;
+}
+
+.select {
+  border-radius: 10px;
+}
+
+.status-select.open .status-list {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -278,15 +293,23 @@ textarea {
 
 .status-list li {
   padding: 12px;
-  list-style: none;
   font-size: 14px;
 }
 
 .status-list li:hover {
-  background-color: var(--drop-background);
+  background-color: var(--m-drop-background);
   color: var(--point-pink);
+  backdrop-filter: blur(8px);
 }
 
+/* 화살표 */
+.status-select .arrow {
+  transform: rotate(0deg);
+  transition: transform 0.2s ease-out;
+}
+.status-select.open .arrow {
+  transform: rotate(-180deg);
+}
 /* 하단 버튼 */
 
 /*  액티브 */
@@ -305,16 +328,19 @@ textarea {
 
 /* 호버 */
 .priority-btn.yellow:hover {
-  background-color: rgb(255, 237, 211);
+  background-color: var(--yllow-btn);
   color: #ff8800;
+  border-color: #ff8800;
 }
 .priority-btn.green:hover {
-  background-color: #d3ffed;
+  background-color: var(--green-btn);
   color: #13c77f;
+  border-color: #13c77f;
 }
 .priority-btn.red:hover {
-  background-color: #ffdef0;
+  background-color: var(--pink-btn);
   color: #dd007b;
+  border-color: #dd007b;
 }
 
 .priority-btn {
@@ -322,6 +348,7 @@ textarea {
     background-color 0.3s ease,
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  box-shadow: var(--modal-shadow);
 }
 
 .priority-btn:hover {
@@ -355,8 +382,9 @@ textarea {
 }
 
 .btn-cancel {
-  background: var(--m-boder);
-  color: #555;
+  background: var(--m-clear-btn);
+  color: var(--m-clear-color);
+  border: 1px solid rgba(224, 224, 224, 0.5);
 }
 .btn-save {
   background: var(--save-color);
@@ -390,7 +418,9 @@ textarea {
   box-shadow:
     0 0 8px var(--neon-glow-light),
     0 0 16px var(--neon-glow-light);
+  background-color: var(--input-bg);
   transform: translateY(-3px);
+  border: 1px solid var(--point-pink);
 }
 
 /* 컨테이너가 좁아지면 1열 */
@@ -439,8 +469,9 @@ textarea {
   padding: 30px;
   /* background: rgba(255, 255, 255, 0.7); */
   backdrop-filter: blur(10px);
-  border: 1px solid var(--m-boder);
+  border: 2px solid var(--dm-boder);
   border-radius: 24px;
+  backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   text-align: center;
   animation: modal-appear 0.3s ease-out;
@@ -448,19 +479,20 @@ textarea {
   background: var(--m-glass-bg);
   border-radius: 18px;
   box-shadow:
-    var(--d-box-shadow),
+    0 0 3px var(--m-box-shadow),
     inset 0 0 10px var(--m-shadow);
   z-index: -1;
 
   /* transform: scale(0.2); */
 }
 .deletebox::before {
+  opacity: 0.6;
   content: "";
   position: absolute;
-  inset: 0px;
-  background: var(--m-glass-bg);
-  backdrop-filter: blur(4px);
-  border-radius: 18px;
+  inset: 2px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
   box-shadow:
     0 0 3px var(--m-box-shadow),
     inset 0 0 10px var(--m-shadow);

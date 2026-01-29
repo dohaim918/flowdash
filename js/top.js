@@ -6,17 +6,18 @@ const applyTheme = (theme) => {
 };
 
 // 아이콘 교체
-const updateIcon = () => {
-  const isDark = body.classList.contains("dark-mode");
-  themeBtn.innerHTML = isDark ? lightIcon : darkIcon;
-};
+// const updateIcon = () => {
+//   const isDark = body.classList.contains("dark-mode");
+//   themeBtn.innerHTML = isDark ? lightIcon : darkIcon;
+// };
 
 // 클릭했을때 테마 교체
 const toggleHandler = () => {
   const isDark = body.classList.contains("dark-mode");
   const newTheme = isDark ? "light" : "dark";
+
   applyTheme(newTheme);
-  updateIcon();
+  // updateIcon();
   localStorage.setItem("flowdash-theme", newTheme);
 };
 
@@ -24,8 +25,17 @@ const toggleHandler = () => {
 const loadTheme = () => {
   const savedTheme = localStorage.getItem("flowdash-theme") || "light";
 
+  // 아이콘 교체 로직 변경
+  themeBtn.innerHTML = `
+    <div class="icon-wrapper">
+      ${lightIcon} 
+      ${darkIcon}
+    </div>
+    <span class="ripple"></span>
+  `;
+
   applyTheme(savedTheme);
-  updateIcon();
+  // updateIcon();
 };
 
 // 이벤트 핸들러
@@ -78,7 +88,8 @@ function activeInput() {
 // 엔터 누르면 span 돌아옴
 function inputEnter(e) {
   if (e.key === "Enter") {
-    finishEdit(e.target); // input 전달식 !!!!!
+    // finishEdit(e.target); // input 전달식 !!!!!
+    e.target.blur();
   }
 }
 
@@ -190,23 +201,19 @@ nicknameEl.textContent = message;
 
 // 날짜 실시간 적용 js
 
-  const dateNow = document.querySelector(".date");
+const dateNow = document.querySelector(".date");
 
-  // 오늘 날짜 추출 
-  const dateToday = new Date();  // 지금 (date객체 생성)
-  dateToday.setHours(0,0,0,0);  // 시간을 00~00초기화
+// 오늘 날짜 추출
+const dateToday = new Date(); // 지금 (date객체 생성)
+dateToday.setHours(0, 0, 0, 0); // 시간을 00~00초기화
 
+const dateYear = dateToday.getFullYear(); // 연도
+const dateMonth = dateToday.getMonth() + 1; // 월 (js 인덱스 0~11 기준 )
+const dateDay = dateToday.getDate(); // 일
 
-  const dateYear = dateToday.getFullYear();    // 연도
-  const dateMonth = dateToday.getMonth() + 1; // 월 (js 인덱스 0~11 기준 )
-  const dateDay = dateToday.getDate();       // 일
+// 주석 풀고 아래 주석처리하면 확인가능 (분)
+// const dateMinutes = now.getMinutes();
+// dateNow.textContent = `${dateYear}년 ${dateMonth}월 ${dateDay}일 ${dateMinutes}분`;
 
-  // 주석 풀고 아래 주석처리하면 확인가능 (분) 
-  // const dateMinutes = now.getMinutes();     
-  // dateNow.textContent = `${dateYear}년 ${dateMonth}월 ${dateDay}일 ${dateMinutes}분`;
-  
-  // HTML에 적용
-  dateNow.textContent = `${dateYear}년 ${dateMonth}월 ${dateDay}일`;
-  
-
-
+// HTML에 적용
+dateNow.textContent = `${dateYear}년 ${dateMonth}월 ${dateDay}일`;

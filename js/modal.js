@@ -41,6 +41,10 @@ statusItems.forEach((item) => {
 const toggleModal = () => {
   modal.classList.toggle("open");
 
+  modal.classList.contains("open")
+    ? (document.body.style.overflow = "hidden")
+    : (document.body.style.overflow = "unset");
+
   titleInput.focus();
 };
 // =============================
@@ -60,12 +64,20 @@ const modalClear = () => {
     // i !== 0 ? li.classList.remove("active") : li.classList.add("active");
     li.classList.toggle("active", i === 0);
   });
-  // statusValue.textContent = statusItems[0].textContent;
-  // console.log("modalClear 실행됨");
+
+  statusValue.textContent = statusItems[0].textContent;
+
   IsFixId = null;
   modalname.textContent = "새 할 일";
 };
 
+// 모달 딤드 눌렀을때 닫기 추가
+modal.addEventListener("click", (e) => {
+  if (e.target == modal) {
+    toggleModal();
+    setTimeout(modalClear, 300);
+  }
+});
 // =============================
 
 // 타이핑 에러 (제목 입력값 검증)
@@ -139,6 +151,24 @@ const saveData = () => {
       updateAt: null,
       completeAt: status === "done" ? nowDate(timeStamp) : null,
     };
+
+    // =============================
+
+    // !!!!!!!!테스트용
+    const immediataly = {
+      id: timeStamp,
+      title,
+      content,
+      status,
+      priority,
+      createAt: nowDate(timeStamp - 1000 * 60 * 60 * 24),
+      updateAt: null,
+      completeAt: status === "done" ? nowDate(timeStamp) : null,
+    };
+
+    todos.push(immediataly);
+
+    // =============================
 
     // 저장 하기
     todos.push(todoObject);

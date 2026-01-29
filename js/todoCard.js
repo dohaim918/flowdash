@@ -24,7 +24,7 @@ const toggleEmpty = () => {
 // 상태 각각 배열
 
 // 클릭했을때 데이터 저장
-// *** 요소만들고(ㄱㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ)  +모달 리셋함수&렌더(로컬데이터 안에)
+// *** 요소만들고 +모달 리셋함수&렌더(로컬데이터 안에)
 //     + 숫자세는거 리스트!!!!!! 그거에 맞춰서바꿔주기
 
 // =========
@@ -156,6 +156,6 @@ const countStatus = (todos) => {
 
   percentNums.textContent =
     total == 0
-      ? 0
+      ? "-"
       : Math.round((todos.filter((t) => t.status === "done").length / total) * 100) + `%`;
 };
