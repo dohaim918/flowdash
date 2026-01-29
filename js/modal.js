@@ -114,8 +114,7 @@ const saveData = () => {
 
   const isStatus = document.querySelector(".status-list li.active");
   const isPriority = document.querySelector(".priority-btn.active");
-  // 객체 변수들... 하 정신 나갈거같아
-  // 우선순위 택1 오ㅐ...얘는 클래스 않줬ㅇ....
+
   const timeStamp = Date.now();
   const istitle = removeValue();
   // if (!title) return;
@@ -154,19 +153,19 @@ const saveData = () => {
 
     // =============================
 
-    // !!!!!!!!테스트용
-    const immediataly = {
-      id: timeStamp - 1000 * 60 * 60 * 24 * 8,
-      title,
-      content,
-      status,
-      priority,
-      createAt: timeStamp - 1000 * 60 * 60 * 24 * 8,
-      updateAt: null,
-      completeAt: status === "done" ? nowDate(timeStamp) : null,
-    };
+    // 기간 테스트용
+    // const immediataly = {
+    //   id: timeStamp - 1000 * 60 * 60 * 24 * 8,
+    //   title,
+    //   content,
+    //   status,
+    //   priority,
+    //   createAt: nowDate(timeStamp - 1000 * 60 * 60 * 24 * 8),
+    //   updateAt: null,
+    //   completeAt: status === "done" ? nowDate(timeStamp) : null,
+    // };
 
-    todos.push(immediataly);
+    // todos.push(immediataly);
 
     // =============================
 

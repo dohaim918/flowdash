@@ -30,34 +30,40 @@
 
       <section class="dashbord-stats">
         <article class="stats-item">
-          <span class="stats-title">Total Tasks</span>
+          <h3 class="stats-title">Total Tasks</h3>
           <span class="stats-number" data-num="total">0</span>
         </article>
 
         <article class="stats-item">
-          <span class="stats-title">To Do</span>
+          <h3 class="stats-title">To Do</h3>
           <span class="stats-number todo">0</span>
         </article>
 
         <article class="stats-item">
-          <span class="stats-title">In Progress</span>
+          <h3 class="stats-title">In Progress</h3>
           <span class="stats-number doing">0</span>
         </article>
 
         <article class="stats-item">
-          <span class="stats-title">done</span>
+          <h3 class="stats-title">done</h3>
           <span class="stats-number done">0</span>
         </article>
 
         <article class="stats-item">
-          <span class="stats-title">Achievement</span>
+          <h3 class="stats-title">Achievement</h3>
           <span class="stats-number" data-num="percent">-</span>
         </article>
       </section>
 
       <section class="control-bar">
+        <h3 class="sr-only">검색 및 필터</h3>
         <div class="search-wrap">
-          <input type="text" class="card-search" placeholder="할 일을 검색해보세요" />
+          <input
+            type="text"
+            maxlength="14"
+            class="card-search"
+            placeholder="할 일을 검색해보세요"
+          />
           <button type="submit" class="search-icon" aria-label="검색">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -159,6 +165,7 @@
       </div>
 
       <section class="progress-wrap">
+        <h3 class="sr-only">todo 보드</h3>
         <div class="progress-box">
           <article class="todo-item card-hover">
             <div class="card-header">

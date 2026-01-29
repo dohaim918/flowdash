@@ -37,7 +37,7 @@ dropdownItem.forEach((item) => {
     dropdownToggle.classList.remove("open");
     // 필터 (조건)부분
 
-    updateBadge(selectedValue.textContent);
+    periodBadge(selectedValue.textContent);
     applyFilter(todos, filter);
     render();
   });
@@ -51,7 +51,7 @@ dropdownItemRanking.forEach((item) => {
     selectedValueRanking.textContent = text; // 텍스트 변경부분
 
     // 상태 업데이트 및 필터 실행
-    updateBadge2(selectedValueRanking.textContent);
+    priorityBadge(selectedValueRanking.textContent);
     applyFilter(todos, filter);
     render();
 
@@ -61,7 +61,7 @@ dropdownItemRanking.forEach((item) => {
 
 document.addEventListener("click", (e) => {
   // 클릭한 대상이 드롭다운 안 아니면 닫아라
-  // contains : 선택한 부모 요소 안에 내가 ~ 클릭한 요소 있냐를 확인시켜주는거임
+  // contains : 선택한 부모 요소 안에 클릭한 요소 있냐를 확인
   if (!dropdownToggle.contains(e.target)) {
     dropdownToggle.classList.remove("open");
   }
@@ -74,7 +74,7 @@ document.addEventListener("click", (e) => {
 
 // 이미지에 맞춘 라벨 매핑
 
-const updateBadge = (text) => {
+const periodBadge = (text) => {
   const dateLi = document.querySelectorAll(".period>li");
   const periodText = document.querySelector(".period>.change");
   const period = document.querySelector(".list-control-bar-content.period");
@@ -91,7 +91,7 @@ const updateBadge = (text) => {
   filter.date = text;
 };
 
-const updateBadge2 = (text) => {
+const priorityBadge = (text) => {
   const rankingLi = document.querySelectorAll(".ranking>li");
   const priority = document.querySelector(".list-control-bar-content.priority");
   const priorityText = document.querySelector(".priority>.change");
@@ -140,6 +140,7 @@ cardSearch.addEventListener("input", (e) => {
   const badge = document.querySelector(".list-control-bar-content.search");
   const badgeText = document.querySelector(".list-control-bar-content.search>.change");
   filter.keyword = e.target.value.trim();
+
   if (filter.keyword) {
     badge.classList.remove("hidden");
     badgeText.textContent = filter.keyword;
@@ -150,19 +151,20 @@ cardSearch.addEventListener("input", (e) => {
   render();
 });
 
-// ======================
+// ================================================
 
 function datefilter(todos, filters) {
   if (!filters || filters === "전체 기간") return todos;
   const today = new Date();
   const todayStart = today.setHours(0, 0, 0, 0); // 오늘기준의 자정00시00분00초00밀리초
   if (filters === "오늘") {
-    return todos.filter((todo) => todo.createAt >= todayStart);
+    // 데이터가 문자열 - Date 객체로 변환 후 비교
+    return todos.filter((todo) => new Date(todo.createAt) >= todayStart);
   } else {
     const sevenDaysStart = new Date(todayStart);
     sevenDaysStart.setDate(sevenDaysStart.getDate() - 7);
 
-    return todos.filter((todo) => todo.createAt >= sevenDaysStart.getTime());
+    return todos.filter((todo) => new Date(todo.createAt) >= sevenDaysStart.getTime());
   }
 }
 
@@ -204,12 +206,62 @@ function applyFilter(todos, filter) {
   let result = todos;
 
   result = datefilter(result, filter.date);
-
+  console.log(result);
   result = priorityfilter(result, filter.priority);
-
+  console.log(result);
   result = sortfilter(result, filter.sort);
-
+  console.log(result);
   result = searchfilter(result, filter.keyword);
+  console.log(result);
 
   return result;
 }
+
+function listNumbers(filterList) {
+  const statusElements = {
+    todo: document.querySelector(".todo-number.todo"),
+    doing: document.querySelector(".progress-number.doing"),
+    done: document.querySelector(".done-number.done"),
+  };
+
+  todoListKey.forEach((st) => {
+    const count = filterList.filter((to) => to.status === st).length;
+    console.log(count);
+    // DOM 요소가 존재한다면 텍스트 업데이트
+    if (statusElements[st]) {
+      statusElements[st].textContent = count;
+    }
+  });
+}
+
+// 뱃지 클릭 시 삭제
+// 전체 기간
+const perioBadgeEl = document.querySelector(".list-control-bar-content.period");
+// 우선 순위
+const prioBadgeEl = document.querySelector(".list-control-bar-content.priority");
+// 검색어
+const searchBadgeEl = document.querySelector(".list-control-bar-content.search");
+
+perioBadgeEl.addEventListener("click", () => {
+  filter.date = "전체 우선순위";
+  selectedValueRanking.textcontent = "전체기간";
+  perioBadgeEl.classList.add("hidden");
+
+  render();
+});
+
+prioBadgeEl.addEventListener("click", () => {
+  filter.priority = "전체 우선순위";
+  selectedValueRanking.textcontent = "전체 우선순위";
+  prioBadgeEl.classList.add("hidden");
+
+  render();
+});
+
+searchBadgeEl.addEventListener("click", () => {
+  filter.keyword = "";
+  cardSearch.value = "";
+  searchBadgeEl.classList.add("hidden");
+
+  render();
+});
