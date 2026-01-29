@@ -109,13 +109,14 @@
           <ul class="dropdown-menu">
             <li class="dropdown-item" data-value="all">전체</li>
             <li class="dropdown-item" data-value="today">오늘</li>
-            <li class="dropdown-item" data-value="week">7일</li>
+            <li class="dropdown-item" data-value="week">최근 7일</li>
           </ul>
         </div>
 
         <!-- 우선순위 필터 -->
         <div class="dropdown-toggle ranking">
           <button class="dropdown-trigger ranking">
+            <span class="selected-value ranking">전체 우선순위</span>
             <span class="selected-value ranking">전체 우선순위</span>
             <svg
               class="arrow bi-chevron-down"
@@ -137,7 +138,7 @@
           </button>
           <ul class="dropdown-menu ranking">
             <li class="dropdown-item">전체 우선순위</li>
-            <li class="dropdown-item" data-state="high" >높음</li>
+            <li class="dropdown-item" data-state="high">높음</li>
             <li class="dropdown-item" data-state="mid">중간</li>
             <li class="dropdown-item" data-state="low">낮음</li>
           </ul>
@@ -156,10 +157,18 @@
       <div class="list-control-bar">
         <!-- span 박스 추가 -->
         <div class="contral-bar-wrap">
-          <span class="list-control-bar-content period" >정렬:<span class="change">오름차순</span></span>
-          <span class="list-control-bar-content priority hidden" data-priority="높음"><span class="change">높음</span></span>
-          <span class="list-control-bar-content priority hidden" data-priority="중간"><span class="change">중간</span></span>
-          <span class="list-control-bar-content priority hidden" data-priority="낮음"><span class="change">낮음</span></span>
+          <span class="list-control-bar-content period"
+            >정렬:<span class="change">오름차순</span></span
+          >
+          <span class="list-control-bar-content priority hidden" data-priority="높음"
+            ><span class="change">높음</span></span
+          >
+          <span class="list-control-bar-content priority hidden" data-priority="중간"
+            ><span class="change">중간</span></span
+          >
+          <span class="list-control-bar-content priority hidden" data-priority="낮음"
+            ><span class="change">낮음</span></span
+          >
         </div>
         <!-- 버튼으로 수정 -->
         <button class="all-delete">전체 데이터 초기화</button>
@@ -337,7 +346,6 @@
     <script src="./js/icons.js"></script>
     <script src="./js/top.js"></script>
     <script src="./js/modal.js"></script>
-    <script src="./js/states.js"></script>
     <script src="./js/fliter.js"></script>
     <script src="./js/todoCard.js"></script>
     <script src="./js/deleteTodo.js"></script>

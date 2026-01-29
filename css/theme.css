@@ -74,6 +74,7 @@
   /* 그림자 및 네온 */
   --box-shadow: 0 0 8px 0 rgba(113, 106, 139, 0.2);
   --mini-shadow: 0 0 6px 0 rgba(60, 52, 95, 0.3);
+  --mb-mini-shadow: rgba(60, 52, 95, 0.3);
   --modal-shadow: 0 0 4px 0 rgba(92, 83, 129, 0.2);
   --neon-color: #dd007b;
   --neon-glow: rgba(221, 0, 123, 0.4);
@@ -89,6 +90,7 @@
   --input-bg: #f9f9f9;
   --text-main: #333;
   --m-boder: #eee;
+  --dm-boder: #eee;
   --m-shadow: #fff;
   --m-glass-bg: rgba(255, 255, 255, 0.73);
   --m-box-shadow: rgba(0, 0, 0, 0.5);
@@ -103,6 +105,9 @@
   --d-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   --overlay-shadow: 0 8px 32px rgba(80, 80, 80, 0.4);
   --d-overlay-shadow: rgba(80, 80, 80, 0.4);
+
+  --toogle-buttem: rgba(80, 80, 80, 0.4);
+  --sun: 0 0 10px #ff3c00d5;
 }
 
 /* 다크 모드 설정 */
@@ -131,7 +136,7 @@ body.dark-mode {
   --bg-gradient: radial-gradient(circle at top, #1a1a2e, #05050a);
 
   --mini-shadow: 0 0 5px 0 rgba(160, 147, 219, 0.5);
-
+  --mb-mini-shadow: rgba(160, 147, 219, 0.5);
   --glass-bg: rgba(0, 0, 0, 0.3);
   --glass-bg-item: rgba(0, 0, 0, 0.2);
   --glass-hover: rgba(22, 21, 24, 0.4);
@@ -142,11 +147,11 @@ body.dark-mode {
   --card-shadow: rgba(0, 0, 0, 0.4);
 
   /* 모달 */
-  --m-shadow: #525252;
+  --m-shadow: 0 0 2px #ffffff;
   --bg-glass: rgba(255, 255, 255, 0.1);
   --m-box-shadow: rgba(0, 0, 0, 0.5);
-  --m-glass-bg: rgba(128, 125, 145, 0.2);
-  --m-drop-background: rgba(173, 140, 179, 0.2);
+  --m-glass-bg: rgba(0, 0, 0, 0.5);
+  --m-drop-background: rgba(8, 5, 8, 0.2);
   --modal-shadow: 0 0 4px 0 rgba(92, 83, 129, 0.2);
   --m-clear-btn: rgba(29, 29, 29, 0.5);
   --m-clear-color: #a5a5a5;
@@ -155,4 +160,8 @@ body.dark-mode {
   --yllow-btn: rgba(53, 41, 25, 0.5);
   --overlay-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   --d-overlay-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --m-boder: rgba(238, 238, 238, 0.5);
+  --dm-boder: rgba(238, 238, 238, 0.2);
+
+  --sun: 0 0 10px #ffa600;
 }

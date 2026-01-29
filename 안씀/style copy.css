@@ -76,7 +76,20 @@ body::after {
   align-items: center;
   gap: 40px;
   box-shadow: var(--box-shadow);
-  transition: 0.3s;
+}
+
+.dark-mode-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  box-shadow: var(--mini-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dark-mode-toggle svg {
+  width: 24px;
+  height: 24px;
 }
 
 .user {
@@ -85,8 +98,6 @@ body::after {
   font-weight: 700;
   color: var(--text-main);
   line-height: 2.6rem;
-  width: 100%;
-  transition: 0.3s;
 }
 .nickname-input,
 .user-name {
@@ -144,7 +155,6 @@ body::after {
 .phrase {
   text-align: center;
   margin-bottom: 130px;
-  transition: margin-bottom 0.3s;
 }
 
 .phrase-header {
@@ -153,9 +163,6 @@ body::after {
   color: var(--text-main);
   margin-bottom: 24px;
   text-shadow: 0 0 10px rgba(255, 222, 240, 0.4);
-  transition:
-    font-size 0.3s,
-    padding 0.3s;
 }
 
 .phrase-text {
@@ -166,8 +173,6 @@ body::after {
   line-height: 1.6;
   margin: 0 15px;
   font-weight: 600;
-  text-shadow: 0 0 10px rgba(255, 222, 240, 0.2);
-  transition: font-size 0.3s;
 }
 
 /*  통계 카드 */
@@ -233,8 +238,6 @@ body::after {
 
 .search-wrap {
   flex: 2 1 260px;
-
-  width: 100px;
   height: 44px;
   display: flex;
   align-items: center;
@@ -246,15 +249,8 @@ body::after {
   box-shadow: var(--box-shadow);
 }
 
-.search-wrap:hover,
-.dropdown-trigger:hover,
-.toggle-btn:hover {
-  border: 1px solid rgba(221, 0, 122, 0.2);
-}
-
 .search-wrap input {
   height: 100%;
-  width: 100%;
   flex: 1;
   background: transparent;
   border: none;
@@ -343,11 +339,13 @@ body::after {
   padding: 8px;
   z-index: 1;
 
+  /* 주석처리 안 나와서~ */
   /* 애니메이션 초기 상태 */
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-20px);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* opacity: 0; */
+  /* visibility: hidden; */
+  /* transform: translateY(-20px); */
+  /* transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); */
+  display: none;
 }
 
 /* 드롭다운 활성화 시 메뉴 표시 */
@@ -771,21 +769,14 @@ body::after {
   opacity: 0.4;
   box-shadow: 0 0 10px var(--card-shadow);
 }
-.done-list > .task-text {
-  text-decoration: line-through;
-  text-decoration-thickness: 1.5px;
-  opacity: 0.8;
-}
 
 .done-list .todo-time {
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
   opacity: 0.4;
 }
 .update-time:hover {
   color: #179c67;
-}
-
-.hidden {
-  display: none;
 }
 
 /* 오름차순 내림차순 컬러 추가 */
@@ -793,93 +784,31 @@ body::after {
   color: #638dff;
 }
 
-/* 다크 모드 아이콘 호버 */
 .dark-mode-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-  box-shadow: var(--mini-shadow);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.dark-mode-toggle svg {
-  width: 24px;
-  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.05); /* 라이트모드 기본 배경 */
+  transition: all 0.2s ease-in-out;
 }
 
-.dark-mode-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-  border: 1px solid var(--mb-mini-shadow);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: var(--mini-shadow);
-  transition: all 0.3s;
-}
-
-.icon-wrapper {
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-/* SVG 공통 설정 */
-.dark-mode-toggle svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 24px;
-  height: 24px;
-
-  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
+/* 마우스를 올렸을 때 */
 .dark-mode-toggle:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: var(--sun);
-  border-color: transparent;
-}
-.dark-mode-toggle:hover svg {
-  color: #ffb800;
-}
-.dark-mode-toggle:hover .moon {
-  color: #ff7300d5;
+  transform: translateY(-2px); /* 살짝 위로 들림 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* 버튼을 누르고 있을 때 */
 .dark-mode-toggle:active {
-  transform: scale(0.9);
+  transform: translateY(0) scale(0.95); /* 눌리는 느낌 */
 }
 
-.moon,
-.sun {
-  color: var(--text-medium);
-  /* transition: color 0.1s; */
-}
-
-body.dark-mode .moon {
-  transform: rotate(360deg) scale(0);
-  opacity: 0;
-}
-
-.sun {
-  transform: rotate(-15deg) scale(0);
-  opacity: 0;
-  position: absolute;
-}
-
-body.dark-mode .sun {
-  transform: rotate(360deg) scale(1);
-  opacity: 1;
-}
-
-@container (max-width: 750px) {
-  .phrase-header {
-    font-size: 2.3rem;
-  }
+.dark-mode-toggle:hover {
+  color: var(--point-pink);
+  border: 1px solid var(--point-pink);
+  box-shadow:
+    0 0 16px var(--neon-color),
+    0 0 10px var(--neon-glow),
+    0 0 16px var(--neon-glow-light);
+  transform: translateY(-3px);
 }
 
 @container (max-width: 555px) {
@@ -889,56 +818,15 @@ body.dark-mode .sun {
   .new-btn {
     flex-basis: 400px;
   }
-  .date,
-  .user {
-    font-size: 1.3rem;
-    line-height: 1.5;
-  }
-  .user-name,
-  .nickname-input {
-    font-size: 1.6rem;
-  }
-  .nickname-icon > svg {
-    transform: scale(0.6) translateX(-14px);
-  }
-  .mode {
-    transform: scale(0.8);
-  }
-  svg.bi-lightning-fill {
-    width: 10px;
-    height: 10px;
-  }
+}
+
+@container (max-width: 469px) {
   .introduction {
-    gap: 30px;
-    padding: 20px 30px;
-  }
-  .phrase-header {
-    font-size: 2rem;
-    margin-bottom: 18px;
-    padding: 0 20px;
-  }
-  .phrase-text {
-    font-size: 0.8rem;
+    gap: 100px;
   }
 }
-@container (max-width: 440px) {
-  .user {
-    width: 160px;
-  }
-}
-@container (max-width: 300px) {
-  .user {
-    width: 130px;
-  }
-  .date,
-  .user {
-    font-size: 1rem;
-  }
-  .user-name,
-  .nickname-input {
-    font-size: 1.2rem;
-  }
-  .nickname-icon > svg {
-    transform: scale(0.6) translate(-12px, -10px);
+@container (max-width: 420px) {
+  .introduction {
+    gap: 60px;
   }
 }
