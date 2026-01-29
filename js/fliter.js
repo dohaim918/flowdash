@@ -206,13 +206,12 @@ function applyFilter(todos, filter) {
   let result = todos;
 
   result = datefilter(result, filter.date);
-  console.log(result);
+
   result = priorityfilter(result, filter.priority);
-  console.log(result);
+
   result = sortfilter(result, filter.sort);
-  console.log(result);
+
   result = searchfilter(result, filter.keyword);
-  console.log(result);
 
   return result;
 }
@@ -226,7 +225,6 @@ function listNumbers(filterList) {
 
   todoListKey.forEach((st) => {
     const count = filterList.filter((to) => to.status === st).length;
-    console.log(count);
     // DOM 요소가 존재한다면 텍스트 업데이트
     if (statusElements[st]) {
       statusElements[st].textContent = count;

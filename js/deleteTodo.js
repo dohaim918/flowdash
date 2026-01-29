@@ -16,7 +16,6 @@ const colseDelModal = () => {
   IsFixId = null;
 
   deletModal.classList.remove("open");
-  console.log("지워졌는지 확인 :", IsFixId);
   document.body.style.overflow = "unset";
 };
 
@@ -48,7 +47,6 @@ const listDelet = () => {
 
   // 모달닫기
   colseDelModal();
-  console.log("삭제 후, 남은 할일 수:", todos.length);
 
   // ====================================================
 };

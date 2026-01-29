@@ -51,7 +51,6 @@ const createList = (todo) => {
     const date = createTag("span", `task-date`, nowDate(day));
     footer.append(date);
 
-    // console.log(date);
     return footer;
   };
 
@@ -78,7 +77,6 @@ const createList = (todo) => {
 // ! 카드 클릭 → 수정 모달 열기
 
 const openModal = (id) => {
-  //   console.log("openModal 실행됨, id:", id);
   const todos = getTodos();
   const todoObj = todos.find((todo) => todo.id == id);
 
@@ -95,7 +93,6 @@ const openModal = (id) => {
   // 저장된 상태(할일/진행중/완료) 값이랑 같은 버튼에 active 설정
   statusItems.forEach((li) => {
     const isActive = li.dataset.state === todoObj.status;
-    // console.log("li:", li.dataset.state, "| todo:", todoObj.status);
     li.classList.toggle("active", isActive);
     if (isActive) {
       statusValue.textContent = li.textContent;
