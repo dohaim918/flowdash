@@ -297,7 +297,7 @@ textarea {
 }
 
 .status-list li:hover {
-  background-color: var(--m-drop-background);
+  background-color: var(--drop-hover);
   color: var(--point-pink);
   backdrop-filter: blur(8px);
 }
@@ -374,7 +374,6 @@ textarea {
   font-weight: 700;
   cursor: pointer;
   border: none;
-  /* max-width: 93px; */
   transition:
     transform 0.3s ease,
     box-shadow 0.2s ease,
@@ -467,7 +466,6 @@ textarea {
 .deletebox {
   width: 350px;
   padding: 30px;
-  /* background: rgba(255, 255, 255, 0.7); */
   backdrop-filter: blur(10px);
   border: 2px solid var(--dm-boder);
   border-radius: 24px;
@@ -482,8 +480,6 @@ textarea {
     0 0 3px var(--m-box-shadow),
     inset 0 0 10px var(--m-shadow);
   z-index: -1;
-
-  /* transform: scale(0.2); */
 }
 .deletebox::before {
   opacity: 0.6;
@@ -573,7 +569,6 @@ textarea {
 
 .btn-delete:hover {
   color: #fff;
-  /* background: #ff008c; */
   background: #ff008c;
   text-shadow:
     0 0 4px var(--neon-color),

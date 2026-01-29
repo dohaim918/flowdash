@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>to-do Team Project</title>
     <link rel="stylesheet" href="./css/reset.css" />
-    <!-- 위에두기 -->
+    <link rel="stylesheet" href="./css/theme.css" />
     <link rel="stylesheet" href="./css/modal_style.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <link rel="stylesheet" href="./css/theme.css" />
   </head>
   <body>
     <div class="page-wrapper">
       <header class="introduction">
         <div class="nickname-header">
-          <!-- 글자수정 -->
           <div class="user">
             <span class="time"> 좋은 저녁이에요</span>, <span class="user-name">FlowDash</span>님
           </div>
@@ -27,13 +25,10 @@
 
       <section class="phrase">
         <h2 class="phrase-header">Welcome to Your Clear Vision</h2>
-        <!-- 오타수정 -->
         <p class="phrase-text">2026년의 새로운 인터페이스로 당신의 목표를 투명하게 관리해보세요.</p>
       </section>
 
-      <!-- ! class 수정완! -->
       <section class="dashbord-stats">
-        <!-- 시멘틱 터그 수정 -->
         <article class="stats-item">
           <span class="stats-title">Total Tasks</span>
           <span class="stats-number" data-num="total">0</span>
@@ -56,15 +51,11 @@
 
         <article class="stats-item">
           <span class="stats-title">Achievement</span>
-          <!-- 글자수정 -->
           <span class="stats-number" data-num="percent">-</span>
         </article>
       </section>
 
       <section class="control-bar">
-        <!-- 3개 묶음 -->
-        <!-- 검색 & 필터 영역 -->
-        <!-- 검색 -->
         <div class="search-wrap">
           <input type="text" class="card-search" placeholder="할 일을 검색해보세요" />
           <button type="submit" class="search-icon" aria-label="검색">
@@ -106,17 +97,15 @@
               />
             </svg>
           </button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item" data-value="all">전체</li>
+          <ul class="dropdown-menu period">
+            <li class="dropdown-item" data-value="all">전체 기간</li>
             <li class="dropdown-item" data-value="today">오늘</li>
             <li class="dropdown-item" data-value="week">최근 7일</li>
           </ul>
         </div>
 
-        <!-- 우선순위 필터 -->
         <div class="dropdown-toggle ranking">
           <button class="dropdown-trigger ranking">
-            <span class="selected-value ranking">전체 우선순위</span>
             <span class="selected-value ranking">전체 우선순위</span>
             <svg
               class="arrow bi-chevron-down"
@@ -144,42 +133,35 @@
           </ul>
         </div>
 
-        <!-- 정렬 -->
         <button class="toggle-btn" aria-label="정렬 방식 변경">
-          정렬: <span class="change">오름차순</span>
+          정렬:<span class="change">오름차순</span>
         </button>
 
-        <!-- 핑크 버튼 + 클래스명수정-->
         <button class="new-btn">+ 새 할 일</button>
       </section>
 
-      <!-- 배치 추가 -->
       <div class="list-control-bar">
-        <!-- span 박스 추가 -->
         <div class="contral-bar-wrap">
-          <span class="list-control-bar-content period"
+          <span class="list-control-bar-content sort"
             >정렬:<span class="change">오름차순</span></span
           >
-          <span class="list-control-bar-content priority hidden" data-priority="높음"
-            ><span class="change">높음</span></span
+          <span class="list-control-bar-content priority hidden"
+            >우선순위: <span class="change">전체 우선순위</span></span
           >
-          <span class="list-control-bar-content priority hidden" data-priority="중간"
-            ><span class="change">중간</span></span
+          <span class="list-control-bar-content period hidden"
+            >기간:<span class="change">전체 기간</span></span
           >
-          <span class="list-control-bar-content priority hidden" data-priority="낮음"
-            ><span class="change">낮음</span></span
-          >
+          <span class="list-control-bar-content search hidden"
+            >검색:<span class="change"></span
+          ></span>
         </div>
-        <!-- 버튼으로 수정 -->
         <button class="all-delete">전체 데이터 초기화</button>
       </div>
 
       <section class="progress-wrap">
         <div class="progress-box">
-          <!-- 시멘틱테그 수정 -->
           <article class="todo-item card-hover">
             <div class="card-header">
-              <!-- 테그수정 -->
               <h3 class="todo-title">할 일</h3>
               <span class="todo-number todo">0</span>
             </div>
@@ -191,7 +173,6 @@
 
           <article class="progress-item card-hover">
             <div class="card-header">
-              <!-- 테그수정 -->
               <h3 class="progress-title">진행 중</h3>
               <span class="progress-number doing">0</span>
             </div>
@@ -203,7 +184,6 @@
 
           <article class="done-item card-hover">
             <div class="card-header">
-              <!-- 테그수정 -->
               <h3 class="done-title">완료</h3>
               <span class="done-number done">0</span>
             </div>
@@ -212,51 +192,10 @@
 
             <p class="empty">완료한 일이 없습니다.</p>
           </article>
-
-          <!--  -->
-          <template id="taskTemplate">
-            <li class="task-card" draggable="true">
-              <div class="task-tag-wrap">
-                <span class="task-tag medium">중간</span>
-              </div>
-
-              <div class="task-text">
-                <h4 class="task-title">할 일 예시</h4>
-                <p class="task-desc">할 일 내용 입니다</p>
-              </div>
-
-              <div class="task-footer">
-                <svg class="task-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M7 11h10M7 15h6M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-
-                <span class="task-date">2026. 01. 22. 01:08</span>
-
-                <!-- 오른쪽 버튼 영역 -->
-                <div class="task-actions">
-                  <select class="task-status-select glass-select" aria-label="상태 변경">
-                    <option value="todo">할 일</option>
-                    <option value="progress">진행중</option>
-                    <option value="done">완료</option>
-                  </select>
-
-                  <button type="button" class="task-delete-btn" aria-label="삭제">✕</button>
-                </div>
-              </div>
-            </li>
-          </template>
         </div>
       </section>
     </div>
 
-    <!-- 모달 -->
     <div class="modal-overlay">
       <div class="modal-wrap">
         <div class="modal-content">
@@ -286,7 +225,6 @@
                   </div>
                 </div>
 
-                <!-- option => ul li 변경 -->
                 <div class="status-section">
                   <label>상태</label>
                   <div class="status-select">
