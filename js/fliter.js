@@ -23,14 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // 첫 번째 우선순위
   dropdownItem.forEach((item) => {
     item.addEventListener("click", () => {
-      // 전체 선택 해제부분
+      //  기존 active 제거
       dropdownItem.forEach((i) => i.classList.remove("active"));
+
+      //  클릭한 버튼만 active
       item.classList.add("active");
-      selectedValue.textContent = item.textContent; // 텍스트 변경부분
-      // 클래스에 open 있으면 remove (제거)
+
+      // 선택된 텍스트 span 업데이트
+      selectedValue.textContent = item.textContent;
+
+      //  드롭다운 닫기
+
       dropdownToggle.classList.remove("open");
+
+        // 필터 (조건)부분 
+       const periodText = item.textContent.trim();
+       filterCardsPeriod(periodText)
     });
-  });
+  })
 
   // 두 번째 랭킹버튼
   dropdownItemRanking.forEach((item) => {
@@ -50,108 +60,171 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!dropdownToggleRanking.contains(e.target)) {
       dropdownToggleRanking.classList.remove("open");
     }
+ 
   });
+
+
+
+  function filterCardsPeriod(periodText) {
+    const cards = document.querySelectorAll(".task-card");
+    const today = new Date();
+    const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const sevenDays = new Date();
+    sevenDays.setDate(today.getDate() - 7);
+
+    cards.forEach(card => {
+      const dateEl = card.querySelector(".task-date");
+      if (!dateEl) return;
+
+      const cardDate = new Date(dateEl.innerText.trim());
+      
+
+      if (periodText === "전체") {
+        card.style.display = "block";
+      } else if (periodText === "오늘") {
+        card.style.display = cardDate >= startOfToday ? "block" : "none";
+      } else if (periodText === "7일") {
+        card.style.display = cardDate >= sevenDays? "block" : "none";
+      }
+    });                                                           
+  }
+
+
 
   // ====================================== 전체 우선순 항목 ==============================================
 
-  dropdownItemRanking.forEach((item) => {
+  // 다시 정리해야함
+ dropdownItemRanking.forEach((item) => {
     item.addEventListener("click", () => {
-      // 클릭한 항목 텍스트
-      // 높음 / 중간 / 낮음 / 전체 우선순
       const clickText = item.textContent.trim();
-
-      // 버튼 텍스트 변경 (버튼 안 텍스트)
       selectedValueRanking.textContent = clickText;
-
-      // 카드 필터 부분 (출력부분)
+ 
       const cardList = document.querySelectorAll(".task-card");
-
+      const searchKey = cardSearch.value.toLowerCase().trim();
+      
       cardList.forEach((card) => {
-        const tagEl = card.querySelector(".task-tag");
-        const tagText = tagEl ? tagEl.textContent.trim() : "";
+      // 제목만 검색
+      const titleEl = card.querySelector(".task-text");
+      const titleText = titleEl ? titleEl.innerText.toLowerCase().trim() : "";
 
-<<<<<<< HEAD
-          // 버튼 안 || li안 텍스트 같아야지 나오게 아님 숨기기 
-          if (clickText === "전체 우선순" || tagText === clickText) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
+      const tagText =
+        card.querySelector(".task-tag")?.textContent.trim() || "";
 
-        //  카드 반복 끝나고 한 번만 컨트롤바 업뎃 
-        updateControlBar(clickText);
-      });
-    });
+      //  검색 조건은 항상 유지
+      const matchesSearch = searchKey === "" || titleText.includes(searchKey);
 
-    // ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
-    // 공용 함수: controlWrap에 span 추가/제거
-    function updateControlBar(text) {
-      const controlWrap = document.querySelector(".contral-bar-wrap");
-      if (!controlWrap) return;
+      //  우선순 조건 (전체면 무조건 true)
+      const matchesPriority = clickText === "전체 우선순위" || tagText === clickText;
 
-      // 기존 추가된 span 제거
-      const oldSpan = controlWrap.querySelector(".list-control-bar-content.added");
-      if (oldSpan) oldSpan.remove();
-
-      // 전체 우선순이면 추가하지 않ㄱㅔ
-      if (text !== "전체 우선순") {
-        const newTextSpan = document.createElement("span");
-        newTextSpan.className = "list-control-bar-content added";
-        newTextSpan.textContent = text;
-        controlWrap.appendChild(newTextSpan);
-      }
-    }
-     
-=======
-        // 버튼 안 || li안 텍스트 같아야지 나오게 아님 숨기기
-        if (clickText === "전체 우선순" || tagText === clickText) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
-    });
-  });
->>>>>>> f8872cc9c120f05dbeb97a2b35ba6c3c3e95bd96
-
-  // ====================================== 전체 기간 항목 ==============================================
-
-<<<<<<< HEAD
-//===============================================================================
-=======
-  //===============================================================================
-
-  // 검색창 기능
-
-  cardSearch.addEventListener("input", () => {
-    const filterList = Array.from(document.querySelectorAll(".task-card")); // 카드 리스트
-    // 변형 되는 부분 / todos 배열 가져오기 (로컬스토리지)
-    let todos = JSON.parse(localStorage.getItem("flowdash-todos")) || [];
-    const keyText = cardSearch.value.toLowerCase();
->>>>>>> f8872cc9c120f05dbeb97a2b35ba6c3c3e95bd96
-
-    // 카드 리스트 검사 (화면 렌더링부분임)
-    filterList.forEach((card) => {
-      // 중간 배찌도 검색해서 특정요소 뽑아서
-      const cardTextEl = card.querySelector(".task-text"); // 제목 + 내용만
-      const cardText = cardTextEl ? cardTextEl.innerText.toLowerCase().trim() : ""; // 소문자+공백 포함
-      //  제목+내용+소문자(toL...)+공배(trim) 포함 특정 키 있나 확인(includes)
-      if (cardText.includes(keyText)) {
+      // 둘 다 만족해야 보이기
+      if (matchesSearch && matchesPriority) {
         card.style.display = "block";
       } else {
         card.style.display = "none";
       }
     });
+     rankingSpan(clickText);
+    });
   });
 
+  function rankingSpan(clickText) {
+    const controlWrap = document.querySelector(".contral-bar-wrap");
+    if (!controlWrap) return;
+
+    // 우선순위 span만 선택
+    const spans = controlWrap.querySelectorAll(".list-control-bar-content.priority");
+
+    spans.forEach((span) => {
+      const priority = span.dataset.priority                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ; // data-priority 값
+      if (priority === clickText) {
+        span.classList.remove("hidden"); // 보여주기
+      } else {
+        span.classList.add("hidden");    // 숨기기
+      }
+    });
+
+    // 전체 기간 span은 항상 보여주기
+    const periodSpan = controlWrap.querySelector(".list-control-bar-content.period");
+    if (periodSpan) periodSpan.classList.remove("hidden");
+  }
+
+
+  // ====================================== 전체 기간 항목 ==============================================
+
+
+  //===============================================================================
+  // 전체 수정 >> 검색 조건과 우선순위 조건 동시작용
+  const cardSearch = document.querySelector(".card-search");
+
+  cardSearch.addEventListener("input", () => {
+    const cardList = document.querySelectorAll(".task-card");
+
+    const keyText = cardSearch.value.toLowerCase().trim();
+
+    // 현재 선택된 우선순위 버튼 텍스트
+    const selectedPriority = selectedValueRanking.textContent.trim();
+
+    cardList.forEach((card) => {
+      // 제목 + 내용 
+      const cardTextEl = card.querySelector(".task-text");
+      const cardText = cardTextEl ? cardTextEl.innerText.toLowerCase().trim() : "";
+
+      // 카드 우선순ㅇ 태그
+      const tagText = card.querySelector(".task-tag")?.textContent.trim() || "";
+
+      // 검색 조건
+      const matchesSearch = keyText === "" || cardText.includes(keyText);
+
+      // 우선순위 조건
+      const matchesPriority = selectedPriority === "전체 우선순위" || tagText === selectedPriority;
+
+      // 둘 다 만족하면 보이게 
+      if (matchesSearch && matchesPriority) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    // 조건: 검색+우선순 불러오기
+    cardSearch.addEventListener("input", () => {
+      updateSearchSpan(cardSearch.value.trim());
+    });
+  });
+  
+  // ==========================================================================
+  // 검색 시 같이 입력과 누르면 삭제 (조건 추가/제거)
+  function updateSearchSpan(searchText) {
+    const controlWrap = document.querySelector(".contral-bar-wrap");
+    if (!controlWrap) return;
+
+    let searchSpan = controlWrap.querySelector(".search-span");
+
+    // span 추가 (검색 시 마지막 추가/제거)
+    if (searchText !== "") {
+      if (!searchSpan) {
+        searchSpan = document.createElement("span");
+        searchSpan.className = "list-control-bar-content added search-span";
+        controlWrap.appendChild(searchSpan);
+
+        // 클릭하면 검색 초기화
+        searchSpan.addEventListener("click", () => {
+          const cardSearch = document.querySelector(".card-search");
+          cardSearch.value = "";              // 검색창 비우기
+          searchSpan.remove();                // span 제거
+          cardSearch.dispatchEvent(new Event("input")); //  검색 이벤트 다시 실행해서 카드 복구
+        });
+      }
+      searchSpan.textContent = searchText;
+    } else {
+      searchSpan?.remove();
+    }
+      
+  }
   //=====================================================================
 
   //=====================================================================
   // 전체 초기화 버튼!
-  const allDelete = document.querySelector(".all-delete");
-  const todosList = document.querySelectorAll(".task-list");
-
   // 기존 flowdash-todos 배열 가져오는데 || 값이 없으면 빈 배열!!
   let todos = JSON.parse(localStorage.getItem("flowdash-todos")) || [];
 
@@ -200,56 +273,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-<<<<<<< HEAD
-=======
-// ===== contral-bar-wrap span 추가/삭제 (배치 추가) =====
-// 공용 함수: controlWrap에 span 추가/제거
-function updateControlBar(text) {
-  const controlWrap = document.querySelector(".contral-bar-wrap");
-  if (!controlWrap) return;
-
-  // 기존 추가된 span 제거
-  const oldSpan = controlWrap.querySelector(".list-control-bar-content.added");
-  if (oldSpan) oldSpan.remove();
-
-  // 전체 우선순이면 추가하지 않ㄱㅔ
-  if (text !== "전체 우선순") {
-    const newTextSpan = document.createElement("span");
-    newTextSpan.className = "list-control-bar-content added";
-    newTextSpan.textContent = text;
-    controlWrap.appendChild(newTextSpan);
-  }
-}
->>>>>>> f8872cc9c120f05dbeb97a2b35ba6c3c3e95bd96
-
-//============================
-//  힌트
-// funxtion 우선순위필터(todos, filter) {
-//   if (!filter) return todos;
-//   return todos.filter(todo => todo.priority === filter값);
-// }
-
-//   // 전역 상태 활용??
-//   const filterState = {
-//     keyword: "",
-//     priority: null,
-//     sort: null,
-//     date: null
-//   };
-
-//   // 기간 필터 버튼/드롭다운 등도 동일하게
-//   // 예: datePicker.addEventListener("change", ...)
-
-//   // 렌더링
-
-//   // 필터 함수
-//   function applyFilter(todos, filter) {
-//     let result = todos;
-//     result = 우선순위필터(result, filter.priority);
-//     result = 검색어필터(result, filter.keyword);
-//     result = 기간필터(result, filter.date);
-//     result = 정렬(result, filter.sort);
-//     return result;
-//   }
-
-// });
