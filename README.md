@@ -77,6 +77,9 @@ flowdash/
 ```
 
 ### 3-2. 모듈 책임 분리
+- main.js : 이벤트 리스너
+- modal.js : Ui 생성과 모달 + 통계 관리
+- deleteTodo.js : 
 - state.js: 앱의 단일 상태 관리
 - storage.js: LocalStorage IO 전담
 - ui/board.js: 보드 단위 렌더링
