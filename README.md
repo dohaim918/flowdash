@@ -58,21 +58,21 @@ flowdash/
 ├─ index.html
 ├─ css/
 │  ├─ reset.css
-│  ├─ base.css
-│  ├─ components.css
-│  ├─ theme.css
-│  └─ responsive.css
+│  ├─ style.css (base.css) 
+│  ├─ components.css (재사용)
+│  ├─ theme.css (색상변수:다크모드)
+│  └─ responsive.css (쿼리)
 └─ js/
-   ├─ main.js()
-   ├─ state.js
-   ├─ storage.js
+   ├─ main.js(초기화함수호출,전역리스너이벤트)
+   ├─ state.js (저장수정삭제로직)
+   ├─ storage.js (저장)
    ├─ utils/
-   │  └─ date.js
+   │  └─ date.js 
    └─ ui/
-      ├─ board.js
-      ├─ card.js
-      ├─ header.js
-      └─ stats.js
+      ├─ board.js (dom)
+      ├─ card.js (제목내용날짜)
+      ├─ header.js (로고버튼프로필)
+      └─ stats.js (통계부분)
 ```
 
 ### 3-2. 모듈 책임 분리
