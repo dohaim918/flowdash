@@ -111,7 +111,7 @@
 }
 
 /* 다크 모드 설정 */
-body.dark-mode {
+:root.dark-mode {
   --grad-1: #ffeaec;
   --grad-2: #f3f3ff;
   --grad-3: #f3f3ff;

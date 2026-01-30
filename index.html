@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="./css/theme.css" />
     <link rel="stylesheet" href="./css/modal_style.css" />
     <link rel="stylesheet" href="./css/style.css" />
+    <script>
+      // 다크모드 FOUC(깜빡임) 방지 최적화 스크립트
+      // DOM이 완성되기 전에 실행되어야 하므로 head에 배치 (최상단에 인라인)
+
+      // 페이지 로드 직후, DOM이 완성되기 전에 테마 결정
+      (function () {
+        const savedTheme = localStorage.getItem("flowdash-theme") || "light";
+        // root에 클래스 토글 (두번째 인자로 bloon)
+        document.documentElement.classList.toggle("dark-mode", savedTheme === "dark");
+      })();
+    </script>
   </head>
   <body>
     <div class="page-wrapper">
@@ -29,6 +40,7 @@
       </section>
 
       <section class="dashbord-stats">
+        <h2 class="sr-only">데쉬보드 통계</h2>
         <article class="stats-item">
           <h3 class="stats-title">Total Tasks</h3>
           <span class="stats-number" data-num="total">0</span>
@@ -287,12 +299,27 @@
       </div>
     </div>
 
+    <!-- - 앱의 진입점으로 DOM 요소 탐색 및 전체 초기 로드 수행 -->
+    <!-- - 로컬스토리지 CRUD 연동 및 요소 생성 함수 등 핵심 메인 로직  -->
     <script src="./js/main.js"></script>
+
+    <!-- - UI에 사용되는 모든 SVG 아이콘 -->
+    <!--   (중앙 집중식 아이콘 관리를 통해 코드 재사용성 높임) -->
     <script src="./js/icons.js"></script>
+
+    <!-- - 상단 바 UI 및 사용자 프로필(이름) 표시, 테마 전환 로직 -->
     <script src="./js/top.js"></script>
+
+    <!-- - 모달 공통 로직 처리 -->
     <script src="./js/modal.js"></script>
+
+    <!-- - 필터링 파이프라인 구현 -->
     <script src="./js/fliter.js"></script>
+
+    <!-- - todo카드 컴포넌트 생성 -->
     <script src="./js/todoCard.js"></script>
+
+    <!-- - 삭제 로직 기능 제어 -->
     <script src="./js/deleteTodo.js"></script>
   </body>
 </html>
