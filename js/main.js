@@ -35,7 +35,7 @@ const dropdownToggle = document.querySelector(".dropdown-toggle");
 // 드롭다운 전체기간 버튼
 const dropdownTrigger = dropdownToggle.querySelector(".dropdown-trigger");
 // 전체 우선순 텍스트
-const selectedValue = dropdownTrigger.querySelector(".selected-value");
+const selectedDate = dropdownTrigger.querySelector(".selected-value");
 // 전체 메뉴 (ul)
 const dropdownMenu = dropdownToggle.querySelector(".dropdown-menu");
 // 메뉴 안 리스트 (li 전체)
@@ -46,7 +46,7 @@ const dropdownItem = dropdownMenu.querySelectorAll("li");
 // 위에랑 같음 내부말고 박스영역 (.ranking만 붙음)
 const dropdownToggleRanking = document.querySelector(".dropdown-toggle.ranking");
 const dropdownTriggerRanking = dropdownToggleRanking.querySelector(".dropdown-trigger.ranking");
-const selectedValueRanking = dropdownTriggerRanking.querySelector(".selected-value.ranking");
+const selectedRanking = dropdownTriggerRanking.querySelector(".selected-value.ranking");
 const dropdownMenuRanking = document.querySelector(".dropdown-menu.ranking"); // toggle 밖에 있음 (분리)
 const dropdownItemRanking = dropdownMenuRanking.querySelectorAll("li");
 
@@ -92,6 +92,13 @@ const doingNums = document.querySelectorAll("span.doing");
 const doneNums = document.querySelectorAll("span.done");
 const percentNums = document.querySelector("span[data-num='percent']");
 
+// 드롭다운 필터
+// 전체 기간
+const perioBadgeEl = document.querySelector(".list-control-bar-content.period");
+// 우선 순위
+const prioBadgeEl = document.querySelector(".list-control-bar-content.priority");
+// 검색어
+const searchBadgeEl = document.querySelector(".list-control-bar-content.search");
 // ==========================================
 
 // 전체 초기화 버튼!

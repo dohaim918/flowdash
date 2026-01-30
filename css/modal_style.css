@@ -453,11 +453,15 @@ textarea {
   backdrop-filter: blur(4px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 1, 1);
+  transition: opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
 .delete-over.open {
   opacity: 1;
   pointer-events: auto;
+}
+.delete-over .deletebox {
+  transform: scale(0.1) translatey(0);
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
 }
 .delete-over.open .deletebox {
   transform: scale(1) translatey(0);
@@ -543,8 +547,6 @@ textarea {
   font-size: 14px;
 
   border: 1px solid rgba(224, 224, 224, 0.5);
-
-  /* border: 2px solid black; */
 }
 
 .btn-delete {

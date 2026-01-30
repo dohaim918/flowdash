@@ -2,34 +2,28 @@
 
 // 테마 적용
 const applyTheme = (theme) => {
-  theme === "dark" ? body.classList.add("dark-mode") : body.classList.remove("dark-mode");
+  // theme === "dark" ? body.classList.add("dark-mode") : body.classList.remove("dark-mode");
+  const isDark = theme === "dark";
+  document.documentElement.classList.toggle("dark-mode", isDark);
+  localStorage.setItem("flowdash-theme", theme);
 };
 
 // 클릭했을때 테마 교체
 const toggleHandler = () => {
-  const isDark = body.classList.contains("dark-mode");
+  const isDark = document.documentElement.classList.contains("dark-mode");
   const newTheme = isDark ? "light" : "dark";
 
   applyTheme(newTheme);
-  // updateIcon();
-  localStorage.setItem("flowdash-theme", newTheme);
 };
 
 // 초기 불러오기
 const loadTheme = () => {
-  const savedTheme = localStorage.getItem("flowdash-theme") || "light";
+  // 테마 아이콘 교체 로직 변경 (태그 만드는 함수 사용)
+  const iconWraper = createTag("div", "icon-wrapper");
+  iconWraper.innerHTML = `${lightIcon} ${darkIcon}`;
 
-  // 아이콘 교체 로직 변경
-  themeBtn.innerHTML = `
-    <div class="icon-wrapper">
-      ${lightIcon} 
-      ${darkIcon}
-    </div>
-    <span class="ripple"></span>
-  `;
-
-  applyTheme(savedTheme);
-  // updateIcon();
+  themeBtn.innerHTML = "";
+  themeBtn.append(iconWraper);
 };
 
 // 이벤트 핸들러
@@ -37,9 +31,6 @@ themeBtn.addEventListener("click", toggleHandler);
 document.addEventListener("DOMContentLoaded", loadTheme);
 
 // ========================
-
-const newBtn = document.querySelector(".new-btn");
-const modalBg = document.querySelector(".modal-overlay");
 
 // 클릭 시 수정
 const nicknameSpan = document.querySelector(".user-name");

@@ -3,7 +3,7 @@
 /* 기본 공통 설정 */
 * {
   transition:
-    background-color 0.4s ease,
+    background-color 0.6s ease,
     color 0.4s ease,
     border-color 0.4s ease,
     box-shadow 0.4s ease;
@@ -107,6 +107,7 @@ body::after {
   transform: translate(4px, 1px);
   margin-left: 4px;
   display: inline-flex;
+  cursor: pointer;
 }
 .nickname-icon > .make {
   width: 50px;
@@ -242,6 +243,7 @@ body::after {
   border: 1px solid var(--glass-border);
   border-radius: 10px;
   box-shadow: var(--box-shadow);
+  transition: background-color 0.2s;
 }
 
 .search-wrap:hover,
@@ -270,7 +272,7 @@ body::after {
   opacity: 0;
 }
 .search-wrap input::placeholder {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease;
 }
 
 .search-icon {
@@ -278,13 +280,17 @@ body::after {
   color: var(--text-medium);
 }
 
-.dropdown-toggle {
-  z-index: 2;
-}
 /* 드롭다운 + 토글 */
 .dropdown-toggle {
+  z-index: 3;
+  transition: background-color 0.2s;
   position: relative;
 }
+.dropdown-toggle.ranking {
+  z-index: 2;
+  transition: background-color 0.2s;
+}
+
 .dropdown-toggle,
 .toggle-btn {
   flex: 1 1 126px;
@@ -313,7 +319,7 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .search-wrap:hover,
@@ -392,6 +398,9 @@ body::after {
 /* sort */
 .toggle-btn {
   border-radius: 30px;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.3s;
 }
 .dropdown-trigger:focus,
 .toggle-btn:focus {
@@ -878,7 +887,7 @@ body::after {
   /* transition: color 0.1s; */
 }
 
-body.dark-mode .moon {
+.dark-mode .moon {
   transform: rotate(360deg) scale(0);
   opacity: 0;
 }
@@ -889,7 +898,7 @@ body.dark-mode .moon {
   position: absolute;
 }
 
-body.dark-mode .sun {
+.dark-mode .sun {
   transform: rotate(360deg) scale(1);
   opacity: 1;
 }
