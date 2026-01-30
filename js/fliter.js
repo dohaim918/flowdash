@@ -30,14 +30,14 @@ dropdownItem.forEach((item) => {
     item.classList.add("active");
 
     // 선택된 텍스트 span 업데이트
-    selectedValue.textContent = item.textContent;
+    selectedDate.textContent = item.textContent;
 
     //  드롭다운 닫기
 
     dropdownToggle.classList.remove("open");
     // 필터 (조건)부분
 
-    periodBadge(selectedValue.textContent);
+    periodBadge(selectedDate.textContent);
     applyFilter(todos, filter);
     render();
   });
@@ -48,10 +48,10 @@ dropdownItemRanking.forEach((item) => {
   item.addEventListener("click", () => {
     const todos = getTodos();
     const text = item.textContent.trim();
-    selectedValueRanking.textContent = text; // 텍스트 변경부분
+    selectedRanking.textContent = text; // 텍스트 변경부분
 
     // 상태 업데이트 및 필터 실행
-    priorityBadge(selectedValueRanking.textContent);
+    priorityBadge(selectedRanking.textContent);
     applyFilter(todos, filter);
     render();
 
@@ -114,14 +114,14 @@ const resetFilter = (type) => {
     // 현재 상태 저장해둔 객체에 값전달
     filterState.search = "";
   } else if (type === "priority") {
-    selectedValueRanking.textContent = "전체 우선순위";
+    selectedRanking.textContent = "전체 우선순위";
     filterState.priority = "전체 우선순위";
   } else if (type === "period") {
     filterState.period = "전체";
   }
 };
 
-// =========\
+// =========
 
 sortBtn.addEventListener("click", () => {
   const todos = getTodos();
@@ -232,17 +232,12 @@ function listNumbers(filterList) {
   });
 }
 
-// 뱃지 클릭 시 삭제
-// 전체 기간
-const perioBadgeEl = document.querySelector(".list-control-bar-content.period");
-// 우선 순위
-const prioBadgeEl = document.querySelector(".list-control-bar-content.priority");
-// 검색어
-const searchBadgeEl = document.querySelector(".list-control-bar-content.search");
+// =========
 
+// 뱃지 클릭 시 삭제 + 문구 초기화
 perioBadgeEl.addEventListener("click", () => {
-  filter.date = "전체 우선순위";
-  selectedValueRanking.textcontent = "전체기간";
+  filter.date = "전체 기간";
+  selectedDate.textContent = "전체 기간";
   perioBadgeEl.classList.add("hidden");
 
   render();
@@ -250,7 +245,7 @@ perioBadgeEl.addEventListener("click", () => {
 
 prioBadgeEl.addEventListener("click", () => {
   filter.priority = "전체 우선순위";
-  selectedValueRanking.textcontent = "전체 우선순위";
+  selectedRanking.textContent = "전체 우선순위";
   prioBadgeEl.classList.add("hidden");
 
   render();
