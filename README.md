@@ -2,8 +2,8 @@
 
 > 공통 과제: 칸반 기반 태스크 관리 대시보드  
 > 팀원: 김신중,김도하  
-> 저장소: [GitHub](https://github.com/링크주소/)](https://github.com/dohaim918/flowdash)
-> 배포: [GitHub Pages](http://127.0.0.1:5500/index.html)
+> 저장소: [GitHub](https://github.com/링크주소/)(https://github.com/dohaim918/flowdash)
+> 배포: [GitHub Pages](https://dohaim918.github.io/flowdash/)
 
 ---
 
